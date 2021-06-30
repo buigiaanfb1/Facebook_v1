@@ -1,0 +1,21 @@
+{
+  "name": "facebook_clone",
+  "version": "1.0.0",
+  "description": "A Small Social Media App let user talk together,....",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "author": "An Gia Dev",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.0",
+    "request": "^2.88.2"
+  }
+}
