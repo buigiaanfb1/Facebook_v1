@@ -11,9 +11,12 @@ import video from '../../common/images/video-nav.svg';
 import bell from '../../common/images/bell-nav.svg';
 import messenger from '../../common/images/messenger-nav.svg';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-//
+// Mui Lib
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
+// Router
+import { Link } from 'react-router-dom';
+//
 import SearchBar from '../SearchBar';
 
 const Navbar = () => {
@@ -23,7 +26,9 @@ const Navbar = () => {
       <div className={classes.navContainer}>
         {/* Left */}
         <div className={classes.left}>
-          <img src={logo} />
+          <Link to="/">
+            <img src={logo} />
+          </Link>
           <SearchBar />
         </div>
         {/* Middle */}
@@ -47,10 +52,12 @@ const Navbar = () => {
         {/* Right */}
         <div className={classes.right}>
           <div className={classes.userContainer}>
-            <div className={classes.userContainer2}>
-              <img src={logo} className={classes.avatar} />
-              <Typography className={classes.nameUser}>An</Typography>
-            </div>
+            <Link to="/profile">
+              <div className={classes.userContainer2}>
+                <img src={logo} className={classes.avatar} />
+                <Typography className={classes.nameUser}>An</Typography>
+              </div>
+            </Link>
           </div>
           <div className={classes.iconNavRightContainer}>
             <div className={classes.containerIconRight}>

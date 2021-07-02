@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
     top: '56px',
     left: '0',
     minWidth: '350px',
+    [theme.breakpoints.down('lg')]: {
+      minWidth: '260px',
+    },
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },

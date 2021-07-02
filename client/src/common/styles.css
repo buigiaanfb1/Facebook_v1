@@ -4,17 +4,23 @@
   box-sizing: border-box;
   color: var(--primary-text);
 }
-
+/* p {
+  cursor: default;
+} */
 :root {
   --background-nav: rgba(36, 37, 38);
+  --background-up-profile: rgba(36, 37, 38);
   --background-post: rgba(36, 37, 38);
   --border-bottom-nav: rgba(57, 58, 59);
   --hover-overlay: rgba(255, 255, 255, 0.1);
   --background-icon: rgba(255, 255, 255, 0.1);
   --hover-icon-overlay: rgba(255, 255, 255, 0.2);
   --background-searchBar: rgba(255, 255, 255, 0.1);
+  --background-button: rgba(255, 255, 255, 0.1);
+  --background-button-hover: rgba(255, 255, 255, 0.2);
   --background-main: rgba(24, 25, 26);
   --primary-text: #e4e6eb;
+  --primary-text-button: #fff;
   --secondary-text: #b0b3b8;
   --color-search: #b0b3b8;
   --color-blue: #4394f5;
