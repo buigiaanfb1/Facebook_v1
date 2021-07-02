@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--primary-text);
+}
+
+:root {
+  --background-nav: rgba(36, 37, 38);
+  --background-post: rgba(36, 37, 38);
+  --border-bottom-nav: rgba(57, 58, 59);
+  --hover-overlay: rgba(255, 255, 255, 0.1);
+  --background-icon: rgba(255, 255, 255, 0.1);
+  --hover-icon-overlay: rgba(255, 255, 255, 0.2);
+  --background-searchBar: rgba(255, 255, 255, 0.1);
+  --background-main: rgba(24, 25, 26);
+  --primary-text: #e4e6eb;
+  --secondary-text: #b0b3b8;
+  --color-search: #b0b3b8;
+  --color-blue: #4394f5;
+  --button-blue: #2d88ff;
+}
+
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: var(--secondary-text);
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: var(--secondary-text);
+
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: var(--secondary-text);
+
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--secondary-text);
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--secondary-text);
+}
+
+::placeholder {
+  /* Most modern browsers support this now. */
+  color: var(--secondary-text);
+}
