@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 // Left
-import logo from '../../common/images/logo.png';
+import logo from "../../common/images/logo.png";
 // Middle
-import home from '../../common/images/home-nav.svg';
-import friends from '../../common/images/friends-nav.svg';
-import entertainment from '../../common/images/entertainment-nav.svg';
-import store from '../../common/images/store-nav.svg';
-import video from '../../common/images/video-nav.svg';
+import home from "../../common/images/home-nav.svg";
+import friends from "../../common/images/friends-nav.svg";
+import entertainment from "../../common/images/entertainment-nav.svg";
+import store from "../../common/images/store-nav.svg";
+import video from "../../common/images/video-nav.svg";
 // Right
-import bell from '../../common/images/bell-nav.svg';
-import messenger from '../../common/images/messenger-nav.svg';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import bell from "../../common/images/bell-nav.svg";
+import messenger from "../../common/images/messenger-nav.svg";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 //
-import { useStyles } from './styles';
-import { Typography } from '@material-ui/core';
-import SearchBar from '../SearchBar';
+import { useStyles } from "./styles";
+import { Typography } from "@material-ui/core";
+import SearchBar from "../SearchBar";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -47,10 +47,10 @@ const Navbar = () => {
         {/* Right */}
         <div className={classes.right}>
           <div className={classes.userContainer}>
-            <div className={classes.userContainer2}>
+            <a href="/profile" className={classes.userContainer2}>
               <img src={logo} className={classes.avatar} />
               <Typography className={classes.nameUser}>An</Typography>
-            </div>
+            </a>
           </div>
           <div className={classes.iconNavRightContainer}>
             <div className={classes.containerIconRight}>
