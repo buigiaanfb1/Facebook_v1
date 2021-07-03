@@ -6,9 +6,45 @@ import content1 from '../../common/images/content3.jpeg';
 import content2 from '../../common/images/content2.jpeg';
 import addIcon from '../../common/images/addIcon.png';
 import editIcon from '../../common/images/editIcon.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { TAB_PROFILE } from '../../common/constants';
+import { arrTab } from '../../common/TabsProfileArray';
 
 const ProfileUp = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const tabCon = useSelector((state) => state.shareStore.tabProfile);
+
+  const handleChangeTab = (tabName) => {
+    dispatch({
+      type: TAB_PROFILE,
+      payload: tabName,
+    });
+  };
+
+  const handleRenderTabs = () => {
+    // arrTab is import from common folder
+    return arrTab.map((tab, index) => {
+      return (
+        <div
+          className={`${
+            tabCon === tab.cons ? classes.itemSelected : classes.item
+          }`}
+          key={index}
+          onClick={() => handleChangeTab(tab.cons)}
+        >
+          <Typography
+            className={`${
+              tabCon === tab.cons ? classes.itemTextSelected : classes.itemText
+            }`}
+          >
+            {tab.view}
+          </Typography>
+        </div>
+      );
+    });
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.root}>
@@ -41,18 +77,7 @@ const ProfileUp = () => {
               </div>
             </div>
             <div className={classes.navigationContainer}>
-              <div className={classes.item}>
-                <Typography className={classes.itemText}>Bài viết</Typography>
-              </div>
-              <div className={classes.item}>
-                <Typography className={classes.itemText}>Giới thiệu</Typography>
-              </div>
-              <div className={classes.item}>
-                <Typography className={classes.itemText}>Bạn bè</Typography>
-              </div>
-              <div className={classes.item}>
-                <Typography className={classes.itemText}>Ảnh</Typography>
-              </div>
+              {handleRenderTabs()}
             </div>
           </Grid>
           <Grid item lg={2} md={1} sm={0}></Grid>

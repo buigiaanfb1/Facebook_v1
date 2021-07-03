@@ -4,12 +4,12 @@ import Profile from '../Templates/Client/Profile';
 export const homeRoutes = [
   {
     exact: true,
-    path: '/',
-    component: Home,
+    path: '/profile',
+    component: Profile,
   },
   {
     exact: true,
-    path: '/profile',
-    component: Profile,
+    path: '/',
+    component: Home,
   },
 ];

@@ -1,8 +1,7 @@
 import React from 'react';
 import ProfileUp from './../../../components/ProfileUp';
-import ProfileDown from './../../../components/ProfileDown';
-import IntroductionProfile from './../../../components/IntroductionProfile';
-import Grid from '@material-ui/core/Grid';
+import Content from './Content';
+
 import { useStyles } from './styles';
 
 const Profile = () => {
@@ -10,7 +9,7 @@ const Profile = () => {
   return (
     <div style={{ marginTop: '56px' }}>
       <ProfileUp />
-      <ProfileDown />
+      <Content />
     </div>
   );
 };

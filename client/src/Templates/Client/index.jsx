@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import { v4 as uuidv4 } from 'uuid';
 
 const LayoutClient = (props) => {
   return (
@@ -13,7 +14,7 @@ const LayoutClient = (props) => {
 const ClientTemplate = ({ component, path, exact }) => {
   return (
     <LayoutClient>
-      <Route exact={exact} path={path} component={component} />
+      <Route exact={exact} path={path} component={component} key={uuidv4()} />
     </LayoutClient>
   );
 };

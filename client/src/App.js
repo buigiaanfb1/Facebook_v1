@@ -1,6 +1,7 @@
 import { homeRoutes } from './routes/index';
 import ClientTemplate from './Templates/Client';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
+import history from './history';
 
 const showLayoutClient = () => {
   if (homeRoutes && homeRoutes.length > 0) {
@@ -20,9 +21,9 @@ const showLayoutClient = () => {
 const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>{showLayoutClient()}</Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };

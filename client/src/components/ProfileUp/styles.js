@@ -102,7 +102,6 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: '8px',
     color: 'var(--primary-text-button)',
   },
-
   //navigation
   navigationContainer: {
     padding: '0rem 2rem',
@@ -114,12 +113,34 @@ export const useStyles = makeStyles((theme) => ({
     padding: '1rem',
     transition: 'all 0.2s',
     borderRadius: '4px',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'var(--hover-overlay)',
     },
   },
+  itemSelected: {
+    position: 'relative',
+    padding: '1rem',
+    transition: 'all 0.2s',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      height: '3px',
+      display: 'block',
+      background: 'var(--button-blue)',
+    },
+  },
   itemText: {
     color: 'var(--secondary-text)',
+    fontWeight: '500',
+  },
+  itemTextSelected: {
+    color: 'var(--color-text-tab)',
     fontWeight: '500',
   },
 }));
