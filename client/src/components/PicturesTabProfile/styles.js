@@ -26,13 +26,16 @@ export const useStyles = makeStyles((theme) => ({
   containerAll: {
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '0 -6px',
-    // justifyContent: 'space-around',
   },
   containerImage: {
+    position: 'relative',
     width: 'calc(100% / 6)',
-    marginBottom: '0.7rem',
-    padding: '0 6px',
+    border: '5px solid transparent',
+    '&:after': {
+      content: '""',
+      display: 'block',
+      paddingBottom: '100%',
+    },
     [theme.breakpoints.down('lg')]: {
       width: 'calc(100% / 5)',
     },
@@ -44,9 +47,10 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   image: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
-    borderRadius: '8px',
     objectFit: 'cover',
+    borderRadius: '8px',
   },
 }));

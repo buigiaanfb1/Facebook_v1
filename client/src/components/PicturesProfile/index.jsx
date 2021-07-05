@@ -32,84 +32,88 @@ const PictureProfile = () => {
     return arr.map((image, index) => {
       index++;
       if (arr.length === 1) {
-        return <img key={index} src={image} className={classes.image4Radius} />;
+        return (
+          <div className={classes.containerImage}>
+            <img src={image} className={classes.image4Radius} />
+          </div>
+        );
       } else if (arr.length === 2) {
         if (index === 1) {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image2TopLeftBottomLeftRadius}
-            />
+            <div className={classes.containerImage}>
+              <img
+                src={image}
+                className={classes.image2TopLeftBottomLeftRadius}
+              />
+            </div>
           );
         } else {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image2TopRightBottomRightRadius}
-            />
+            <div className={classes.containerImage}>
+              <img
+                src={image}
+                className={classes.image2TopRightBottomRightRadius}
+              />
+            </div>
           );
         }
       } else if (arr.length === 3 || arr.length === 6) {
         if (arr.length === 3) {
           if (index == arr.length - 1) {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           } else if (index % 3 !== 0) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2TopLeftBottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2TopLeftBottomLeftRadius}
+                />
+              </div>
             );
           } else {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2TopRightBottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2TopRightBottomRightRadius}
+                />
+              </div>
             );
           }
         } else {
           if (index === 1) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopLeftRadius} />
+              </div>
             );
           } else if (index === 3) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopRightRadius} />
+              </div>
             );
           } else if (index === 4) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomLeftRadius} />
+              </div>
             );
           } else if (index === 6) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomRightRadius} />
+              </div>
             );
           } else {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           }
         }
@@ -117,69 +121,68 @@ const PictureProfile = () => {
         if (arr.length === 4) {
           if (index === 1) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopLeftRadius} />
+              </div>
             );
           } else if (index === 3) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2TopRightBottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2TopRightBottomRightRadius}
+                />
+              </div>
             );
           } else if (index === 4) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2BottomRightBottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2BottomRightBottomLeftRadius}
+                />
+              </div>
             );
           } else {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           }
         } else {
           if (index === 1) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopLeftRadius} />
+              </div>
             );
           } else if (index === 3) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopRightRadius} />
+              </div>
             );
           } else if (index === 6) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomRightRadius} />
+              </div>
             );
           } else if (index === 7) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2BottomRightBottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2BottomRightBottomLeftRadius}
+                />
+              </div>
             );
           } else {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           }
         }
@@ -187,117 +190,105 @@ const PictureProfile = () => {
         if (arr.length === 5) {
           if (index === 1) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopLeftRadius} />
+              </div>
             );
           } else if (index === 3) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image2TopRightBottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img
+                  src={image}
+                  className={classes.image2TopRightBottomRightRadius}
+                />
+              </div>
             );
           } else if (index === 4) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomLeftRadius} />
+              </div>
             );
           } else if (index === 5) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomRightRadius} />
+              </div>
             );
           } else {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           }
         } else if (arr.length === 8) {
           if (index === 1) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopLeftRadius} />
+              </div>
             );
           } else if (index === 3) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1TopRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1TopRightRadius} />
+              </div>
             );
           } else if (index === 6 || index === 8) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomRightRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomRightRadius} />
+              </div>
             );
           } else if (index === 7) {
             return (
-              <img
-                key={index}
-                src={image}
-                className={classes.image1BottomLeftRadius}
-              />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image1BottomLeftRadius} />
+              </div>
             );
           } else {
             return (
-              <img key={index} src={image} className={classes.image0Radius} />
+              <div className={classes.containerImage}>
+                <img src={image} className={classes.image0Radius} />
+              </div>
             );
           }
         }
       } else {
         if (index === 1) {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image1TopLeftRadius}
-              onClick={() => handleOpenModalPicture()}
-            />
+            <div className={classes.containerImage}>
+              <img
+                src={image}
+                className={classes.image1TopLeftRadius}
+                onClick={() => handleOpenModalPicture()}
+              />
+            </div>
           );
         } else if (index === 3) {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image1TopRightRadius}
-            />
+            <div className={classes.containerImage}>
+              <img src={image} className={classes.image1TopRightRadius} />
+            </div>
           );
         } else if (index === 7) {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image1BottomLeftRadius}
-            />
+            <div className={classes.containerImage}>
+              <img src={image} className={classes.image1BottomLeftRadius} />
+            </div>
           );
         } else if (index === 9) {
           return (
-            <img
-              key={index}
-              src={image}
-              className={classes.image1BottomRightRadius}
-            />
+            <div className={classes.containerImage}>
+              <img src={image} className={classes.image1BottomRightRadius} />
+            </div>
           );
         } else {
           return (
-            <img key={index} src={image} className={classes.image0Radius} />
+            <div className={classes.containerImage}>
+              <img src={image} className={classes.image0Radius} />
+            </div>
           );
         }
       }

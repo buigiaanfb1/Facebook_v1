@@ -28,10 +28,12 @@
   --color-search: #b0b3b8;
   --color-blue: #4394f5;
   --button-blue: #2d88ff;
+  --button-blue-hover: #4b99ff;
   --color-text-tab: #2e89ff;
   --disabled-button-background: rgba(255, 255, 255, 0.2);
   --scrollbar-thumb: #3b3d41;
   --scrollbar-background: #18191a;
+  --secondary-button-background: rgba(255, 255, 255, 0.1);
 }
 
 body {
@@ -89,4 +91,18 @@ body {
 /* Handle on hover */
 *::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb);
+}
+
+.show {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+.reaction-icon {
+}
+
+.like-btn {
+}
+
+.like-btn::before {
 }

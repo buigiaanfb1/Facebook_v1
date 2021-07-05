@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   wallpaperContainer: {
     maxHeight: '475px',
+    cursor: 'pointer',
     [theme.breakpoints.down('lg')]: {
       maxHeight: '350px',
     },
@@ -105,6 +106,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '6px 12px',
     margin: '0 4px',
+    cursor: 'pointer',
     backgroundColor: 'var(--button-blue)',
     [theme.breakpoints.down('xs')]: {
       margin: '8px 4px',
@@ -118,6 +120,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '6px 12px',
     marginLeft: '4px',
+    cursor: 'pointer',
     backgroundColor: 'var(--background-searchBar)',
   },
   iconRight: {

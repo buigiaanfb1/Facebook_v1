@@ -1,50 +1,12 @@
 import { makeStyles } from '@material-ui/core';
-import { theme } from '../../common/theme';
 import comboPost1 from '../../common/images/comboPost1.png';
+import like from '../../common/images/like.svg';
+import { theme } from '../../common/theme';
 
 export const useStyles = makeStyles((theme) => ({
-  container: {
-    backgroundColor: 'var(--background-post)',
-    borderRadius: '8px',
-    padding: '12px 16px 10px 16px',
-    marginTop: '1rem',
-  },
-  avatarVsName: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    paddingBottom: '0.75rem',
-  },
-  avatar: {
-    width: '40px',
-    height: '40px',
-    marginRight: '0.5rem',
-    borderRadius: '50%',
-  },
-  nameVsTimeContainer: {},
-  name: {
-    fontWeight: '500',
-  },
-  timeContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  time: {
-    fontSize: '13px',
-    fontWeight: '500',
-    color: 'var(--secondary-text)',
-  },
-  privacyIcon: {
-    backgroundImage: `url(${comboPost1})`,
-    backgroundPosition: '0 -666px',
-    backgroundSize: '25px 796px',
-    width: '12px',
-    height: '12px',
-    backgroundRepeat: 'no-repeat',
-    display: 'inline-block',
-    filter: 'invert(60%)',
-  },
   commentContainer: {
     padding: '10px 0',
+    width: '100%',
   },
   emojiContainer: {
     display: 'flex',
@@ -80,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   tool: {
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -218,32 +181,81 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
 
-  // test
-  containerClipPath: {
+  //test
+
+  toolReaction: {
+    position: 'relative',
     display: 'flex',
-    flexWrap: 'wrap',
-  },
-  path: {
-    width: 'calc(100% / 2)',
-    maxHeight: '275px',
-    border: '2px solid var(--background-post)',
-    '& img': {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 'calc(100% / 3)',
+    '&:hover $reactionBox': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    '&:before': {
+      content: '""',
+      opacity: '0',
+      display: 'block',
       width: '100%',
-      height: '100%',
-      maxHeight: '275px',
-      objectFit: 'cover',
+      height: '20px',
+      position: 'absolute',
+      top: '-20px',
+      left: ' 0',
     },
   },
-  pathMax: {
-    width: 'calc(100% / 2)',
-    maxHeight: 'px',
-    maxHeight: '275px',
-    border: '1px solid var(--background-post)',
-    '& img': {
-      width: '100%',
-      height: '100%',
-      maxHeight: '275px',
-      objectFit: 'cover',
+
+  reactionBox: {
+    display: 'block',
+    position: 'absolute',
+    width: '330px',
+    height: '45px',
+    padding: '0 0.4rem',
+    background: 'var(--background-main)',
+    borderRadius: '28px',
+    left: '0px',
+    bottom: '35px',
+    display: 'none',
+  },
+  reactionIcon: {
+    position: 'relative',
+    width: '40px',
+    height: '40px',
+    opacity: '0',
+    transform: 'translate(0, 100px) scale(0)',
+    // background: '#8959A8',
+    borderRadius: '20px',
+    textAlign: 'center',
+    transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+    '&:hover': {
+      transform: 'scale(1.2) !important',
+      transformOrigin: 'bottom',
     },
+    '&:hover $label': {
+      visibility: 'visible',
+    },
+  },
+  icon: {
+    width: '100%',
+  },
+  label: {
+    padding: '3px 5px 3px 5px',
+    position: 'relative',
+    top: '-24px',
+    borderRadius: '10px',
+    fontSize: '11px',
+    color: '#FFF',
+    background: '#333',
+    visibility: 'hidden',
+  },
+
+  icon: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
   },
 }));

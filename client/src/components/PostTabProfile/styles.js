@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   item: {
-    margin: '0 1rem',
+    marginRight: '1rem',
     [theme.breakpoints.down('xs')]: {
       margin: '0',
     },
