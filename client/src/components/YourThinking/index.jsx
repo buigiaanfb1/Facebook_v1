@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './styles';
 import avatar from '../../common/images/avatar.png';
+import YourThinkingModal from '../YourThinkingModal';
 import { Typography } from '@material-ui/core';
 
+// Modal Your Thinking
 const YourThinking = () => {
   const classes = useStyles();
+  const [openPostPictureModal, setPostPictureModal] = useState(false);
+
+  // mở Modal
+  const handleOpenModalPicture = () => {
+    setPostPictureModal({
+      openPostPictureModal: true,
+    });
+  };
+
   return (
     <div className={classes.yourThinkingContainer}>
       <div className={classes.avatarVsInput}>
@@ -12,22 +23,21 @@ const YourThinking = () => {
         <input
           className={classes.input}
           placeholder="An ơi, bạn đang nghĩ gì thế?"
+          onClick={handleOpenModalPicture}
+          value=""
         />
       </div>
       <div className={classes.toolsContainer}>
         <div className={classes.tool}>
-          <i className={classes.liveStream}></i>
-          <Typography className={classes.text}>Video trực tiếp</Typography>
-        </div>
-        <div className={classes.tool}>
           <i className={classes.pictureVideo}></i>
-          <Typography className={classes.text}>Ảnh/Video</Typography>
+          <Typography className={classes.text}>Ảnh</Typography>
         </div>
         <div className={classes.tool}>
           <i className={classes.emotion}></i>
-          <Typography className={classes.text}>Cảm xúc/Hoạt động</Typography>
+          <Typography className={classes.text}>Cảm xúc</Typography>
         </div>
       </div>
+      <YourThinkingModal openModal={openPostPictureModal} />
     </div>
   );
 };

@@ -29,7 +29,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     padding: '0 2rem',
     transform: 'translate(0%, -50%)',
-    // borderBottom: '1px solid var(--border-bottom-nav)',
     '&:before': {
       content: '""',
       position: 'absolute',
@@ -39,12 +38,22 @@ export const useStyles = makeStyles((theme) => ({
       height: '1px',
       background: 'var(--border-bottom-nav)',
     },
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      transform: 'translate(0%, -30%)',
+    },
   },
 
   left: {
     display: 'flex',
     alignItems: 'flex-end',
     width: '60%',
+    [theme.breakpoints.down('sm')]: {
+      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      width: '100%',
+    },
   },
 
   avatarBig: {
@@ -52,11 +61,19 @@ export const useStyles = makeStyles((theme) => ({
     height: '168px',
     borderRadius: '50%',
     border: '5px solid var(--background-up-profile)',
+    [theme.breakpoints.down('sm')]: {
+      width: '120px',
+      height: '120px',
+    },
   },
   nameBig: {
     fontSize: '32px',
     fontWeight: '700',
     padding: '0.25rem 1rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '28px',
+      padding: '0.1rem 1rem',
+    },
   },
 
   // buttons
@@ -64,12 +81,20 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'center',
+    },
   },
 
   containerButtons: {
     display: 'flex',
     alignItems: 'flex-end',
     padding: '1rem 0',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '0',
+    },
   },
 
   addContainer: {
@@ -81,6 +106,9 @@ export const useStyles = makeStyles((theme) => ({
     padding: '6px 12px',
     margin: '0 4px',
     backgroundColor: 'var(--button-blue)',
+    [theme.breakpoints.down('xs')]: {
+      margin: '8px 4px',
+    },
   },
   editContainer: {
     borderRadius: '8px',
@@ -108,6 +136,10 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '-4rem',
     display: 'flex',
     alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '-3rem',
+      justifyContent: 'center',
+    },
   },
   item: {
     padding: '1rem',

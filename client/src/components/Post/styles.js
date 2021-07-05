@@ -156,7 +156,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '2px',
   },
   avatarOtherPeople: {
-    width: '32px',
+    minWidth: '32px',
     height: '32px',
     marginRight: '0.5rem',
     borderRadius: '50%',

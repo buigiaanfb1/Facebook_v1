@@ -16,11 +16,11 @@ export const arrTab = [
     component: PostTabProfile,
     view: 'Bài viết',
   },
-  {
-    cons: INTRODUCE_TAB,
-    component: IntroductionTabProfile,
-    view: 'Giới thiệu',
-  },
+  // {
+  //   cons: INTRODUCE_TAB,
+  //   component: IntroductionTabProfile,
+  //   view: 'Giới thiệu',
+  // },
   {
     cons: FRIENDS_TAB,
     component: FriendsTabProfile,

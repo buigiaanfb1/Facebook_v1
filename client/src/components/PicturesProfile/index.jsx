@@ -6,7 +6,6 @@ import content2 from '../../common/images/content2.jpeg';
 import content3 from '../../common/images/content3.jpeg';
 import content4 from '../../common/images/content4.jpeg';
 import PostPictureModal from '../PostPictureModal';
-import history from '../../history';
 
 const PictureProfile = () => {
   const classes = useStyles();

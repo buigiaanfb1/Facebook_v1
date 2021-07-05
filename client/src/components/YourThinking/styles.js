@@ -31,11 +31,15 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0 16px',
     fontSize: '18px',
     color: 'var(--primary-text)',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'var(--hover-icon-overlay)',
+    },
   },
 
   toolsContainer: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     paddingTop: '8px',
   },
   tool: {

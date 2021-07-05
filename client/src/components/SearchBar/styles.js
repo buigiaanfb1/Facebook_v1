@@ -38,8 +38,12 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: '2.25rem',
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '24ch',
+    width: '24ch',
+    [theme.breakpoints.down('md')]: {
+      width: '20ch',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '5ch',
     },
   },
 }));

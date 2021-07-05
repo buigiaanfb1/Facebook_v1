@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStyles } from './styles';
 import IntroductionProfile from '../IntroductionProfile';
+import YourThinking from '../YourThinking';
 import PicturesProfile from '../PicturesProfile';
 import FriendsProfile from '../FriendsProfile';
 import Post from '../Post';
@@ -16,13 +17,20 @@ const ProfileDown = () => {
           <div className={classes.container}>
             {/*  */}
             {/*  */}
-            <Grid container spacing={2}>
+            <Grid container spacing={0}>
               <Grid item lg={5} md={5} sm={5}>
-                <IntroductionProfile />
-                <PicturesProfile />
-                <FriendsProfile />
+                <div className={classes.item}>
+                  <IntroductionProfile />
+                </div>
+                <div className={classes.item}>
+                  <PicturesProfile />
+                </div>
+                <div className={classes.item}>
+                  <FriendsProfile />
+                </div>
               </Grid>
-              <Grid item lg={7} md={7} sm={7}>
+              <Grid item lg={7} md={7} sm={7} style={{ marginTop: '1rem' }}>
+                <YourThinking />
                 <Post />
               </Grid>
             </Grid>

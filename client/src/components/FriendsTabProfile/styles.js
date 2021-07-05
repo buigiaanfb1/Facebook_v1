@@ -13,12 +13,19 @@ export const useStyles = makeStyles((theme) => ({
     margin: '1rem 2rem',
     borderRadius: '8px',
     backgroundColor: 'var(--background-post)',
+    [theme.breakpoints.down('xs')]: {
+      padding: '1rem',
+      margin: '1rem 0',
+    },
   },
   title: {
     fontSize: '20px',
     fontWeight: '700',
     display: 'block',
     paddingBottom: '1rem',
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: '1rem',
+    },
   },
 
   item: {
@@ -33,6 +40,10 @@ export const useStyles = makeStyles((theme) => ({
     width: '80px',
     height: '80px',
     borderRadius: '8px',
+    [theme.breakpoints.down('xs')]: {
+      width: '60px',
+      height: '60px',
+    },
   },
   nameContainer: {
     padding: '0 0rem 0 1rem',

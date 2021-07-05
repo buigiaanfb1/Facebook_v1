@@ -12,6 +12,10 @@ export const useStyles = makeStyles((theme) => ({
     margin: '1rem 2rem',
     borderRadius: '8px',
     backgroundColor: 'var(--background-post)',
+    [theme.breakpoints.down('sm')]: {
+      padding: '1rem',
+      margin: '1rem 0',
+    },
   },
   title: {
     fontSize: '20px',
@@ -31,6 +35,12 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0 6px',
     [theme.breakpoints.down('lg')]: {
       width: 'calc(100% / 5)',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: 'calc(100% / 4)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 'calc(100% / 3)',
     },
   },
   image: {

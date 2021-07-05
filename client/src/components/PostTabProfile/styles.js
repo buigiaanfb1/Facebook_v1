@@ -8,5 +8,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   container: {
     padding: '0rem 2rem',
+    [theme.breakpoints.down('sm')]: {
+      padding: '1rem',
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: '1rem 0',
+    },
+  },
+  item: {
+    margin: '0 1rem',
+    [theme.breakpoints.down('xs')]: {
+      margin: '0',
+    },
   },
 }));

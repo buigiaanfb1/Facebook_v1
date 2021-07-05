@@ -11,6 +11,12 @@ export const useStyles = makeStyles((theme) => ({
       minWidth: '260px',
     },
     [theme.breakpoints.down('md')]: {
+      minWidth: '200px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '150px',
+    },
+    [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },

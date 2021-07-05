@@ -32,6 +32,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 
   right: {
@@ -54,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'var(--hover-overlay)',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '70.6px',
     },
   },
 

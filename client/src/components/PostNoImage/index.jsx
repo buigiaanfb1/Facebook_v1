@@ -29,6 +29,7 @@ const PostNoImage = () => {
             </div>
           </div>
         </div>
+
         <div className={classes.content}>
           <Typography>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt in
@@ -105,6 +106,7 @@ const PostNoImage = () => {
               </div>
             </div>
           </div>
+
           {/*  */}
           {/*  */}
           {/*  */}

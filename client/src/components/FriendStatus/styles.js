@@ -11,6 +11,12 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('lg')]: {
       width: '280px',
     },
+    [theme.breakpoints.down('md')]: {
+      width: '240px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   container: {
     margin: '0 16px',

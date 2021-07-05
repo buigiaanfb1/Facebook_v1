@@ -4,9 +4,6 @@
   box-sizing: border-box;
   color: var(--primary-text);
 }
-/* p {
-  cursor: default;
-} */
 :root {
   --background-nav: rgba(36, 37, 38);
   --background-up-profile: rgba(36, 37, 38);
@@ -32,6 +29,13 @@
   --color-blue: #4394f5;
   --button-blue: #2d88ff;
   --color-text-tab: #2e89ff;
+  --disabled-button-background: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb: #3b3d41;
+  --scrollbar-background: #18191a;
+}
+
+body {
+  background: var(--background-post);
 }
 
 ::-webkit-input-placeholder {
@@ -62,4 +66,27 @@
 ::placeholder {
   /* Most modern browsers support this now. */
   color: var(--secondary-text);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 100%;
+  border-radius: 50px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-background);
+  border-radius: 100px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb);
 }

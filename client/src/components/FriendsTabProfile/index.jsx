@@ -19,7 +19,7 @@ const FriendsTabProfile = () => {
           <div className={classes.container}>
             <Typography className={classes.title}>Bạn bè</Typography>
             <Grid container>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={test1} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -35,7 +35,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={test2} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -51,7 +51,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={test3} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -67,7 +67,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={avatar} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -83,7 +83,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={avatar} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -99,7 +99,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={test5} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -115,7 +115,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={test6} className={classes.avatar} />
                   <div className={classes.nameContainer}>
@@ -131,7 +131,7 @@ const FriendsTabProfile = () => {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={6} md={6} sm={6}>
+              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <div className={classes.item}>
                   <img src={avatar} className={classes.avatar} />
                   <div className={classes.nameContainer}>
