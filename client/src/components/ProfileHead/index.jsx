@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "./style";
 import Angry from "../../common/images/angry.png";
 import Cover from "../../common/images/content1.jpeg";
-import CameraAltOutlinedIcon from "@material-ui/icons/CameraAltOutlined";
+import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -17,14 +17,14 @@ function ProfileHead() {
           <div className={classes.cover}>
             <img className={classes.coverImg} src={Cover} alt="cover-picture" />
             <Typography className={classes.changeCover}>
-              <CameraAltOutlinedIcon />
+              <CameraAltIcon color="success" className={classes.cameraIcon} />
               Chỉnh sửa ảnh bìa
             </Typography>
           </div>
           <div className={classes.avatar}>
             <img className={classes.avatarImg} src={Angry} alt="user-avata" />
             <a className={classes.changeAvatar} href="#">
-              <CameraAltOutlinedIcon />
+              <CameraAltIcon />
             </a>
           </div>
         </div>

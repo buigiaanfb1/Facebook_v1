@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1920,
     height: 530,
 
-    background: "linear-gradient( #b9c4d7 -50%,#242526)",
+    background: "linear-gradient( #b9c4d7 -50%,var(--background-main))",
     marginTop: 56,
   },
   container: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     backgroundColor: "white",
-    color: "#242526",
+    color: "var(--background-main)",
     alignItems: "center",
     cursor: "pointer",
     borderRadius: 7,
@@ -56,21 +56,21 @@ const useStyles = makeStyles((theme) => ({
     bottom: 20,
     translate: "backgroundColor 0.2s ease",
     "&:hover": {
-      backgroundColor: "#f2f2f2",
+      backgroundColor: "var(--primary-text)",
     },
   },
-  cameraIcon: { color: "#242526" },
+  cameraIcon: { color: "var(--background-main)" },
   avatar: {
     width: 180,
     height: 180,
     borderRadius: "50%",
-    border: "3px solid #242526",
+    border: "3px solid var(--background-main)",
     position: "absolute",
     bottom: -15,
     left: "50%",
     transform: "translateX(-50%)",
     boxSizing: "border-box",
-    backgroundColor: "#242526",
+    backgroundColor: "var(--background-main)",
   },
   avatarImg: {
     width: "100%",
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     width: 40,
     height: 40,
     display: "block",
-    backgroundColor: "#242526",
+    backgroundColor: "var(--background-main)",
     borderRadius: "50%",
     color: "white",
     fontSize: 20,
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#b0b3b8",
   },
   changeInfo: {
-    color: "#2b89ff",
+    color: "var(--button-blue)",
     fontSize: 18,
     fontWeight: 500,
     cursor: "pointer",
@@ -141,14 +141,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   itemActive: {
-    color: "#2b89ff ",
+    color: "var(--button-blue) ",
     position: "relative",
 
     "&:after": {
       content: '""',
       width: "100%",
       height: 3,
-      backgroundColor: "#2b89ff",
+      backgroundColor: "var(--button-blue)",
       display: "block",
       position: "absolute",
       bottom: "-5px",
@@ -176,11 +176,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navAdd: {
-    backgroundColor: "#2b89ff",
+    backgroundColor: "var(--button-blue)",
     color: "#fff",
 
     "&:hover": {
-      backgroundColor: "#3d93ff",
+      backgroundColor: "var(--color-blue)",
     },
   },
   fixIcon: {

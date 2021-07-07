@@ -1,5 +1,5 @@
-import { Route } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
+import { Route } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 const LayoutClient = (props) => {
   return (
