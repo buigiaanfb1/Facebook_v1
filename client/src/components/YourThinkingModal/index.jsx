@@ -20,7 +20,8 @@ const YourThinkingModal = (props) => {
     text: '',
     imageBlob: [],
   });
-  const userInfo = useSelector((state) => state.shareStore.userInfo);
+  const profileInfo = useSelector((state) => state.shareStore.profileInfo);
+  const currentUser = useSelector((state) => state.shareStore.currentUser);
   const types = ['image/png', 'image/jpeg'];
 
   useEffect(() => {
@@ -40,16 +41,26 @@ const YourThinkingModal = (props) => {
   const handleSubmit = async () => {
     if (info.imageBlob && info.imageBlob.length > 0) {
       setSubmitting(true);
-      await createAPostWithPicture(info.text, info.imageBlob, userInfo);
+      await createAPostWithPicture(
+        info.text,
+        info.imageBlob,
+        profileInfo,
+        currentUser.avatar
+      );
       handleClose();
       setSubmitting(false);
     } else {
       setSubmitting(true);
-      await createAPostWithNoPicture(info.text, userInfo);
+      await createAPostWithNoPicture(
+        info.text,
+        profileInfo,
+        currentUser.avatar
+      );
       handleClose();
       setSubmitting(false);
     }
   };
+
   const handleInputFiles = (e) => {
     // copy deep of state imageBlob
     let arrPicture = [...info.imageBlob];

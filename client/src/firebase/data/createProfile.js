@@ -7,14 +7,15 @@ export const createProfile = async (user) => {
   try {
     // kiểm tra đã tạo profile chưa
     const res = await getDocument('users', user.uid);
-    console.log(res);
     // chưa thì tạo
     if (!res) {
       const doc = {
         userID: user.uid,
         username: user.displayName,
         email: user.email,
-        slogan: '',
+        avatar: null,
+        wallpaper: null,
+        slogan: null,
         posts: [],
         pictures: [],
         friends: [],
@@ -23,7 +24,7 @@ export const createProfile = async (user) => {
       const addDocStatus = await addDocWithID(doc, user.uid);
       console.log(addDocStatus);
     } else {
-      return;
+      return res;
     }
   } catch (err) {
     console.log(err);

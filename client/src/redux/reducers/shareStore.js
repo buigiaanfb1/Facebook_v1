@@ -1,8 +1,14 @@
-import { POST_TAB, TAB_PROFILE, USER_INFO } from '../../common/constants';
+import {
+  CURRENT_USER,
+  POST_TAB,
+  TAB_PROFILE,
+  PROFILE_INFO,
+} from '../../common/constants';
 
 const initialState = {
-  userInfo: null,
+  profileInfo: null,
   tabProfile: POST_TAB,
+  currentUser: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -11,8 +17,12 @@ export default (state = initialState, { type, payload }) => {
       state.tabProfile = payload;
       return { ...state };
     }
-    case USER_INFO: {
-      state.userInfo = payload;
+    case PROFILE_INFO: {
+      state.profileInfo = payload;
+      return { ...state };
+    }
+    case CURRENT_USER: {
+      state.currentUser = payload;
       return { ...state };
     }
     default:

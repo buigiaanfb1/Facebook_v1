@@ -11,7 +11,6 @@ const WallpaperVsAvatarModal = (props) => {
 
   // get data from Parent (ProfileUp)
   useEffect(() => {
-    console.log(props.openModal);
     // if true, the Modal will open
     if (props.openModal) {
       handleOpen();

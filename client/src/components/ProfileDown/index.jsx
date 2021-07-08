@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import IntroductionProfile from '../IntroductionProfile';
 import YourThinking from '../YourThinking';
@@ -6,22 +6,27 @@ import PicturesProfile from '../PicturesProfile';
 import FriendsProfile from '../FriendsProfile';
 import Post from '../Post';
 import Grid from '@material-ui/core/Grid';
-// import getCollectionRealtime from '../../firebase/data/getCollectionRealtime';
 import { useSelector } from 'react-redux';
+import { getUser } from '../../firebase/data/currentUser';
 
-const ProfileDown = (props) => {
-  // let id = window.location.pathname;
-  // id = id.substring(9, id.length);
+const ProfileDown = () => {
+  console.log('ProfileDown render');
+  let id = window.location.pathname;
+  id = id.substring(9, id.length);
   const classes = useStyles();
-  const userInfo = useSelector((state) => state.shareStore.userInfo);
-  // const { unsubscribeListener } = getCollectionRealtime('users', id);
+  const { res: currentUser } = getUser();
+  const profileInfo = useSelector((state) => state.shareStore.profileInfo);
+  console.log(profileInfo);
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('cmp will in moint');
-  //     unsubscribeListener();
-  //   };
-  // }, []);
+  const handleRenderYourThinking = () => {
+    if (currentUser && profileInfo) {
+      if (currentUser.uid === profileInfo.id) {
+        return <YourThinking />;
+      }
+      return;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Grid container>
@@ -43,8 +48,8 @@ const ProfileDown = (props) => {
                 </div>
               </Grid>
               <Grid item lg={7} md={7} sm={7} style={{ marginTop: '1rem' }}>
-                <YourThinking />
-                <Post />
+                {handleRenderYourThinking()}
+                <Post posts={profileInfo?.posts} />
               </Grid>
             </Grid>
           </div>
@@ -55,4 +60,4 @@ const ProfileDown = (props) => {
   );
 };
 
-export default ProfileDown;
+export default React.memo(ProfileDown);

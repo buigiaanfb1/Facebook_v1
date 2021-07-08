@@ -5,5 +5,8 @@ export const PICTURE_TAB = 'PICTURE_TAB';
 // redux
 export const TAB_PROFILE = 'tab_profile/TAB_PROFILE';
 
-// userID
-export const USER_INFO = 'USER_INFO';
+// user profile
+export const PROFILE_INFO = 'PROFILE_INFO';
+
+// current user
+export const CURRENT_USER = 'CURRENT_USER';

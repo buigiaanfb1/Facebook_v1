@@ -6,7 +6,8 @@ import history from './history';
 import { useEffect } from 'react';
 import { createProfile } from './firebase/data/createProfile';
 import { getUser } from './firebase/data/currentUser';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { CURRENT_USER } from './common/constants';
 
 const showLayoutClient = () => {
   if (homeRoutes && homeRoutes.length > 0) {
@@ -24,11 +25,22 @@ const showLayoutClient = () => {
 };
 
 const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
+    checkToCreateProfile();
+  });
+
+  const checkToCreateProfile = async () => {
     const { res } = getUser();
     // nếu là người mới thì create profile vice versa
-    createProfile(res);
-  });
+    if (res) {
+      const profileInfo = await createProfile(res);
+      dispatch({
+        type: CURRENT_USER,
+        payload: profileInfo,
+      });
+    }
+  };
 
   return (
     <div className="App">

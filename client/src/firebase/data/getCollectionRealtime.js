@@ -1,6 +1,7 @@
 import { projectFirestore } from '../../firebase/config';
 
 const getCollectionRealtime = (collection, userID) => {
+  console.log(collection, userID);
   let collectionRef = projectFirestore
     .collection(collection)
     .doc(userID)
@@ -16,21 +17,17 @@ const getCollectionRealtime = (collection, userID) => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
       });
       documents = results;
-      console.log(documents);
     },
     (err) => {
       console.err(err.message);
     }
   );
 
-  // watchEffect((onInvalidate) => {
-  //   onInvalidate(() => unsub());
-  // });
-
-  const unsubscribeListener = () => {
+  const unsubcribe = () => {
+    console.log('run unsubcribe');
     unsub();
   };
-  return { documents, unsubscribeListener };
+  return { documents, unsubcribe };
 };
 
 export default getCollectionRealtime;

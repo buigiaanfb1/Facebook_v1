@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: 'var(--background-post)',
     borderRadius: '8px',
-    padding: '12px 16px 10px 16px',
+    padding: '12px 16px 0px 16px',
     marginTop: '1rem',
   },
   avatarVsName: {
@@ -42,6 +42,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     display: 'inline-block',
     filter: 'invert(60%)',
+  },
+  content: {
+    whiteSpace: 'pre-line',
   },
   commentContainer: {
     padding: '10px 0',
@@ -211,17 +214,22 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   contentPicture: {
-    margin: '0 -16px',
+    margin: '8px -16px 0px -16px',
+    backgroundColor: 'var(--background-black)',
   },
 
   picture: {
     width: '100%',
+    maxHeight: '300px',
+    objectFit: 'contain',
   },
 
   // test
   containerClipPath: {
     display: 'flex',
     flexWrap: 'wrap',
+    margin: '8px -16px 0px -16px',
+    backgroundColor: 'var(--background-black)',
   },
   path: {
     width: 'calc(100% / 2)',
@@ -231,7 +239,7 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
       height: '100%',
       maxHeight: '275px',
-      objectFit: 'cover',
+      objectFit: 'contain',
     },
   },
   pathMax: {
@@ -245,5 +253,39 @@ export const useStyles = makeStyles((theme) => ({
       maxHeight: '275px',
       objectFit: 'cover',
     },
+  },
+
+  pathMaxRelative: {
+    width: 'calc(100% / 2)',
+    maxHeight: 'px',
+    maxHeight: '275px',
+    border: '1px solid var(--background-post)',
+    position: 'relative',
+    '& img': {
+      width: '100%',
+      height: '100%',
+      maxHeight: '275px',
+      objectFit: 'cover',
+    },
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      display: 'block',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+  },
+  moreText: {
+    position: 'absolute',
+    bottom: '35%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: '26px',
+    fontWeight: '500',
+    color: 'var(--primary-text-button)',
+    cursor: 'pointer',
   },
 }));

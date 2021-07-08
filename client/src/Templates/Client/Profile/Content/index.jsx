@@ -16,4 +16,4 @@ const Content = () => {
   return <div>{handleRenderComponent()}</div>;
 };
 
-export default Content;
+export default React.memo(Content);

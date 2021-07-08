@@ -60,7 +60,7 @@ export const useStyles = makeStyles((theme) => ({
   left: {
     display: 'flex',
     alignItems: 'flex-end',
-    width: '60%',
+    width: '100%',
     [theme.breakpoints.down('sm')]: {
       alignItems: 'center',
       flexDirection: 'column',

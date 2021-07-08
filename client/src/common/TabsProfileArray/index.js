@@ -7,13 +7,13 @@ import {
 } from '../../common/constants';
 import IntroductionTabProfile from '../../components/IntroductionTabProfile';
 import FriendsTabProfile from '../../components/FriendsTabProfile';
-import PostTabProfile from '../../components/PostTabProfile';
+import ProfileDown from '../../components/ProfileDown';
 import PicturesTabProfile from '../../components/PicturesTabProfile';
 
 export const arrTab = [
   {
     cons: POST_TAB,
-    component: PostTabProfile,
+    component: ProfileDown,
     view: 'Bài viết',
   },
   // {

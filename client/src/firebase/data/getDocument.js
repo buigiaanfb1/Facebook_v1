@@ -1,7 +1,6 @@
 import { projectFirestore } from '../config';
 
 export const getDocument = async (collection, id) => {
-  console.log(collection, id);
   let documentRef = await projectFirestore
     .collection(collection)
     .doc(id)

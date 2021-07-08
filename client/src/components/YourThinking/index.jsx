@@ -41,4 +41,4 @@ const YourThinking = () => {
   );
 };
 
-export default YourThinking;
+export default React.memo(YourThinking);

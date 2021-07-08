@@ -11,7 +11,7 @@ import angry from '../../common/images/angry.svg';
 import { Typography } from '@material-ui/core';
 import $ from 'jquery';
 
-const EmojisVsComments = ({ id }) => {
+const EmojisVsComments = ({ id, comments, reaction }) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -30,6 +30,42 @@ const EmojisVsComments = ({ id }) => {
       );
     });
   }, []);
+
+  const handleComments = () => {
+    if (comments && comments.length > 0) {
+      return comments.map((comment, index) => {
+        return (
+          <div className={classes.commentsSection}>
+            <img src={avatar} className={classes.avatarOtherPeople} />
+            <div className={classes.nameVsCommentVsToolsContainer}>
+              <div className={classes.nameVsComment}>
+                <Typography className={classes.nameOtherPeople}>
+                  Nguyễn Văn A
+                </Typography>
+                <Typography className={classes.commentOtherPeople}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </Typography>
+              </div>
+              <div className={classes.toolsComment}>
+                <Typography className={classes.toolsCommentText}>
+                  Thích&nbsp;&nbsp;·&nbsp;
+                </Typography>
+                <Typography className={classes.toolsCommentText}>
+                  &nbsp;Trả lời&nbsp;&nbsp;·&nbsp;
+                </Typography>
+                <Typography className={classes.toolsCommentText}>
+                  &nbsp;Chia sẻ&nbsp;&nbsp;·&nbsp;
+                </Typography>
+                <Typography className={classes.timeComment}>
+                  &nbsp;3 giờ
+                </Typography>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+  };
 
   return (
     <div className={classes.commentContainer}>
@@ -96,86 +132,7 @@ const EmojisVsComments = ({ id }) => {
         <Typography className={classes.sortText}>Tất cả câu trả lời</Typography>
         <i className={classes.sortIcon}></i>
       </div>
-      <div className={classes.commentsSection}>
-        <img src={haha} className={classes.avatarOtherPeople} />
-        <div className={classes.nameVsCommentVsToolsContainer}>
-          <div className={classes.nameVsComment}>
-            <Typography className={classes.nameOtherPeople}>
-              Nguyễn Văn A
-            </Typography>
-            <Typography className={classes.commentOtherPeople}>
-              Lorem ipsum dolor sit amet.
-            </Typography>
-          </div>
-          <div className={classes.toolsComment}>
-            <Typography className={classes.toolsCommentText}>
-              Thích&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Trả lời&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Chia sẻ&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.timeComment}>&nbsp;3 giờ</Typography>
-          </div>
-        </div>
-      </div>
-      <div className={classes.commentsSection}>
-        <img src={avatar} className={classes.avatarOtherPeople} />
-        <div className={classes.nameVsCommentVsToolsContainer}>
-          <div className={classes.nameVsComment}>
-            <Typography className={classes.nameOtherPeople}>
-              Nguyễn Văn A
-            </Typography>
-            <Typography className={classes.commentOtherPeople}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-              fugiat quidem quas magnam? Beatae, accusamus est perspiciatis
-              eligendi tenetur libero sint adipisci laudantium qui nobis dolorem
-              quo vero. Delectus quibusdam possimus numquam eum perspiciatis?
-              Earum esse fuga voluptas placeat eos, impedit dolor in soluta, ut
-              vitae libero voluptates. Non, quos.
-            </Typography>
-          </div>
-          <div className={classes.toolsComment}>
-            <Typography className={classes.toolsCommentText}>
-              Thích&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Trả lời&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Chia sẻ&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.timeComment}>&nbsp;3 giờ</Typography>
-          </div>
-        </div>
-      </div>
-      <div className={classes.commentsSection}>
-        <img src={avatar} className={classes.avatarOtherPeople} />
-        <div className={classes.nameVsCommentVsToolsContainer}>
-          <div className={classes.nameVsComment}>
-            <Typography className={classes.nameOtherPeople}>
-              Nguyễn Văn A
-            </Typography>
-            <Typography className={classes.commentOtherPeople}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </Typography>
-          </div>
-          <div className={classes.toolsComment}>
-            <Typography className={classes.toolsCommentText}>
-              Thích&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Trả lời&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.toolsCommentText}>
-              &nbsp;Chia sẻ&nbsp;&nbsp;·&nbsp;
-            </Typography>
-            <Typography className={classes.timeComment}>&nbsp;3 giờ</Typography>
-          </div>
-        </div>
-      </div>
+      {handleComments()}
       {/*  */}
       {/*  */}
       {/*  */}
