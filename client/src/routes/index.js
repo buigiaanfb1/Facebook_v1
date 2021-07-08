@@ -4,7 +4,7 @@ import Profile from '../Templates/Client/Profile';
 export const homeRoutes = [
   {
     exact: true,
-    path: '/profile',
+    path: '/profile/:id',
     component: Profile,
   },
   {

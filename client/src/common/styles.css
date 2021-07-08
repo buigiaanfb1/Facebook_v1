@@ -11,10 +11,12 @@
   --border-bottom-nav: rgba(57, 58, 59);
   --hover-overlay: rgba(255, 255, 255, 0.1);
   --background-icon: rgba(255, 255, 255, 0.1);
-  --border-item: rgba(255, 255, 255, 0.02);
+  --border-item: rgba(255, 255, 255, 0.05);
   --background-icon-arrow: rgba(255, 255, 255, 0.05);
   --background-icon-arrow-hover: rgba(255, 255, 255, 0.1);
   --hover-icon-overlay: rgba(255, 255, 255, 0.2);
+  --hover-1: rgba(255, 255, 255, 0.1);
+  --hover-2: rgba(255, 255, 255, 0.2);
   --background-searchBar: rgba(255, 255, 255, 0.1);
   --background-button: rgba(255, 255, 255, 0.1);
   --background-button-hover: rgba(255, 255, 255, 0.2);

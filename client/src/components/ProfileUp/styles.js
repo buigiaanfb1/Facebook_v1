@@ -26,6 +26,18 @@ export const useStyles = makeStyles((theme) => ({
       maxHeight: '350px',
     },
   },
+
+  wallpaperDefault: {
+    backgroundColor: 'rgba(255,255,255, 0.5)',
+    borderBottomLeftRadius: '8px',
+    borderBottomRightRadius: '8px',
+    width: '100%',
+    height: '475px',
+    objectFit: 'cover',
+    [theme.breakpoints.down('lg')]: {
+      maxHeight: '350px',
+    },
+  },
   avatarVsButtonContainer: {
     display: 'flex',
     padding: '0 2rem',

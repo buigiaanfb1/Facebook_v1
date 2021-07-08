@@ -24,7 +24,6 @@ const YourThinking = () => {
           className={classes.input}
           placeholder="An ơi, bạn đang nghĩ gì thế?"
           onClick={handleOpenModalPicture}
-          value=""
         />
       </div>
       <div className={classes.toolsContainer}>

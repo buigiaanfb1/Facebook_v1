@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 const LayoutClient = (props) => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {props.children}
     </>
   );
@@ -14,7 +14,7 @@ const LayoutClient = (props) => {
 const ClientTemplate = ({ component, path, exact }) => {
   return (
     <LayoutClient>
-      <Route exact={exact} path={path} component={component} key={uuidv4()} />
+      <Route exact={exact} path={path} component={component} />
     </LayoutClient>
   );
 };

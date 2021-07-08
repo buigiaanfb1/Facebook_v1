@@ -141,4 +141,23 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '700',
     margin: '0rem 0.5rem 0rem 0.25rem',
   },
+
+  button: {
+    // width: '100%',
+    height: '36px',
+    padding: '0 12px',
+    margin: '10px 0',
+    backgroundColor: 'var(--background-button)',
+    border: 'none',
+    borderRadius: '8px',
+    transition: 'all 0.2s',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'var(--background-button-hover)',
+    },
+  },
+  titleButton: {
+    fontSize: '15px',
+    fontWeight: '500',
+  },
 }));

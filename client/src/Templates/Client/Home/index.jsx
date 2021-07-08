@@ -7,6 +7,7 @@ import FriendStatus from '../../../components/FriendStatus';
 
 const Home = () => {
   const classes = useStyles();
+  console.log('home render');
   return (
     <div className={classes.root}>
       <Grid container>

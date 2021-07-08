@@ -8,16 +8,24 @@ import { theme } from './common/theme';
 import { Provider } from 'react-redux';
 import store from './redux/reducers/config';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import { projectAuth } from './firebase/config';
+
+let app;
+
+projectAuth.onAuthStateChanged((_user) => {
+  if (!app) {
+    app = ReactDOM.render(
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ThemeProvider>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  }
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

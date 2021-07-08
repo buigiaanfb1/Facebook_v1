@@ -6,18 +6,22 @@ import { Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { useSelector } from 'react-redux';
+//Firebase
+import { createAPost } from '../../firebase/data/createAPost';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [checkInput, setCheckInput] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();
   const [info, setInfo] = useState({
     text: '',
     imageBlob: [],
   });
+  const userInfo = useSelector((state) => state.shareStore.userInfo);
   const types = ['image/png', 'image/jpeg'];
-
-  console.log(info);
 
   useEffect(() => {
     if (props.openModal) {
@@ -33,6 +37,19 @@ const YourThinkingModal = (props) => {
     setOpen(false);
   };
 
+  const handleSubmit = async () => {
+    if (info.imageBlob && info.imageBlob.length > 0) {
+      setSubmitting(true);
+      await createAPostWithPicture(info.text, info.imageBlob, userInfo);
+      handleClose();
+      setSubmitting(false);
+    } else {
+      setSubmitting(true);
+      await createAPostWithNoPicture(info.text, userInfo);
+      handleClose();
+      setSubmitting(false);
+    }
+  };
   const handleInputFiles = (e) => {
     // copy deep of state imageBlob
     let arrPicture = [...info.imageBlob];
@@ -214,14 +231,14 @@ const YourThinkingModal = (props) => {
                 </label>
               </div>
               <div className={classes.buttonPostContainer}>
-                {!checkInput ? (
+                {!checkInput || submitting ? (
                   <button className={classes.buttonPostDisabled}>
                     <Typography className={classes.buttonPostTextDisabled}>
                       Đăng
                     </Typography>
                   </button>
                 ) : (
-                  <button className={classes.buttonPost}>
+                  <button className={classes.buttonPost} onClick={handleSubmit}>
                     <Typography className={classes.buttonPostText}>
                       Đăng
                     </Typography>

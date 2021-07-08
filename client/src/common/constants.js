@@ -4,3 +4,6 @@ export const FRIENDS_TAB = 'FRIENDS_TAB';
 export const PICTURE_TAB = 'PICTURE_TAB';
 // redux
 export const TAB_PROFILE = 'tab_profile/TAB_PROFILE';
+
+// userID
+export const USER_INFO = 'USER_INFO';

@@ -178,10 +178,15 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     height: '36px',
     cursor: 'pointer',
+    transition: '0.2s',
+    '&:hover': {
+      backgroundColor: 'var(--button-blue-hover)',
+    },
   },
   buttonPostText: {
     fontSize: '15px',
     fontWeight: '500',
+    color: 'var(--primary-text-button)',
     // opacity: '1',
   },
   containerImage: {

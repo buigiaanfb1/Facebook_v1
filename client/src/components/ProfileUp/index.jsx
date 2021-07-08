@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import content1 from '../../common/images/test2.jpeg';
 import content2 from '../../common/images/test1.jpeg';
+import defaultWallpaper from '../../common/images/defaultWallpaper.jpeg';
 import avatar from '../../common/images/avatar.png';
 import addIcon from '../../common/images/addIcon.png';
 import editIcon from '../../common/images/editIcon.png';
@@ -17,6 +18,8 @@ const ProfileUp = () => {
   const dispatch = useDispatch();
   const tabCon = useSelector((state) => state.shareStore.tabProfile);
   const [openPostPictureModal, setPostPictureModal] = useState(false);
+
+  // console.log(props.info);
   // mở Modal
   const handleOpenModalPicture = () => {
     setPostPictureModal({
@@ -64,12 +67,12 @@ const ProfileUp = () => {
               className={classes.wallpaperContainer}
               onClick={handleOpenModalPicture}
             >
-              <img src={content1} className={classes.wallpaper} />
+              <img src={defaultWallpaper} className={classes.wallpaper} />
             </div>
             <div className={classes.avatarVsButtonContainer}>
               <div className={classes.left}>
                 <img
-                  src={content2}
+                  // src={props.info?.avatar}
                   className={classes.avatarBig}
                   onClick={handleOpenModalPicture}
                 />

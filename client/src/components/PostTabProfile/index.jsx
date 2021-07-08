@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './styles';
 import IntroductionProfile from '../IntroductionProfile';
 import YourThinking from '../YourThinking';
@@ -6,9 +6,22 @@ import PicturesProfile from '../PicturesProfile';
 import FriendsProfile from '../FriendsProfile';
 import Post from '../Post';
 import Grid from '@material-ui/core/Grid';
+// import getCollectionRealtime from '../../firebase/data/getCollectionRealtime';
+import { useSelector } from 'react-redux';
 
-const ProfileDown = () => {
+const ProfileDown = (props) => {
+  // let id = window.location.pathname;
+  // id = id.substring(9, id.length);
   const classes = useStyles();
+  const userInfo = useSelector((state) => state.shareStore.userInfo);
+  // const { unsubscribeListener } = getCollectionRealtime('users', id);
+
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('cmp will in moint');
+  //     unsubscribeListener();
+  //   };
+  // }, []);
   return (
     <div className={classes.root}>
       <Grid container>

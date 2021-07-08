@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Left
 import logo from '../../common/images/logo.png';
 // Middle
@@ -10,17 +10,62 @@ import video from '../../common/images/video-nav.svg';
 // Right
 import bell from '../../common/images/bell-nav.svg';
 import messenger from '../../common/images/messenger-nav.svg';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Mui Lib
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
 // Router
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 //
 import SearchBar from '../SearchBar';
+// BE (firebase)
+import { getUser } from '../../firebase/data/currentUser';
+import { login } from '../../firebase/data/login';
+//
+import DropdownTools from './DropdownTools';
 
 const Navbar = () => {
   const classes = useStyles();
+  const { res } = getUser();
+  console.log('navbar');
+
+  // render button Login or buttonProfile
+  const handleRenderLoginOrNot = () => {
+    if (res) {
+      return (
+        <>
+          <div className={classes.userContainer}>
+            <Link to={`/profile/${res.uid}`}>
+              <div className={classes.userContainer2}>
+                <img src={logo} className={classes.avatar} />
+                <Typography className={classes.nameUser}>
+                  {res.displayName}
+                </Typography>
+              </div>
+            </Link>
+          </div>
+          <div className={classes.iconNavRightContainer}>
+            <div className={classes.containerIconRight}>
+              <img src={messenger} className={classes.iconNavRight} />
+            </div>
+            <div className={classes.containerIconRight}>
+              <img src={bell} className={classes.iconNavRight} />
+            </div>
+            <div className={classes.containerIconRight}>
+              <DropdownTools user={res} />
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <button className={classes.button} onClick={login}>
+          <Typography className={classes.titleButton}>
+            Đăng nhập với Google
+          </Typography>
+        </button>
+      );
+    }
+  };
   return (
     <div className={classes.navbar}>
       <div className={classes.navContainer}>
@@ -50,27 +95,7 @@ const Navbar = () => {
           </div>
         </div>
         {/* Right */}
-        <div className={classes.right}>
-          <div className={classes.userContainer}>
-            <Link to="/profile">
-              <div className={classes.userContainer2}>
-                <img src={logo} className={classes.avatar} />
-                <Typography className={classes.nameUser}>An</Typography>
-              </div>
-            </Link>
-          </div>
-          <div className={classes.iconNavRightContainer}>
-            <div className={classes.containerIconRight}>
-              <img src={messenger} className={classes.iconNavRight} />
-            </div>
-            <div className={classes.containerIconRight}>
-              <img src={bell} className={classes.iconNavRight} />
-            </div>
-            <div className={classes.containerIconRight}>
-              <ArrowDropDownIcon className={classes.iconMuiNavRight} />
-            </div>
-          </div>
-        </div>
+        <div className={classes.right}>{handleRenderLoginOrNot()}</div>
       </div>
     </div>
   );
