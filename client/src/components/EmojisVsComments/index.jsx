@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useStyles } from './styles';
 import avatar from '../../common/images/avatar.png';
 import like from '../../common/images/like.svg';
@@ -9,10 +9,34 @@ import hug from '../../common/images/hug.svg';
 import sad from '../../common/images/sad.svg';
 import angry from '../../common/images/angry.svg';
 import { Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
 
-const EmojisVsComments = ({ id, comments, reaction }) => {
+const EmojisVsComments = ({ id, comments, reactions, userReaction }) => {
+  console.log('EmojisVsComments render');
   const classes = useStyles();
+  const check = useRef(false);
+  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const [reactionPicker, setReactionPicker] = useState({
+    userID: null,
+    reaction: userReaction,
+    id: id,
+  });
+
+  if (currentUser) {
+    reactionPicker.userID = currentUser.userID;
+  }
+
+  let vietSub = {
+    like: 'Thích',
+    love: 'Yêu thích',
+    hug: 'Thương thương',
+    haha: 'Haha',
+    wow: 'Wow',
+    sad: 'Buồn',
+    angry: 'Phẫn nộ',
+  };
 
   useEffect(() => {
     $(function () {
@@ -30,6 +54,18 @@ const EmojisVsComments = ({ id, comments, reaction }) => {
       );
     });
   }, []);
+
+  useEffect(() => {
+    if (check.current) {
+      const { avatar, username, userID } = currentUser;
+      let user = {
+        avatar,
+        username,
+        userID,
+      };
+      addReactionServices({ reactionPicker, user });
+    }
+  }, [reactionPicker]);
 
   const handleComments = () => {
     if (comments && comments.length > 0) {
@@ -67,6 +103,69 @@ const EmojisVsComments = ({ id, comments, reaction }) => {
     }
   };
 
+  // Chọn trong Reaction Box
+  const handleChooseEmoji = (e) => {
+    let reaction = e.target.id;
+    if (reaction === reactionPicker.reaction) {
+      setReactionPicker({
+        ...reactionPicker,
+        reaction: null,
+      });
+    } else {
+      setReactionPicker({
+        ...reactionPicker,
+        reaction: reaction,
+      });
+    }
+    check.current = true;
+  };
+
+  // Khi ấn nút like
+  const handleChooseEmojiButton = (e) => {
+    let reaction = e.target.id;
+    if (reactionPicker.reaction) {
+      setReactionPicker({
+        ...reactionPicker,
+        reaction: null,
+      });
+    } else {
+      setReactionPicker({
+        ...reactionPicker,
+        reaction: reaction,
+      });
+    }
+    check.current = true;
+  };
+
+  const handleRenderLikeButton = () => {
+    return (
+      <div
+        id="likeButton"
+        onClick={(e) => handleChooseEmojiButton(e)}
+        className={classes.likeContainer}
+      >
+        <i
+          className={`${classes.likeIcon} ${
+            reactionPicker.reaction
+              ? eval(`classes.${reactionPicker.reaction}Active`)
+              : ''
+          }`}
+          id="like"
+        ></i>
+        <Typography
+          className={`${classes.text} ${
+            reactionPicker.reaction
+              ? eval(`classes.${reactionPicker.reaction}`)
+              : ''
+          }`}
+          id="like"
+        >
+          {reactionPicker.reaction ? vietSub[reactionPicker.reaction] : 'Thích'}
+        </Typography>
+      </div>
+    );
+  };
+
   return (
     <div className={classes.commentContainer}>
       <div className={classes.emojiContainer}>
@@ -77,7 +176,7 @@ const EmojisVsComments = ({ id, comments, reaction }) => {
             <img src={wow} alt="hug emoji" className={classes.emoji} />
           </div>
           <Typography className={classes.amountPeopleEmoji}>
-            Bạn và 7 người khác
+            {reactions.total || ''}
           </Typography>
         </div>
         <Typography className={classes.amountPeopleComment}>
@@ -87,37 +186,77 @@ const EmojisVsComments = ({ id, comments, reaction }) => {
       <div className={classes.tools}>
         <div className={`like-btn-${id} ${classes.toolReaction}`}>
           <div className={`${classes.reactionBox}`}>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={like} alt="Like Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img
+                id="like"
+                src={like}
+                alt="Like Icon"
+                className={classes.icon}
+              />
               <label className={classes.label}>Thích</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={love} alt="Love Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img
+                id="love"
+                src={love}
+                alt="Love Icon"
+                className={classes.icon}
+              />
               <label className={classes.label}>Yêu</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={hug} alt="Hug Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img id="hug" src={hug} alt="Hug Icon" className={classes.icon} />
               <label className={classes.label}>Thương</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={haha} alt="Haha Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img
+                id="haha"
+                src={haha}
+                alt="Haha Icon"
+                className={classes.icon}
+              />
               <label className={classes.label}>Haha</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={wow} alt="Wow Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img id="wow" src={wow} alt="Wow Icon" className={classes.icon} />
               <label className={classes.label}>Wow</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={sad} alt="Sad Icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img id="sad" src={sad} alt="Sad Icon" className={classes.icon} />
               <label className={classes.label}>Buồn</label>
             </div>
-            <div className={`reaction-icon-${id} ${classes.reactionIcon}`}>
-              <img src={angry} alt="Angry icon" className={classes.icon} />
+            <div
+              className={`reaction-icon-${id} ${classes.reactionIcon}`}
+              onClick={(e) => handleChooseEmoji(e)}
+            >
+              <img
+                id="angry"
+                src={angry}
+                alt="Angry icon"
+                className={classes.icon}
+              />
               <label className={classes.label}>Tức</label>
             </div>
           </div>
-          <i className={classes.like}></i>
-          <Typography className={classes.text}>Thích</Typography>
+          {handleRenderLikeButton()}
         </div>
         <div className={classes.tool}>
           <i className={classes.comment}></i>

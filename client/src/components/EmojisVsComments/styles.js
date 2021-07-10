@@ -1,6 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 import comboPost1 from '../../common/images/comboPost1.png';
+import fillterIcon from '../../common/images/fillterIcon.png';
 import like from '../../common/images/like.svg';
+import wow from '../../common/images/wow.svg';
+import haha from '../../common/images/haha.svg';
+import love from '../../common/images/love.svg';
+import hug from '../../common/images/hug.svg';
+import sad from '../../common/images/sad.svg';
+import angry from '../../common/images/angry.svg';
 import { theme } from '../../common/theme';
 
 export const useStyles = makeStyles((theme) => ({
@@ -49,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
     width: 'calc(100% / 3)',
   },
 
-  like: {
+  likeIcon: {
     backgroundImage: `url(${comboPost1})`,
     backgroundPosition: '0 -191px',
     backgroundSize: '25px 796px',
@@ -83,6 +90,7 @@ export const useStyles = makeStyles((theme) => ({
   text: {
     marginLeft: '8px',
     color: 'var(--secondary-text)',
+    cursor: 'pointer',
     fontSize: '16px',
     fontWeight: '500',
   },
@@ -198,7 +206,7 @@ export const useStyles = makeStyles((theme) => ({
       content: '""',
       opacity: '0',
       display: 'block',
-      width: '100%',
+      width: '200%',
       height: '20px',
       position: 'absolute',
       top: '-20px',
@@ -223,6 +231,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '40px',
     height: '40px',
     opacity: '0',
+    cursor: 'pointer',
     transform: 'translate(0, 100px) scale(0)',
     // background: '#8959A8',
     borderRadius: '20px',
@@ -257,5 +266,116 @@ export const useStyles = makeStyles((theme) => ({
     width: '40px',
     height: '40px',
     borderRadius: '50%',
+  },
+  likeContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  // active reaction
+
+  likeActive: {
+    backgroundImage: `url(${fillterIcon})`,
+    backgroundPosition: '-38px -190px',
+    backgroundSize: '73px 365px',
+    width: '18px',
+    height: '18px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter:
+      'invert(40%) sepia(52%) saturate(200%) saturate(200%) saturate(200%) saturate(189%) hue-rotate(191deg) brightness(103%) contrast(102%)',
+  },
+
+  like: {
+    color: 'rgba(32, 120, 244)',
+  },
+
+  loveActive: {
+    backgroundImage: `url(${love})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  love: {
+    color: 'rgba(243, 62, 88)',
+  },
+
+  hugActive: {
+    backgroundImage: `url(${hug})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  hug: {
+    color: 'rgba(247, 177, 37)',
+  },
+
+  hahaActive: {
+    backgroundImage: `url(${haha})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  haha: {
+    color: 'rgba(247, 177, 37)',
+  },
+
+  wowActive: {
+    backgroundImage: `url(${wow})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  wow: {
+    color: 'rgba(247, 177, 37)',
+  },
+
+  sadActive: {
+    backgroundImage: `url(${sad})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  sad: {
+    color: 'rgba(247, 177, 37)',
+  },
+  angryActive: {
+    backgroundImage: `url(${angry})`,
+    backgroundPosition: 'center',
+    width: '22px',
+    height: '22px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+    borderRadius: '50%',
+  },
+
+  angry: {
+    color: 'rgba(233, 113, 15)',
   },
 }));

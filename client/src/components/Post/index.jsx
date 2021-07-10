@@ -6,9 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 import FacebookStyle from '../../componentsLoader/PostLoader';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { vi } from 'date-fns/locale';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../firebase/data/currentUser';
 
 const Post = ({ posts }) => {
   const classes = useStyles();
+  const { res } = getUser();
+  // const currentUser = useSelector((state) => state.shareStore.currentUser);
 
   const handleRender1Picture = (picturesArr) => {
     return (
@@ -99,10 +103,60 @@ const Post = ({ posts }) => {
     }
   };
 
+  const handleGetReaction = (post) => {
+    //
+    const { wow, like, sad, love, hug, angry, haha } = post.reaction;
+    //
+    const multiArrReaction = [like, love, hug, haha, wow, sad, angry];
+    let indexReaction = {
+      0: 'like',
+      1: 'love',
+      2: 'hug',
+      3: 'haha',
+      4: 'wow',
+      5: 'sad',
+      6: 'angry',
+    };
+    //
+    console.log(multiArrReaction);
+    for (let i = 0; i < multiArrReaction.length; i++) {
+      // 2 dimension array
+      console.log(multiArrReaction[i]);
+      if (multiArrReaction[i].length > 0) {
+        // if arr > 0 continue
+        let specificReaction = multiArrReaction[i];
+        console.log(specificReaction);
+        for (let j = 0; j < multiArrReaction[i]?.length; i++) {
+          // check if duplicate id so the user is liked
+          if (res?.uid === specificReaction[j].userID) {
+            console.log(specificReaction[j]);
+            console.log(indexReaction[i]);
+            return (
+              <EmojisVsComments
+                id={post.id}
+                comments={post.comments}
+                reactions={post.reaction}
+                userReaction={indexReaction[i]}
+              />
+            );
+          }
+        }
+      }
+    }
+    return (
+      <EmojisVsComments
+        id={post.id}
+        comments={post.comments}
+        reactions={post.reaction}
+        userReaction={null}
+      />
+    );
+  };
+
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
-  const handleRenderPostFake = (posts) => {
+  const handleRenderPost = (posts) => {
     return posts
       .slice(0)
       .reverse()
@@ -133,11 +187,7 @@ const Post = ({ posts }) => {
               <Typography>{post.content}</Typography>
               {checkHowManyPictures(post.picture)}
             </div>
-            <EmojisVsComments
-              id={index}
-              comments={post.comments}
-              reaction={post.reaction}
-            />
+            {handleGetReaction(post)}
           </div>
         );
       });
@@ -153,7 +203,7 @@ const Post = ({ posts }) => {
     );
   };
 
-  return <>{posts ? handleRenderPostFake(posts) : handleNothing()}</>;
+  return <>{posts ? handleRenderPost(posts) : handleNothing()}</>;
 };
 
 export default Post;

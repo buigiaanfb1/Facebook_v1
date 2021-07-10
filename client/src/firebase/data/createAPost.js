@@ -3,8 +3,8 @@ import { getDocument } from '../data/getDocument';
 import { setCollection } from '../data/setCollection';
 import { setStorage } from '../data/setStorage';
 import { addPostToPostsCollection } from '../../components/YourThinkingModal/modules/backendServices';
-
 import { v4 as uuidv4 } from 'uuid';
+
 export const createAPost = () => {
   const { addDocWithID } = setCollection('users');
   const { addDoc } = setCollection('posts');
@@ -30,7 +30,16 @@ export const createAPost = () => {
       content: text,
       avatar: avatar,
       picture: [...arrPicture],
-      reaction: [],
+      reaction: {
+        total: 0,
+        like: [],
+        love: [],
+        hug: [],
+        haha: [],
+        wow: [],
+        sad: [],
+        angry: [],
+      },
       comments: [],
       createdAt: new Date(),
     };
@@ -57,7 +66,15 @@ export const createAPost = () => {
       content: text,
       avatar: avatar,
       picture: [],
-      reaction: [],
+      reaction: {
+        like: [],
+        love: [],
+        hug: [],
+        haha: [],
+        wow: [],
+        sad: [],
+        angry: [],
+      },
       comments: [],
       createdAt: new Date(),
     };
