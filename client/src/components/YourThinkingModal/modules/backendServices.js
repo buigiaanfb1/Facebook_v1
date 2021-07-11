@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const addPostToPostsCollection = async (post) => {
+export const addPostToPostsAndUsersPostCollectionServices = async (post) => {
   try {
     const res = await axios({
       url: '/api/posts/global',

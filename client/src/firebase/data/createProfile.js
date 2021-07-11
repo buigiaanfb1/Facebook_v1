@@ -16,9 +16,6 @@ export const createProfile = async (user) => {
         avatar: '',
         wallpaper: '',
         slogan: '',
-        posts: [],
-        pictures: [],
-        friends: [],
         createdAt: timestamp(),
       };
       await addDocWithID(doc, user.uid);

@@ -11,8 +11,6 @@ import { getUser } from '../../firebase/data/currentUser';
 
 const ProfileDown = () => {
   console.log('ProfileDown render');
-  let id = window.location.pathname;
-  id = id.substring(9, id.length);
   const classes = useStyles();
   const { res: currentUser } = getUser();
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
@@ -54,7 +52,7 @@ const ProfileDown = () => {
                 style={{ marginTop: '1rem', width: '100%' }}
               >
                 {handleRenderYourThinking()}
-                <Posts posts={profileInfo?.posts} />
+                <Posts />
               </Grid>
             </Grid>
           </div>
@@ -65,4 +63,4 @@ const ProfileDown = () => {
   );
 };
 
-export default React.memo(ProfileDown);
+export default ProfileDown;

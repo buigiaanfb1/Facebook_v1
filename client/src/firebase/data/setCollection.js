@@ -1,9 +1,9 @@
 import { projectFirestore } from '../config';
 
-export const setCollection = (document) => {
+export const setCollection = (collection) => {
   const addDoc = async (doc) => {
     try {
-      const res = await projectFirestore.collection(document).add(doc);
+      const res = await projectFirestore.collection(collection).add(doc);
       return res.id;
     } catch (err) {
       console.log(err);
@@ -13,9 +13,9 @@ export const setCollection = (document) => {
   const addDocWithID = async (doc, userID) => {
     try {
       const res = await projectFirestore
-        .collection(document)
+        .collection(collection)
         .doc(userID)
-        .collection(document)
+        .collection(collection)
         .doc(userID)
         .set(doc);
     } catch (err) {
@@ -26,9 +26,9 @@ export const setCollection = (document) => {
   const updateWallpaperFieldDoc = async (wallpaperURL, userID) => {
     try {
       const res = await projectFirestore
-        .collection(document)
+        .collection(collection)
         .doc(userID)
-        .collection(document)
+        .collection(collection)
         .doc(userID)
         .update({
           wallpaper: wallpaperURL,
@@ -41,9 +41,9 @@ export const setCollection = (document) => {
   const updateAvatarFieldDoc = async (avatarURL, userID) => {
     try {
       const res = await projectFirestore
-        .collection(document)
+        .collection(collection)
         .doc(userID)
-        .collection(document)
+        .collection(collection)
         .doc(userID)
         .update({
           avatar: avatarURL,

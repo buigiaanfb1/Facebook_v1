@@ -1,9 +1,26 @@
 const db = require('../config');
 
 const setCollection = (document) => {
-  const addDoc = async (doc) => {
+  const addDoc = async (doc, idUserPostsSubCollection) => {
     try {
-      const res = await db.collection(document).add(doc);
+      await db.collection(document).doc(idUserPostsSubCollection).set(doc);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addDocSubCollection = async (
+    collection,
+    userID,
+    subCollection,
+    doc
+  ) => {
+    try {
+      const res = await db
+        .collection(collection)
+        .doc(userID)
+        .collection(subCollection)
+        .add(doc);
       return res.id;
     } catch (err) {
       console.log(err);
@@ -33,7 +50,7 @@ const setCollection = (document) => {
       console.log(err);
     }
   };
-  return { addDoc, updateDoc, updatePostReactionGlobal };
+  return { addDoc, addDocSubCollection, updateDoc, updatePostReactionGlobal };
 };
 
 module.exports = setCollection;

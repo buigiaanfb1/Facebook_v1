@@ -7,9 +7,17 @@ const router = express.Router();
 // @desc    Add to Post Collection
 // @access  Public
 router.post('/global', async (req, res) => {
-  const { addDoc } = setCollection('posts');
-  const id = await addDoc(req.body);
-  return res.status(200).json(id);
+  const { addDoc, addDocSubCollection } = setCollection('posts');
+  // add vô collection user-posts
+  const idUserPostsSubCollection = await addDocSubCollection(
+    'user-posts',
+    req.body.userID,
+    'posts',
+    req.body
+  );
+  // add vô collection posts (for homepage can see)
+  const idPostCollection = await addDoc(req.body, idUserPostsSubCollection);
+  return res.status(200).json({ idUserPostsSubCollection });
 });
 
 // @route   POST api/posts/reaction
