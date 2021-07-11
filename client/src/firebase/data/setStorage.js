@@ -17,5 +17,29 @@ export const setStorage = () => {
       console.log(err);
     }
   };
-  return { uploadPictureOfPost };
+
+  const uploadWallpaper = async (userID, file) => {
+    filePath = `users/${userID}/wallpaper/${file.name}`;
+    const storageRef = projectStorage.ref(filePath);
+    try {
+      const res = await storageRef.put(file);
+      let url = await res.ref.getDownloadURL();
+      return { url };
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const uploadAvatar = async (userID, file) => {
+    filePath = `users/${userID}/avatar/${file.name}`;
+    const storageRef = projectStorage.ref(filePath);
+    try {
+      const res = await storageRef.put(file);
+      let url = await res.ref.getDownloadURL();
+      return { url };
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  return { uploadPictureOfPost, uploadWallpaper, uploadAvatar };
 };

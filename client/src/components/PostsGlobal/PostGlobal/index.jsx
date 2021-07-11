@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
-import EmojisVsComments from '../EmojisVsComments';
-import { Typography } from '@material-ui/core';
+import React from 'react';
 import { useStyles } from './styles';
-import { v4 as uuidv4 } from 'uuid';
-import FacebookStyle from '../../componentsLoader/PostLoader';
+import { getUser } from '../../../firebase/data/currentUser';
+import { Typography } from '@material-ui/core';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { vi } from 'date-fns/locale';
-import { useSelector } from 'react-redux';
-import { getUser } from '../../firebase/data/currentUser';
+import EmojisVsComments from '../../EmojisVsComments';
+import { Link } from 'react-router-dom';
 
-const Post = ({ posts }) => {
+const PostGlobal = ({ post }) => {
+  console.log(post);
   const classes = useStyles();
   const { res } = getUser();
-  // const currentUser = useSelector((state) => state.shareStore.currentUser);
+
+  const avatarDefault =
+    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
   const handleRender1Picture = (picturesArr) => {
     return (
@@ -118,19 +119,14 @@ const Post = ({ posts }) => {
       6: 'angry',
     };
     //
-    console.log(multiArrReaction);
     for (let i = 0; i < multiArrReaction.length; i++) {
       // 2 dimension array
-      console.log(multiArrReaction[i]);
       if (multiArrReaction[i].length > 0) {
         // if arr > 0 continue
         let specificReaction = multiArrReaction[i];
-        console.log(specificReaction);
         for (let j = 0; j < multiArrReaction[i]?.length; i++) {
           // check if duplicate id so the user is liked
           if (res?.uid === specificReaction[j].userID) {
-            console.log(specificReaction[j]);
-            console.log(indexReaction[i]);
             return (
               <EmojisVsComments
                 id={post.id}
@@ -153,57 +149,36 @@ const Post = ({ posts }) => {
     );
   };
 
-  const avatarDefault =
-    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
+  let time = formatDistanceToNowStrict(new Date(post.createdAt), {
+    locale: vi,
+  });
 
-  const handleRenderPost = (posts) => {
-    return posts
-      .slice(0)
-      .reverse()
-      .map((post, index) => {
-        let time = formatDistanceToNowStrict(post.createdAt.toDate(), {
-          locale: vi,
-        });
-        return (
-          <div className={classes.container}>
-            <div className={classes.avatarVsName}>
-              <img
-                src={post.avatar ? post.avatar : avatarDefault}
-                className={classes.avatar}
-              />
-              <div className={classes.nameVsTimeContainer}>
-                <Typography className={classes.name}>
-                  {post.username}
-                </Typography>
-                <div className={classes.timeContainer}>
-                  <Typography className={classes.time}>
-                    {time}&nbsp;·&nbsp;
-                  </Typography>
-                  <span className={classes.privacyIcon}></span>
-                </div>
-              </div>
-            </div>
-            <div className={classes.content}>
-              <Typography>{post.content}</Typography>
-              {checkHowManyPictures(post.picture)}
-            </div>
-            {handleGetReaction(post)}
+  return (
+    <div className={classes.container}>
+      <div className={classes.avatarVsName}>
+        <Link to={`profile/${post.userID}`}>
+          <img
+            src={post.avatar ? post.avatar : avatarDefault}
+            className={classes.avatar}
+          />
+        </Link>
+        <div className={classes.nameVsTimeContainer}>
+          <Typography className={classes.name}>{post.username}</Typography>
+          <div className={classes.timeContainer}>
+            <Typography className={classes.time}>
+              {time}&nbsp;·&nbsp;
+            </Typography>
+            <span className={classes.privacyIcon}></span>
           </div>
-        );
-      });
-  };
-
-  const handleNothing = () => {
-    return (
-      <>
-        <FacebookStyle />
-        <FacebookStyle />
-        <FacebookStyle />
-      </>
-    );
-  };
-
-  return <>{posts ? handleRenderPost(posts) : handleNothing()}</>;
+        </div>
+      </div>
+      <div className={classes.content}>
+        <Typography>{post.content}</Typography>
+        {checkHowManyPictures(post.picture)}
+      </div>
+      {handleGetReaction(post)}
+    </div>
+  );
 };
 
-export default Post;
+export default PostGlobal;

@@ -13,19 +13,18 @@ export const createProfile = async (user) => {
         userID: user.uid,
         username: user.displayName,
         email: user.email,
-        avatar: null,
-        wallpaper: null,
-        slogan: null,
+        avatar: '',
+        wallpaper: '',
+        slogan: '',
         posts: [],
         pictures: [],
         friends: [],
         createdAt: timestamp(),
       };
-      const addDocStatus = await addDocWithID(doc, user.uid);
-      console.log(addDocStatus);
-    } else {
-      return res;
+      await addDocWithID(doc, user.uid);
+      return doc;
     }
+    return res;
   } catch (err) {
     console.log(err);
   }

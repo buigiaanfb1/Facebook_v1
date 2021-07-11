@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { theme } from '../../common/theme';
+import comboTools from '../../common/images/comboTools.png';
+import comboPost6 from '../../common/images/comboPost6.png';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -10,6 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
   },
   wallpaperContainer: {
+    position: 'relative',
     maxHeight: '475px',
     cursor: 'pointer',
     [theme.breakpoints.down('lg')]: {
@@ -25,8 +28,49 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('lg')]: {
       maxHeight: '350px',
     },
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: '200px',
+    },
   },
 
+  buttonEditWallpaper: {
+    position: 'absolute',
+    bottom: '5%',
+    right: '2.5%',
+    zIndex: '50',
+    padding: '6px 12px',
+    background: 'var(--primary-text-button)',
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '8px',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '0.96',
+    },
+    [theme.breakpoints.down('xs')]: {
+      bottom: '80%',
+      right: '5%',
+    },
+  },
+
+  iconEditWallpaper: {
+    backgroundImage: `url(${comboTools})`,
+    backgroundPosition: '0 -46px',
+    backgroundSize: '25px 191px',
+    width: '16px',
+    height: '16px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(0%)',
+  },
+  editWallpaperText: {
+    fontWeight: '500',
+    fontSize: '15px',
+    color: 'var(--background-black)',
+    marginLeft: '0.25rem',
+  },
   wallpaperDefault: {
     backgroundColor: 'rgba(255,255,255, 0.5)',
     borderBottomLeftRadius: '8px',
@@ -69,16 +113,54 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
+  avatarContainer: {
+    position: 'relative',
+  },
+
+  containerEditAvatar: {
+    position: 'absolute',
+    bottom: '5%',
+    right: '8%',
+    zIndex: '50',
+    width: '36px',
+    height: '36px',
+    background: '#3A3B3C',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    '&:hover': {
+      background: '#494a4b',
+    },
+  },
+  iconEditAvatar: {
+    backgroundImage: `url(${comboPost6})`,
+    backgroundPosition: '0 -200px',
+    backgroundSize: '33px 895px',
+    width: '20px',
+    height: '20px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(89%) sepia(6%) hue-rotate(185deg)',
+  },
+
   avatarBig: {
     width: '168px',
     height: '168px',
     borderRadius: '50%',
     border: '5px solid var(--background-up-profile)',
+    objectFit: 'cover',
+    cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
       width: '120px',
       height: '120px',
     },
   },
+
   nameBig: {
     fontSize: '32px',
     fontWeight: '700',

@@ -13,13 +13,20 @@ import { useSelector } from 'react-redux';
 import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
 
-const EmojisVsComments = ({ id, comments, reactions, userReaction }) => {
+const EmojisVsComments = ({
+  id,
+  comments,
+  userPostedID,
+  reactions,
+  userReaction,
+}) => {
   console.log('EmojisVsComments render');
   const classes = useStyles();
   const check = useRef(false);
   const currentUser = useSelector((state) => state.shareStore.currentUser);
   const [reactionPicker, setReactionPicker] = useState({
     userID: null,
+    userReactionOld: userReaction,
     reaction: userReaction,
     id: id,
   });
@@ -63,7 +70,7 @@ const EmojisVsComments = ({ id, comments, reactions, userReaction }) => {
         username,
         userID,
       };
-      addReactionServices({ reactionPicker, user });
+      addReactionServices({ reactionPicker, userPostedID, user });
     }
   }, [reactionPicker]);
 
@@ -166,23 +173,102 @@ const EmojisVsComments = ({ id, comments, reactions, userReaction }) => {
     );
   };
 
+  const handleRenderReactionIconStatistics = () => {
+    const {
+      wow: wowA,
+      like: likeA,
+      sad: sadA,
+      love: loveA,
+      hug: hugA,
+      angry: angryA,
+      haha: hahaA,
+    } = reactions;
+    const reactionArr = [likeA, loveA, hugA, hahaA, wowA, sadA, angryA];
+    let testArray = [0, 0, 9, 3, 6, 7, 3];
+    let showIconArr = [];
+
+    let vietSub = {
+      0: like,
+      1: love,
+      2: hug,
+      3: haha,
+      4: wow,
+      5: sad,
+      6: angry,
+    };
+
+    for (let i = 0; i < 3; i++) {
+      let index = -1;
+      let tmp = -1;
+      // có 7 reaction nên fix cứng
+      for (let j = 0; j < 7; j++) {
+        // reaction lớn thì gán vô tmp
+        if (reactionArr[j].length > tmp && reactionArr[j].length > 0) {
+          tmp = reactionArr[j].length;
+          index = j;
+        }
+        // khi j về cuối thì gán vô showIconArr reset lại
+        if (j === 6) {
+          if (index > -1) {
+            showIconArr.push(index);
+          }
+          reactionArr[index] = [];
+        }
+      }
+    }
+
+    return showIconArr.map((icon) => {
+      return (
+        <img
+          src={vietSub[icon]}
+          alt={`${vietSub[icon]} emoji`}
+          className={classes.emoji}
+        />
+      );
+    });
+  };
+
+  const handleRenderReactionStatistics = () => {
+    if (reactions.total) {
+      if (reactions.total === 1 && reactions.total > 0) {
+        // check trùng user thì render "Bạn"
+        return reactionPicker.reaction ? (
+          <Typography className={classes.amountPeopleEmoji}>Bạn</Typography>
+        ) : (
+          <Typography className={classes.amountPeopleEmoji}>
+            {reactions.total}
+          </Typography>
+        );
+      } else {
+        return reactionPicker.reaction ? (
+          <Typography className={classes.amountPeopleEmoji}>
+            Bạn và {reactions.total - 1}
+          </Typography>
+        ) : (
+          <Typography className={classes.amountPeopleEmoji}>
+            {reactions.total}
+          </Typography>
+        );
+      }
+    }
+  };
   return (
     <div className={classes.commentContainer}>
-      <div className={classes.emojiContainer}>
-        <div className={classes.emojis}>
-          <div className={classes.emojisPicture}>
-            <img src={like} alt="like emoji" className={classes.emoji} />
-            <img src={haha} alt="haha emoji" className={classes.emoji} />
-            <img src={wow} alt="hug emoji" className={classes.emoji} />
+      {comments || reactions ? (
+        <div className={classes.emojiContainer}>
+          <div className={classes.emojis}>
+            <div className={classes.emojisPicture}>
+              {handleRenderReactionIconStatistics()}
+            </div>
+            {handleRenderReactionStatistics()}
           </div>
-          <Typography className={classes.amountPeopleEmoji}>
-            {reactions.total || ''}
+          <Typography className={classes.amountPeopleComment}>
+            {comments.length > 0 ? comments.length + 'bình luận' : ''}
           </Typography>
         </div>
-        <Typography className={classes.amountPeopleComment}>
-          8 người bình luận
-        </Typography>
-      </div>
+      ) : (
+        ''
+      )}
       <div className={classes.tools}>
         <div className={`like-btn-${id} ${classes.toolReaction}`}>
           <div className={`${classes.reactionBox}`}>

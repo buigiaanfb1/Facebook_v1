@@ -11,7 +11,7 @@ const setCollection = (document) => {
   };
   const updateDoc = async (doc, userID) => {
     try {
-      const res = await db
+      await db
         .collection(document)
         .doc(userID)
         .collection(document)
@@ -23,7 +23,17 @@ const setCollection = (document) => {
       console.log(err);
     }
   };
-  return { addDoc, updateDoc };
+
+  const updatePostReactionGlobal = async (where, reactionArr, id) => {
+    try {
+      await db.collection(where).doc(id).update({
+        reaction: reactionArr,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return { addDoc, updateDoc, updatePostReactionGlobal };
 };
 
 module.exports = setCollection;

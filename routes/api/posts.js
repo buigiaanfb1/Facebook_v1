@@ -16,21 +16,57 @@ router.post('/global', async (req, res) => {
 // @desc    Add to post reaction
 // @access  Public
 router.post('/reaction', async (req, res) => {
-  const { id, userID, reaction, userInfo } = req.body;
-  const results = await getCollection('users', userID);
+  const { id, userID, reaction, reactionOld, userInfo, userPostedID } =
+    req.body;
+  const usersInfo = await getCollection('users', userPostedID);
+  const { updateDoc, updatePostReactionGlobal } = setCollection('users');
   // find posts
-  let post = results.posts.filter((post) => {
+  let index = usersInfo.posts.findIndex((post) => {
     return post.id === id;
   });
   // add people to reaction array
-  post[0].reaction[reaction] = [...post[0].reaction[reaction], userInfo];
-  console.log(post[0].reaction);
-  // auto increment
-  post[0].reaction['total'] = post[0].reaction['total'] + 1;
-  console.log(post[0].reaction['total']);
-  const { updateDoc } = setCollection('users');
-  await updateDoc(post, userID);
+  if ((reactionOld && reaction) || !reactionOld) {
+    // nếu ko có reactionOld nghĩa là user là người
+    // lần đầu tiên thả reaction vào post
+    if (!reactionOld) {
+      // push user reaction vào
+      usersInfo.posts[index].reaction[reaction] = [
+        ...usersInfo.posts[index].reaction[reaction],
+        userInfo,
+      ];
+      // auto increment
+      usersInfo.posts[index].reaction['total'] =
+        usersInfo.posts[index].reaction['total'] + 1;
+    } else {
+      // ngược lại là user đổi từ reaction này sang reaction khác
+      let reactionIter = usersInfo.posts[index].reaction[reactionOld];
+      let indexUserReaction = reactionIter.findIndex(
+        (user) => user.userID === userID
+      );
+      // xoá reaction cũ
+      reactionIter.splice(indexUserReaction, 1);
+      // thêm reaction mới
+      usersInfo.posts[index].reaction[reaction] = [
+        ...usersInfo.posts[index].reaction[reaction],
+        userInfo,
+      ];
+    }
+  } else {
+    let reactionIter = usersInfo.posts[index].reaction[reactionOld];
+    let indexUserReaction = reactionIter.findIndex(
+      (user) => user.userID === userID
+    );
+    reactionIter.splice(indexUserReaction, 1);
+    // auto decrement
+    usersInfo.posts[index].reaction['total'] =
+      usersInfo.posts[index].reaction['total'] - 1;
+    // update lại array
+    usersInfo.posts[index].reaction[reactionOld] = reactionIter;
+  }
 
+  // update lại vị trí posts
+  await updateDoc(usersInfo.posts, userPostedID);
+  await updatePostReactionGlobal('posts', usersInfo.posts[index].reaction, id);
   return res.status(200).json('success');
 });
 

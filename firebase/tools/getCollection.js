@@ -5,7 +5,7 @@ const getDocument = async (collection, id) => {
     .collection(collection)
     .doc(id)
     .collection(collection)
-    .doc(id);
+    .doc('' + id);
   return await documentRef
     .get()
     .then((doc) => {

@@ -5,7 +5,6 @@ export const setCollection = (document) => {
     try {
       const res = await projectFirestore.collection(document).add(doc);
       return res.id;
-      return res;
     } catch (err) {
       console.log(err);
     }
@@ -23,5 +22,40 @@ export const setCollection = (document) => {
       console.log(err);
     }
   };
-  return { addDoc, addDocWithID };
+
+  const updateWallpaperFieldDoc = async (wallpaperURL, userID) => {
+    try {
+      const res = await projectFirestore
+        .collection(document)
+        .doc(userID)
+        .collection(document)
+        .doc(userID)
+        .update({
+          wallpaper: wallpaperURL,
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateAvatarFieldDoc = async (avatarURL, userID) => {
+    try {
+      const res = await projectFirestore
+        .collection(document)
+        .doc(userID)
+        .collection(document)
+        .doc(userID)
+        .update({
+          avatar: avatarURL,
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return {
+    addDoc,
+    addDocWithID,
+    updateWallpaperFieldDoc,
+    updateAvatarFieldDoc,
+  };
 };

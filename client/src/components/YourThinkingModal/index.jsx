@@ -45,7 +45,7 @@ const YourThinkingModal = (props) => {
         info.text,
         info.imageBlob,
         profileInfo,
-        currentUser.avatar
+        currentUser?.avatar
       );
       handleClose();
       setSubmitting(false);
@@ -54,7 +54,7 @@ const YourThinkingModal = (props) => {
       await createAPostWithNoPicture(
         info.text,
         profileInfo,
-        currentUser.avatar
+        currentUser?.avatar
       );
       handleClose();
       setSubmitting(false);

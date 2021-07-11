@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
-import { theme } from '../../common/theme';
-import comboPost1 from '../../common/images/comboPost1.png';
+import { theme } from '../../../common/theme';
+import comboPost1 from '../../../common/images/comboPost1.png';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '40px',
     marginRight: '0.5rem',
     borderRadius: '50%',
+    objectFit: 'cover',
   },
   nameVsTimeContainer: {},
   name: {
@@ -277,15 +278,5 @@ export const useStyles = makeStyles((theme) => ({
       display: 'block',
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
-  },
-  moreText: {
-    position: 'absolute',
-    bottom: '35%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    fontSize: '26px',
-    fontWeight: '500',
-    color: 'var(--primary-text-button)',
-    cursor: 'pointer',
   },
 }));

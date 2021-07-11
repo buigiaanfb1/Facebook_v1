@@ -24,6 +24,7 @@ const WallpaperVsAvatarModal = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    props.listenModalChildren(false);
   };
 
   return (

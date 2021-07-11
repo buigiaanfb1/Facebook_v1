@@ -1,4 +1,3 @@
-import { projectStorage } from '../config';
 import { getDocument } from '../data/getDocument';
 import { setCollection } from '../data/setCollection';
 import { setStorage } from '../data/setStorage';
@@ -9,7 +8,7 @@ export const createAPost = () => {
   const { addDocWithID } = setCollection('users');
   const { addDoc } = setCollection('posts');
 
-  const createAPostWithPicture = async (text, pictures, user, avatar) => {
+  const createAPostWithPicture = async (text, pictures, user, avatar = '') => {
     const { uploadPictureOfPost } = setStorage();
     // tạo mảng chứa url ảnh
     const arrPicture = [];
@@ -53,7 +52,7 @@ export const createAPost = () => {
     await addDocWithID(userObject, user.userID);
   };
 
-  const createAPostWithNoPicture = async (text, user, avatar) => {
+  const createAPostWithNoPicture = async (text, user, avatar = '') => {
     // lấy doc user ra
     const res = await getDocument('users', user.userID);
     const { addDoc } = setCollection('posts');
@@ -74,6 +73,7 @@ export const createAPost = () => {
         wow: [],
         sad: [],
         angry: [],
+        total: 0,
       },
       comments: [],
       createdAt: new Date(),

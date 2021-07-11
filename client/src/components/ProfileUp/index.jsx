@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TAB_PROFILE } from '../../common/constants';
 import { arrTab } from '../../common/TabsProfileArray';
 import WallpaperVsAvatarModal from '../WallpaperVsAvatarModal';
+import { setStorage } from '../../firebase/data/setStorage';
+import { setCollection } from '../../firebase/data/setCollection';
 
 const ProfileUp = () => {
   console.log('ProfileUp render');
@@ -16,13 +18,35 @@ const ProfileUp = () => {
   const dispatch = useDispatch();
   const tabCon = useSelector((state) => state.shareStore.tabProfile);
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
-  const [openPostPictureModal, setPostPictureModal] = useState(false);
+  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const [openPostPictureModal, setPostPictureModal] = useState({
+    open: false,
+    picture: null,
+  });
 
   // mở Modal
-  const handleOpenModalPicture = () => {
-    setPostPictureModal({
-      openPostPictureModal: true,
-    });
+  const handleOpenModalPicture = (picture, from) => {
+    console.log(openPostPictureModal.open);
+    if (from === 'avatar') {
+      setPostPictureModal({
+        open: true,
+        picture: picture ? picture : avatarDefault,
+      });
+    } else {
+      setPostPictureModal({
+        open: true,
+        picture: picture ? picture : wallpaperDefault,
+      });
+    }
+  };
+
+  const listenModalChildren = (close) => {
+    if (!close) {
+      setPostPictureModal({
+        open: false,
+        picture: null,
+      });
+    }
   };
 
   const handleChangeTab = (tabName) => {
@@ -55,6 +79,28 @@ const ProfileUp = () => {
     });
   };
 
+  const handleUploadWallpaper = async (e) => {
+    const { uploadWallpaper } = setStorage();
+    const { updateWallpaperFieldDoc } = setCollection('users');
+    const file = e.target.files[0];
+    if (file) {
+      const { url } = await uploadWallpaper(currentUser.userID, file);
+      console.log(url);
+      await updateWallpaperFieldDoc(url, currentUser.userID);
+    }
+  };
+
+  const handleUploadAvatar = async (e) => {
+    const { uploadAvatar } = setStorage();
+    const { updateAvatarFieldDoc } = setCollection('users');
+    const file = e.target.files[0];
+    if (file) {
+      const { url } = await uploadAvatar(currentUser.userID, file);
+      console.log(url);
+      await updateAvatarFieldDoc(url, currentUser.userID);
+    }
+  };
+
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
@@ -69,10 +115,7 @@ const ProfileUp = () => {
           <Grid item lg={8} md={10} sm={12}>
             {profileInfo ? (
               <>
-                <div
-                  className={classes.wallpaperContainer}
-                  onClick={handleOpenModalPicture}
-                >
+                <div className={classes.wallpaperContainer}>
                   <img
                     src={
                       profileInfo.wallpaper
@@ -80,17 +123,55 @@ const ProfileUp = () => {
                         : wallpaperDefault
                     }
                     className={classes.wallpaper}
+                    onClick={() =>
+                      handleOpenModalPicture(profileInfo.wallpaper, 'wallpaper')
+                    }
                   />
+                  <label for="uploadWallpaper">
+                    <div className={classes.buttonEditWallpaper}>
+                      <i className={classes.iconEditWallpaper}></i>
+                      <Typography className={classes.editWallpaperText}>
+                        {profileInfo.wallpaper
+                          ? 'Thay ảnh bìa'
+                          : 'Thêm ảnh bìa'}
+                      </Typography>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadWallpaper"
+                      style={{ display: 'none' }}
+                      accept="image/png, image/jpeg"
+                      onChange={(e) => handleUploadWallpaper(e)}
+                    />
+                  </label>
                 </div>
                 <div className={classes.avatarVsButtonContainer}>
                   <div className={classes.left}>
-                    <img
-                      src={
-                        profileInfo.avatar ? profileInfo.avatar : avatarDefault
-                      }
-                      className={classes.avatarBig}
-                      onClick={handleOpenModalPicture}
-                    />
+                    <div className={classes.avatarContainer}>
+                      <img
+                        src={
+                          profileInfo.avatar
+                            ? profileInfo.avatar
+                            : avatarDefault
+                        }
+                        className={classes.avatarBig}
+                        onClick={() =>
+                          handleOpenModalPicture(profileInfo.avatar, 'avatar')
+                        }
+                      />
+                      <label for="uploadAvatar">
+                        <div className={classes.containerEditAvatar}>
+                          <i className={classes.iconEditAvatar}></i>
+                        </div>
+                        <input
+                          type="file"
+                          id="uploadAvatar"
+                          style={{ display: 'none' }}
+                          accept="image/png, image/jpeg"
+                          onChange={(e) => handleUploadAvatar(e)}
+                        />
+                      </label>
+                    </div>
                     <Typography className={classes.nameBig}>
                       {profileInfo.username ? profileInfo.username : ''}
                     </Typography>
@@ -124,8 +205,9 @@ const ProfileUp = () => {
         </Grid>
       </div>
       <WallpaperVsAvatarModal
-        openModal={openPostPictureModal}
-        picture={content1}
+        openModal={openPostPictureModal.open}
+        picture={openPostPictureModal.picture}
+        listenModalChildren={listenModalChildren}
       />
     </div>
   );

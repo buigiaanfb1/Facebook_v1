@@ -1,14 +1,14 @@
 import React from 'react';
 import YourThinking from '../YourThinking';
 import { useStyles } from './styles';
-import Post from '../Post';
+import PostsGlobal from '../PostsGlobal';
 
 const NewsFeed = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <YourThinking />
-      <Post />
+      <PostsGlobal />
     </div>
   );
 };

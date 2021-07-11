@@ -4,7 +4,7 @@ import IntroductionProfile from '../IntroductionProfile';
 import YourThinking from '../YourThinking';
 import PicturesProfile from '../PicturesProfile';
 import FriendsProfile from '../FriendsProfile';
-import Post from '../Post';
+import Posts from '../Posts';
 import Grid from '@material-ui/core/Grid';
 import { useSelector } from 'react-redux';
 import { getUser } from '../../firebase/data/currentUser';
@@ -16,7 +16,6 @@ const ProfileDown = () => {
   const classes = useStyles();
   const { res: currentUser } = getUser();
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
-  console.log(profileInfo);
 
   const handleRenderYourThinking = () => {
     if (currentUser && profileInfo) {
@@ -47,9 +46,15 @@ const ProfileDown = () => {
                   <FriendsProfile />
                 </div>
               </Grid>
-              <Grid item lg={7} md={7} sm={7} style={{ marginTop: '1rem' }}>
+              <Grid
+                item
+                lg={7}
+                md={7}
+                sm={7}
+                style={{ marginTop: '1rem', width: '100%' }}
+              >
                 {handleRenderYourThinking()}
-                <Post posts={profileInfo?.posts} />
+                <Posts posts={profileInfo?.posts} />
               </Grid>
             </Grid>
           </div>

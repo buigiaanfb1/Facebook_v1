@@ -20,3 +20,8 @@ export const getDocument = async (collection, id) => {
       console.log('Error getting document:', error);
     });
 };
+
+export const getDocumentPostGlobal = async (collection) => {
+  const snapshot = await projectFirestore.collection(collection).get();
+  return snapshot.docs.map((doc) => doc.data());
+};

@@ -4,7 +4,9 @@ export const addReactionServices = async (reactionData) => {
   const data = {
     id: reactionData.reactionPicker.id,
     reaction: reactionData.reactionPicker.reaction,
+    reactionOld: reactionData.reactionPicker.userReactionOld,
     userID: reactionData.reactionPicker.userID,
+    userPostedID: reactionData.userPostedID,
     userInfo: reactionData.user,
   };
   try {
