@@ -1,12 +1,13 @@
-import { post } from 'jquery';
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import FacebookStyle from '../../componentsLoader/PostLoader';
-import Post from './Post';
+import React from "react";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import FacebookStyle from "../../componentsLoader/PostLoader";
+import Post from "./Post";
 
-const Posts = ({ posts }) => {
-  const handleRenderPost = (posts) => {
-    return posts
+const Posts = () => {
+  const profilePosts = useSelector((state) => state.shareStore.profilePosts);
+  const handleRenderPost = () => {
+    return profilePosts
       .slice(0)
       .reverse()
       .map((post) => {
@@ -24,7 +25,7 @@ const Posts = ({ posts }) => {
     );
   };
 
-  return <>{posts ? handleRenderPost(posts) : handleNothing()}</>;
+  return profilePosts ? handleRenderPost() : handleNothing();
 };
 
 export default Posts;

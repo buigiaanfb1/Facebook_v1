@@ -8,6 +8,7 @@ export const addReactionServices = async (reactionData) => {
     userID: reactionData.reactionPicker.userID,
     userPostedID: reactionData.userPostedID,
     userInfo: reactionData.user,
+    postID: reactionData.postID,
   };
   try {
     const res = await axios({

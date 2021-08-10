@@ -1,18 +1,19 @@
-const express = require('express');
-const setCollection = require('../../firebase/tools/setCollection');
-const getCollection = require('../../firebase/tools/getCollection');
+const express = require("express");
+const setCollection = require("../../firebase/tools/setCollection");
+const getCollection = require("../../firebase/tools/getCollection");
 const router = express.Router();
 
 // @route   POST api/posts/global
 // @desc    Add to Post Collection
 // @access  Public
-router.post('/global', async (req, res) => {
-  const { addDoc, addDocSubCollection } = setCollection('posts');
+router.post("/global", async (req, res) => {
+  const { addDoc, addDocSubCollection, updatePostProfile } =
+    setCollection("posts");
   // add vô collection user-posts
   const idUserPostsSubCollection = await addDocSubCollection(
-    'user-posts',
+    "user-posts",
     req.body.userID,
-    'posts',
+    "posts",
     req.body
   );
   // add vô collection posts (for homepage can see)
@@ -23,59 +24,65 @@ router.post('/global', async (req, res) => {
 // @route   POST api/posts/reaction
 // @desc    Add to post reaction
 // @access  Public
-router.post('/reaction', async (req, res) => {
-  const { id, userID, reaction, reactionOld, userInfo, userPostedID } =
+router.post("/reaction", async (req, res) => {
+  const { updateDoc, updatePostReactionGlobal, updatePostProfile } =
+    setCollection();
+  const { id, userID, reaction, reactionOld, userInfo, userPostedID, postID } =
     req.body;
-  const usersInfo = await getCollection('users', userPostedID);
-  const { updateDoc, updatePostReactionGlobal } = setCollection('users');
-  // find posts
-  let index = usersInfo.posts.findIndex((post) => {
-    return post.id === id;
-  });
+  console.log(postID);
+  let postInfo = await getCollection(
+    "user-posts",
+    "posts",
+    userPostedID,
+    postID
+  );
+
   // add people to reaction array
   if ((reactionOld && reaction) || !reactionOld) {
     // nếu ko có reactionOld nghĩa là user là người
     // lần đầu tiên thả reaction vào post
     if (!reactionOld) {
       // push user reaction vào
-      usersInfo.posts[index].reaction[reaction] = [
-        ...usersInfo.posts[index].reaction[reaction],
-        userInfo,
-      ];
+      postInfo.reaction[reaction] = [...postInfo.reaction[reaction], userInfo];
       // auto increment
-      usersInfo.posts[index].reaction['total'] =
-        usersInfo.posts[index].reaction['total'] + 1;
+      postInfo.reaction["total"] = postInfo.reaction["total"] + 1;
     } else {
       // ngược lại là user đổi từ reaction này sang reaction khác
-      let reactionIter = usersInfo.posts[index].reaction[reactionOld];
+      let reactionIter = postInfo.reaction[reactionOld];
       let indexUserReaction = reactionIter.findIndex(
         (user) => user.userID === userID
       );
       // xoá reaction cũ
       reactionIter.splice(indexUserReaction, 1);
       // thêm reaction mới
-      usersInfo.posts[index].reaction[reaction] = [
-        ...usersInfo.posts[index].reaction[reaction],
-        userInfo,
-      ];
+      postInfo.reaction[reaction] = [...postInfo.reaction[reaction], userInfo];
     }
   } else {
-    let reactionIter = usersInfo.posts[index].reaction[reactionOld];
+    let reactionIter = postInfo.reaction[reactionOld];
     let indexUserReaction = reactionIter.findIndex(
       (user) => user.userID === userID
     );
     reactionIter.splice(indexUserReaction, 1);
     // auto decrement
-    usersInfo.posts[index].reaction['total'] =
-      usersInfo.posts[index].reaction['total'] - 1;
+    postInfo.reaction["total"] = postInfo.reaction["total"] - 1;
     // update lại array
-    usersInfo.posts[index].reaction[reactionOld] = reactionIter;
+    postInfo.reaction[reactionOld] = reactionIter;
   }
 
+  console.log(userPostedID,
+    postID,
+    postInfo.reaction)
+
   // update lại vị trí posts
-  await updateDoc(usersInfo.posts, userPostedID);
-  await updatePostReactionGlobal('posts', usersInfo.posts[index].reaction, id);
-  return res.status(200).json('success');
+  await updatePostProfile(
+    "user-posts",
+    "posts",
+    userPostedID,
+    postID,
+    postInfo.reaction
+  );
+  // await updatePostReactionGlobal("posts", usersInfo.posts[index].reaction, id);
+  return res.status(200).json("success");
 });
 
 module.exports = router;

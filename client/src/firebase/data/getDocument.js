@@ -1,4 +1,4 @@
-import { projectFirestore } from '../config';
+import { projectFirestore } from "../config";
 
 export const getDocument = async (collection, id) => {
   let documentRef = await projectFirestore
@@ -17,8 +17,27 @@ export const getDocument = async (collection, id) => {
       }
     })
     .catch((error) => {
-      console.log('Error getting document:', error);
+      console.log("Error getting document:", error);
     });
+};
+
+export const getDocumentPostProfile = async (
+  collectionMain,
+  collectionSub,
+  userId
+) => {
+  let arr = [];
+  let documentRef = await projectFirestore
+    .collection(collectionMain)
+    .doc(userId)
+    .collection(collectionSub)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        arr.push({ ...doc.data(), id: doc.id });
+      });
+    });
+  return arr;
 };
 
 export const getDocumentPostGlobal = async (collection) => {

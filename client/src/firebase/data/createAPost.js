@@ -1,5 +1,3 @@
-import { getDocument } from '../data/getDocument';
-import { setCollection } from '../data/setCollection';
 import { setStorage } from '../data/setStorage';
 import { addPostToPostsAndUsersPostCollectionServices } from '../../components/YourThinkingModal/modules/backendServices';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,8 +8,6 @@ export const createAPost = () => {
     // tạo mảng chứa url ảnh
     const arrPicture = [];
     // lấy doc user ra
-    const res = await getDocument('users', user.userID);
-
     for (const picture of pictures) {
       // upload ảnh lên
       const { url } = await uploadPictureOfPost(user.userID, picture, uuidv4());
@@ -45,8 +41,6 @@ export const createAPost = () => {
   };
 
   const createAPostWithNoPicture = async (text, user, avatar = '') => {
-    // lấy doc user ra
-    const res = await getDocument('users', user.userID);
     // create Post
     const post = {
       username: user.username,

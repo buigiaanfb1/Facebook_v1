@@ -10,3 +10,5 @@ export const PROFILE_INFO = 'PROFILE_INFO';
 
 // current user
 export const CURRENT_USER = 'CURRENT_USER';
+// user posts
+export const PROFILE_POSTS = 'PROFILE_POSTS';

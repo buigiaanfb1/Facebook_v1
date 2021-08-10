@@ -19,6 +19,7 @@ const EmojisVsComments = ({
   userPostedID,
   reactions,
   userReaction,
+  postID
 }) => {
   console.log('EmojisVsComments render');
   const classes = useStyles();
@@ -70,7 +71,7 @@ const EmojisVsComments = ({
         username,
         userID,
       };
-      addReactionServices({ reactionPicker, userPostedID, user });
+      addReactionServices({ reactionPicker, userPostedID, user, postID });
     }
   }, [reactionPicker]);
 
@@ -369,4 +370,4 @@ const EmojisVsComments = ({
   );
 };
 
-export default EmojisVsComments;
+export default React.memo(EmojisVsComments);

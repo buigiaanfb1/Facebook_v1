@@ -1,11 +1,12 @@
 const db = require('../config');
 
-const getDocument = async (collection, id) => {
+const getDocument = async (collection, subCollection, id, subId) => {
+  console.log(id)
   let documentRef = await db
     .collection(collection)
     .doc(id)
-    .collection(collection)
-    .doc('' + id);
+    .collection(subCollection)
+    .doc(subId);
   return await documentRef
     .get()
     .then((doc) => {

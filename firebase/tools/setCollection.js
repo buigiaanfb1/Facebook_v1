@@ -1,6 +1,6 @@
 const db = require('../config');
 
-const setCollection = (document) => {
+const setCollection = () => {
   const addDoc = async (doc, idUserPostsSubCollection) => {
     try {
       await db.collection(document).doc(idUserPostsSubCollection).set(doc);
@@ -41,6 +41,21 @@ const setCollection = (document) => {
     }
   };
 
+  const updatePostProfile = async (collection, subCollection, id, subId, reactionArr) => {
+    try {
+      await db
+        .collection(collection)
+        .doc(id)
+        .collection(subCollection)
+        .doc(subId)
+        .update({
+          reaction: reactionArr,
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const updatePostReactionGlobal = async (where, reactionArr, id) => {
     try {
       await db.collection(where).doc(id).update({
@@ -50,7 +65,7 @@ const setCollection = (document) => {
       console.log(err);
     }
   };
-  return { addDoc, addDocSubCollection, updateDoc, updatePostReactionGlobal };
+  return { addDoc, addDocSubCollection, updateDoc, updatePostReactionGlobal, updatePostProfile };
 };
 
 module.exports = setCollection;

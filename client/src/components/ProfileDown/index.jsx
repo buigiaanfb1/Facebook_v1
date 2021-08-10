@@ -52,7 +52,7 @@ const ProfileDown = () => {
                 style={{ marginTop: '1rem', width: '100%' }}
               >
                 {handleRenderYourThinking()}
-                <Posts />
+                <Posts/>
               </Grid>
             </Grid>
           </div>
