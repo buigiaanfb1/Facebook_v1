@@ -5,6 +5,7 @@ import comboPost2 from '../../common/images/full-combo.png';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
+    paddingTop: '56px',
     backgroundColor: 'var(--background-post)',
     padding: '12px 16px 10px 16px',
     height: '100vh',

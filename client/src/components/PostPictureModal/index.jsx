@@ -90,7 +90,7 @@ const PostPictureModal = (props) => {
                   </div>
                 </div>
                 {/* Main Picture */}
-                <PictureModal />
+                <PictureModal picturesArr={props.picturesArr}/>
                 {/* ArrowRight */}
                 <div className={classes.containerArrowRight}>
                   <div className={classes.iconContainer}>

@@ -31,6 +31,7 @@ const EmojisVsComments = ({
     reaction: userReaction,
     id: id,
   });
+  console.log(reactionPicker);
 
   if (currentUser) {
     reactionPicker.userID = currentUser.userID;
@@ -123,6 +124,7 @@ const EmojisVsComments = ({
       setReactionPicker({
         ...reactionPicker,
         reaction: reaction,
+        userReactionOld: reactionPicker.reaction || null,
       });
     }
     check.current = true;
@@ -132,14 +134,24 @@ const EmojisVsComments = ({
   const handleChooseEmojiButton = (e) => {
     let reaction = e.target.id;
     if (reactionPicker.reaction) {
+     if (reactionPicker.reaction === 'like') {
       setReactionPicker({
         ...reactionPicker,
         reaction: null,
+        userReactionOld: 'like',
       });
+     } else {
+      setReactionPicker({
+        ...reactionPicker,
+        reaction: null,
+        userReactionOld: reactionPicker.reaction || null,
+      });
+     }
     } else {
       setReactionPicker({
         ...reactionPicker,
         reaction: reaction,
+        userReactionOld: null,
       });
     }
     check.current = true;
@@ -273,18 +285,6 @@ const EmojisVsComments = ({
       <div className={classes.tools}>
         <div className={`like-btn-${id} ${classes.toolReaction}`}>
           <div className={`${classes.reactionBox}`}>
-            <div
-              className={`reaction-icon-${id} ${classes.reactionIcon}`}
-              onClick={(e) => handleChooseEmoji(e)}
-            >
-              <img
-                id="like"
-                src={like}
-                alt="Like Icon"
-                className={classes.icon}
-              />
-              <label className={classes.label}>Thích</label>
-            </div>
             <div
               className={`reaction-icon-${id} ${classes.reactionIcon}`}
               onClick={(e) => handleChooseEmoji(e)}

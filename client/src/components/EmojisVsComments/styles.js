@@ -217,7 +217,7 @@ export const useStyles = makeStyles((theme) => ({
   reactionBox: {
     display: 'block',
     position: 'absolute',
-    width: '330px',
+    width: '280px',
     height: '45px',
     padding: '0 0.4rem',
     background: 'var(--background-main)',

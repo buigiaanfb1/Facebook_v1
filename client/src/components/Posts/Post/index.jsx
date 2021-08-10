@@ -62,7 +62,7 @@ const Post = ({ post }) => {
                   id={state.post.id}
                   comments={state.post.comments}
                   reactions={state.post.reaction}
-                  userReaction={post.reaction[i]}
+                  userReaction={indexReaction[i]}
                   userPostedID={state.post.userID}
                   postID={state.post.id}
                 />
@@ -93,7 +93,6 @@ const Post = ({ post }) => {
         });
         return time;
     }
-    return 1;
   }
 
   return (

@@ -7,7 +7,7 @@ const router = express.Router();
 // @desc    Add to Post Collection
 // @access  Public
 router.post("/global", async (req, res) => {
-  const { addDoc, addDocSubCollection, updatePostProfile } =
+  const { addDocToGlobalPost, addDocSubCollection, updatePostProfile } =
     setCollection("posts");
   // add vô collection user-posts
   const idUserPostsSubCollection = await addDocSubCollection(
@@ -17,7 +17,7 @@ router.post("/global", async (req, res) => {
     req.body
   );
   // add vô collection posts (for homepage can see)
-  const idPostCollection = await addDoc(req.body, idUserPostsSubCollection);
+  await addDocToGlobalPost(req.body, idUserPostsSubCollection, 'posts');
   return res.status(200).json({ idUserPostsSubCollection });
 });
 
@@ -29,7 +29,6 @@ router.post("/reaction", async (req, res) => {
     setCollection();
   const { id, userID, reaction, reactionOld, userInfo, userPostedID, postID } =
     req.body;
-  console.log(postID);
   let postInfo = await getCollection(
     "user-posts",
     "posts",
@@ -42,11 +41,11 @@ router.post("/reaction", async (req, res) => {
     // nếu ko có reactionOld nghĩa là user là người
     // lần đầu tiên thả reaction vào post
     if (!reactionOld) {
-      // push user reaction vào
       postInfo.reaction[reaction] = [...postInfo.reaction[reaction], userInfo];
       // auto increment
       postInfo.reaction["total"] = postInfo.reaction["total"] + 1;
     } else {
+      console.log("Nhay vao co reactionOld")
       // ngược lại là user đổi từ reaction này sang reaction khác
       let reactionIter = postInfo.reaction[reactionOld];
       let indexUserReaction = reactionIter.findIndex(
@@ -58,6 +57,7 @@ router.post("/reaction", async (req, res) => {
       postInfo.reaction[reaction] = [...postInfo.reaction[reaction], userInfo];
     }
   } else {
+    console.log("Xoa reaction")
     let reactionIter = postInfo.reaction[reactionOld];
     let indexUserReaction = reactionIter.findIndex(
       (user) => user.userID === userID
@@ -68,11 +68,7 @@ router.post("/reaction", async (req, res) => {
     // update lại array
     postInfo.reaction[reactionOld] = reactionIter;
   }
-
-  console.log(userPostedID,
-    postID,
-    postInfo.reaction)
-
+  console.log(postInfo.reaction);
   // update lại vị trí posts
   await updatePostProfile(
     "user-posts",
@@ -81,7 +77,7 @@ router.post("/reaction", async (req, res) => {
     postID,
     postInfo.reaction
   );
-  // await updatePostReactionGlobal("posts", usersInfo.posts[index].reaction, id);
+  await updatePostReactionGlobal("posts", postInfo.reaction, postID);
   return res.status(200).json("success");
 });
 

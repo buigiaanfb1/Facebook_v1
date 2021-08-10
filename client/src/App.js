@@ -28,7 +28,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     checkToCreateProfile();
-  });
+  }, []);
 
   const checkToCreateProfile = async () => {
     const { res } = getUser();

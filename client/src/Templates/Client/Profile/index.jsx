@@ -8,7 +8,7 @@ import { useStyles } from "./styles";
 // BE (firebase)
 import { projectFirestore } from "../../../firebase/config";
 import { PROFILE_INFO, PROFILE_POSTS } from "../../../common/constants";
-import { getDocumentPostProfile } from "../../../firebase/data/getDocument";
+import { getDocumentPostProfile, getDocument } from "../../../firebase/data/getDocument";
 
 const Profile = (props) => {
   console.log("profile render");
@@ -17,6 +17,7 @@ const Profile = (props) => {
 
   useEffect(() => {
       getUserPosts();
+      getProfileInfo();
   }, []);
 
   const getUserPosts = async () => {
@@ -26,6 +27,14 @@ const Profile = (props) => {
       payload: res,
     });
   };
+
+  const getProfileInfo = async () => {
+    const res = await getDocument('users' , id);
+    dispatch({
+      type: PROFILE_INFO,
+      payload: res,
+    });
+  }
 
   return (
     <div style={{ marginTop: "56px" }}>
