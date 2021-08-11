@@ -6,7 +6,7 @@ const getCollectionRealtime = (collection, userID) => {
     .collection(collection)
     .doc(userID)
     .collection(collection)
-    .orderBy('createdAt');
+    .doc(userID)
   let documents = null;
 
   let unsub = collectionRef.onSnapshot(

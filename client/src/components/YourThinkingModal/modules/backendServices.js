@@ -7,7 +7,7 @@ export const addPostToPostsAndUsersPostCollectionServices = async (post) => {
       data: post,
       method: 'POST',
     });
-    return res.data;
+    return res.status;
   } catch (err) {
     console.log(err.message);
   }

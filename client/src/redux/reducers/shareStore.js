@@ -4,13 +4,15 @@ import {
   TAB_PROFILE,
   PROFILE_INFO,
   PROFILE_POSTS,
+  POST_UPLOAD_STATUS
 } from '../../common/constants';
 
 const initialState = {
   profileInfo: null,
   tabProfile: POST_TAB,
   currentUser: null,
-  profilePosts: null
+  profilePosts: null,
+  postUploadStatus: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -30,6 +32,10 @@ export default (state = initialState, { type, payload }) => {
     case CURRENT_USER: {
       state.currentUser = payload;
       return { ...state };
+    }
+    case POST_UPLOAD_STATUS: {
+      state.postUploadStatus += 1;
+      return {...state};
     }
     default:
       return { ...state };

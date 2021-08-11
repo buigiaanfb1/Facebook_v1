@@ -63,4 +63,4 @@ const ProfileDown = () => {
   );
 };
 
-export default ProfileDown;
+export default React.memo(ProfileDown);

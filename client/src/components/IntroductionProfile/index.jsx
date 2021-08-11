@@ -187,4 +187,4 @@ const IntroductionProfile = () => {
   );
 };
 
-export default IntroductionProfile;
+export default React.memo(IntroductionProfile);

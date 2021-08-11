@@ -11,7 +11,7 @@ const Posts = () => {
       .slice(0)
       .reverse()
       .map((post) => {
-        return <Post key={uuidv4()} post={post} />;
+        return <Post key={post.id} post={post} />;
       });
   };
 

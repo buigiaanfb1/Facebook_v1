@@ -6,13 +6,15 @@ import { Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {POST_UPLOAD_STATUS} from "../../common/constants"
 //Firebase
 import { createAPost } from '../../firebase/data/createAPost';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const [checkInput, setCheckInput] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();
@@ -41,25 +43,35 @@ const YourThinkingModal = (props) => {
   const handleSubmit = async () => {
     if (info.imageBlob && info.imageBlob.length > 0) {
       setSubmitting(true);
-      await createAPostWithPicture(
+      const res = await createAPostWithPicture(
         info.text,
         info.imageBlob,
         profileInfo,
         currentUser?.avatar
       );
+      handleReRender(res);
       handleClose();
       setSubmitting(false);
     } else {
       setSubmitting(true);
-      await createAPostWithNoPicture(
+      const res = await createAPostWithNoPicture(
         info.text,
         profileInfo,
         currentUser?.avatar
       );
+      handleReRender(res);
       handleClose();
       setSubmitting(false);
     }
   };
+  // Đăng bài thành công (server trả về 200) thì re render cmp
+  const handleReRender = (status) => {
+    if (status === 200) {
+      dispatch({
+        type: POST_UPLOAD_STATUS,
+      })
+    }
+  }
 
   const handleInputFiles = (e) => {
     // copy deep of state imageBlob

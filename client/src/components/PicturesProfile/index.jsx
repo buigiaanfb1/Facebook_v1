@@ -307,4 +307,4 @@ const PictureProfile = () => {
   );
 };
 
-export default PictureProfile;
+export default React.memo(PictureProfile);

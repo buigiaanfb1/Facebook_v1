@@ -12,3 +12,5 @@ export const PROFILE_INFO = 'PROFILE_INFO';
 export const CURRENT_USER = 'CURRENT_USER';
 // user posts
 export const PROFILE_POSTS = 'PROFILE_POSTS';
+// success status when posted successfully a new post
+export const POST_UPLOAD_STATUS = 'POST_UPLOAD_STATUS';

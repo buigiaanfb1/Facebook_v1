@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProfileUp from "./../../../components/ProfileUp";
 import Content from "./Content";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useStyles } from "./styles";
 
@@ -13,13 +13,20 @@ import { getDocumentPostProfile, getDocument } from "../../../firebase/data/getD
 const Profile = (props) => {
   console.log("profile render");
   const id = props.match.params.id;
+  const postUploadStatus = useSelector(state => state.shareStore.postUploadStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
       getUserPosts();
-      getProfileInfo();
+      // getProfileInfo();
   }, []);
 
+  useEffect(() => {
+    if (postUploadStatus && postUploadStatus !== 0 ) {
+      console.log("@@")
+      getUserPosts();
+    }
+  }, [postUploadStatus])
   const getUserPosts = async () => {
     const res = await getDocumentPostProfile("user-posts", "posts", id);
     dispatch({
@@ -28,17 +35,17 @@ const Profile = (props) => {
     });
   };
 
-  const getProfileInfo = async () => {
-    const res = await getDocument('users' , id);
-    dispatch({
-      type: PROFILE_INFO,
-      payload: res,
-    });
-  }
+  // const getProfileInfo = async () => {
+  //   const res = await getDocument('users' , id);
+  //   dispatch({
+  //     type: PROFILE_INFO,
+  //     payload: res,
+  //   });
+  // }
 
   return (
     <div style={{ marginTop: "56px" }}>
-      <ProfileUp />
+      <ProfileUp/>
       <Content />
     </div>
   );

@@ -41,4 +41,4 @@ const FriendsProfile = () => {
   );
 };
 
-export default FriendsProfile;
+export default React.memo(FriendsProfile);

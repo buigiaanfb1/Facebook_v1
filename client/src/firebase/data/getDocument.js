@@ -31,6 +31,7 @@ export const getDocumentPostProfile = async (
     .collection(collectionMain)
     .doc(userId)
     .collection(collectionSub)
+    .orderBy('createdAt')
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {

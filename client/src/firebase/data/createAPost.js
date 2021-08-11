@@ -36,8 +36,8 @@ export const createAPost = () => {
     };
     // create in collection Post (let everyone sees)
     // const id = await addDoc(post);
-    const id = await addPostToPostsAndUsersPostCollectionServices(post);
-    return id;
+    const status = await addPostToPostsAndUsersPostCollectionServices(post);
+    return status;
   };
 
   const createAPostWithNoPicture = async (text, user, avatar = '') => {
@@ -63,8 +63,8 @@ export const createAPost = () => {
     };
     // create in collection Post (let everyone sees)
     // const id = await addDoc(post);
-    const id = await addPostToPostsAndUsersPostCollectionServices(post);
-    return id;
+    const status = await addPostToPostsAndUsersPostCollectionServices(post);
+    return status;
   };
 
   return { createAPostWithPicture, createAPostWithNoPicture };

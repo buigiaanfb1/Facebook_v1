@@ -12,6 +12,7 @@ import { Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
+import Comments from './Comments';
 
 const EmojisVsComments = ({
   id,
@@ -19,7 +20,7 @@ const EmojisVsComments = ({
   userPostedID,
   reactions,
   userReaction,
-  postID
+  postID,
 }) => {
   console.log('EmojisVsComments render');
   const classes = useStyles();
@@ -31,6 +32,7 @@ const EmojisVsComments = ({
     reaction: userReaction,
     id: id,
   });
+
   console.log(reactionPicker);
 
   if (currentUser) {
@@ -134,19 +136,19 @@ const EmojisVsComments = ({
   const handleChooseEmojiButton = (e) => {
     let reaction = e.target.id;
     if (reactionPicker.reaction) {
-     if (reactionPicker.reaction === 'like') {
-      setReactionPicker({
-        ...reactionPicker,
-        reaction: null,
-        userReactionOld: 'like',
-      });
-     } else {
-      setReactionPicker({
-        ...reactionPicker,
-        reaction: null,
-        userReactionOld: reactionPicker.reaction || null,
-      });
-     }
+      if (reactionPicker.reaction === 'like') {
+        setReactionPicker({
+          ...reactionPicker,
+          reaction: null,
+          userReactionOld: 'like',
+        });
+      } else {
+        setReactionPicker({
+          ...reactionPicker,
+          reaction: null,
+          userReactionOld: reactionPicker.reaction || null,
+        });
+      }
     } else {
       setReactionPicker({
         ...reactionPicker,
@@ -160,7 +162,7 @@ const EmojisVsComments = ({
   const handleRenderLikeButton = () => {
     return (
       <div
-        id="likeButton"
+        id="like"
         onClick={(e) => handleChooseEmojiButton(e)}
         className={classes.likeContainer}
       >
@@ -362,10 +364,7 @@ const EmojisVsComments = ({
       {/*  */}
       {/*  */}
       {/*  */}
-      <div className={classes.yourThinking}>
-        <img src={avatar} className={classes.avatarOtherPeople} />
-        <input className={classes.input} placeholder="Viết câu trả lời..." />
-      </div>
+      <Comments postID={postID} />
     </div>
   );
 };

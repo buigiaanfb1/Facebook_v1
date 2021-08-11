@@ -8,6 +8,8 @@ import { createProfile } from './firebase/data/createProfile';
 import { getUser } from './firebase/data/currentUser';
 import { useDispatch } from 'react-redux';
 import { CURRENT_USER } from './common/constants';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const showLayoutClient = () => {
   if (homeRoutes && homeRoutes.length > 0) {
@@ -48,6 +50,7 @@ const App = () => {
         <Navbar />
         <Switch>{showLayoutClient()}</Switch>
       </Router>
+      <ToastContainer/>
     </div>
   );
 };

@@ -36,6 +36,8 @@ router.post("/reaction", async (req, res) => {
     postID
   );
 
+  console.log(postInfo);
+
   // add people to reaction array
   if ((reactionOld && reaction) || !reactionOld) {
     // nếu ko có reactionOld nghĩa là user là người
@@ -68,7 +70,7 @@ router.post("/reaction", async (req, res) => {
     // update lại array
     postInfo.reaction[reactionOld] = reactionIter;
   }
-  console.log(postInfo.reaction);
+
   // update lại vị trí posts
   await updatePostProfile(
     "user-posts",

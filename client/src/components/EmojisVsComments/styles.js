@@ -175,6 +175,11 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '2px',
     fontSize: '16px',
     fontWeight: '300',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    resize: 'none',
+    '&:focus': {
+      outline: 'none',
+    },
   },
 
   contentHavePicture: {
