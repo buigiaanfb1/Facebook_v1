@@ -15,6 +15,14 @@ export const useStyles = makeStyles((theme) => ({
       padding: '1rem 0',
     },
   },
+  positionSticky: {
+    [theme.breakpoints.up('sm')]: {
+      height: '100vh',
+      position: '-webkit-sticky',
+      position: 'sticky',
+      top: '-65%',
+    },
+  },
   item: {
     marginRight: '1rem',
     [theme.breakpoints.down('xs')]: {

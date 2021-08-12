@@ -12,7 +12,8 @@ import { Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
-import Comments from './Comments';
+import CommentInput from './CommentInput';
+import OtherComments from './OtherComments';
 
 const EmojisVsComments = ({
   id,
@@ -32,8 +33,6 @@ const EmojisVsComments = ({
     reaction: userReaction,
     id: id,
   });
-
-  console.log(reactionPicker);
 
   if (currentUser) {
     reactionPicker.userID = currentUser.userID;
@@ -77,42 +76,6 @@ const EmojisVsComments = ({
       addReactionServices({ reactionPicker, userPostedID, user, postID });
     }
   }, [reactionPicker]);
-
-  const handleComments = () => {
-    if (comments && comments.length > 0) {
-      return comments.map((comment, index) => {
-        return (
-          <div className={classes.commentsSection}>
-            <img src={avatar} className={classes.avatarOtherPeople} />
-            <div className={classes.nameVsCommentVsToolsContainer}>
-              <div className={classes.nameVsComment}>
-                <Typography className={classes.nameOtherPeople}>
-                  Nguyễn Văn A
-                </Typography>
-                <Typography className={classes.commentOtherPeople}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </Typography>
-              </div>
-              <div className={classes.toolsComment}>
-                <Typography className={classes.toolsCommentText}>
-                  Thích&nbsp;&nbsp;·&nbsp;
-                </Typography>
-                <Typography className={classes.toolsCommentText}>
-                  &nbsp;Trả lời&nbsp;&nbsp;·&nbsp;
-                </Typography>
-                <Typography className={classes.toolsCommentText}>
-                  &nbsp;Chia sẻ&nbsp;&nbsp;·&nbsp;
-                </Typography>
-                <Typography className={classes.timeComment}>
-                  &nbsp;3 giờ
-                </Typography>
-              </div>
-            </div>
-          </div>
-        );
-      });
-    }
-  };
 
   // Chọn trong Reaction Box
   const handleChooseEmoji = (e) => {
@@ -269,7 +232,7 @@ const EmojisVsComments = ({
   };
   return (
     <div className={classes.commentContainer}>
-      {comments || reactions ? (
+      {/* {comments || reactions ? (
         <div className={classes.emojiContainer}>
           <div className={classes.emojis}>
             <div className={classes.emojisPicture}>
@@ -283,7 +246,7 @@ const EmojisVsComments = ({
         </div>
       ) : (
         ''
-      )}
+      )} */}
       <div className={classes.tools}>
         <div className={`like-btn-${id} ${classes.toolReaction}`}>
           <div className={`${classes.reactionBox}`}>
@@ -360,11 +323,11 @@ const EmojisVsComments = ({
         <Typography className={classes.sortText}>Tất cả câu trả lời</Typography>
         <i className={classes.sortIcon}></i>
       </div>
-      {handleComments()}
+      <OtherComments postID={postID} />
       {/*  */}
       {/*  */}
       {/*  */}
-      <Comments postID={postID} />
+      <CommentInput postID={postID} />
     </div>
   );
 };

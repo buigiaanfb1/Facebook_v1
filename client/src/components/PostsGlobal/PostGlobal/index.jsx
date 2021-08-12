@@ -8,7 +8,6 @@ import EmojisVsComments from '../../EmojisVsComments';
 import { Link } from 'react-router-dom';
 
 const PostGlobal = ({ post }) => {
-  console.log(post);
   const classes = useStyles();
   const { res } = getUser();
 
@@ -173,7 +172,9 @@ const PostGlobal = ({ post }) => {
         </div>
       </div>
       <div className={classes.content}>
-        <Typography>{post.content}</Typography>
+        <Typography style={{ wordBreak: 'break-word' }}>
+          {post.content}
+        </Typography>
         {checkHowManyPictures(post.picture)}
       </div>
       {handleGetReaction(post)}

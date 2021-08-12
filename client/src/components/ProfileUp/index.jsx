@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useStyles } from "./styles";
-import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
-import addIcon from "../../common/images/addIcon.png";
-import editIcon from "../../common/images/editIcon.png";
-import { useDispatch, useSelector } from "react-redux";
-import { PROFILE_INFO, TAB_PROFILE } from "../../common/constants";
-import { arrTab } from "../../common/TabsProfileArray";
-import WallpaperVsAvatarModal from "../WallpaperVsAvatarModal";
-import { setStorage } from "../../firebase/data/setStorage";
-import { setCollection } from "../../firebase/data/setCollection";
-import { useParams } from "react-router-dom";
-import { projectFirestore } from "../../firebase/config";
+import React, { useEffect, useState } from 'react';
+import { useStyles } from './styles';
+import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
+import addIcon from '../../common/images/addIcon.png';
+import editIcon from '../../common/images/editIcon.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { PROFILE_INFO, TAB_PROFILE } from '../../common/constants';
+import { arrTab } from '../../common/TabsProfileArray';
+import WallpaperVsAvatarModal from '../WallpaperVsAvatarModal';
+import { setStorage } from '../../firebase/data/setStorage';
+import { setCollection } from '../../firebase/data/setCollection';
+import { useParams } from 'react-router-dom';
+import { projectFirestore } from '../../firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 
 const ProfileUp = () => {
-  console.log("ProfileUp render");
+  console.log('ProfileUp render');
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -31,9 +31,9 @@ const ProfileUp = () => {
     // gán vào biến subcriber để khi component will unmount
     // sẽ đóng bandwidth không listen nữa tránh ảnh hưởng performance
     const subscriber = projectFirestore
-      .collection("users")
+      .collection('users')
       .doc(id)
-      .collection("users")
+      .collection('users')
       .doc(id)
       .onSnapshot((doc) => {
         let id = doc.id;
@@ -50,7 +50,7 @@ const ProfileUp = () => {
   // mở Modal
   const handleOpenModalPicture = (picture, from) => {
     console.log(openPostPictureModal.open);
-    if (from === "avatar") {
+    if (from === 'avatar') {
       setPostPictureModal({
         open: true,
         picture: picture ? picture : avatarDefault,
@@ -104,19 +104,19 @@ const ProfileUp = () => {
 
   const handleUploadWallpaper = async (e) => {
     const { uploadWallpaper } = setStorage();
-    const { updateWallpaperFieldDoc } = setCollection("users");
+    const { updateWallpaperFieldDoc } = setCollection('users');
     const file = e.target.files[0];
     if (file) {
       const { url } = await uploadWallpaper(currentUser.userID, file);
       console.log(url);
       await updateWallpaperFieldDoc(url, currentUser.userID);
-      toast("Wow so easy !")
+      toast('Wow so easy !');
     }
   };
 
   const handleUploadAvatar = async (e) => {
     const { uploadAvatar } = setStorage();
-    const { updateAvatarFieldDoc } = setCollection("users");
+    const { updateAvatarFieldDoc } = setCollection('users');
     const file = e.target.files[0];
     if (file) {
       const { url } = await uploadAvatar(currentUser.userID, file);
@@ -126,10 +126,10 @@ const ProfileUp = () => {
   };
 
   const avatarDefault =
-    "https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0";
+    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
   const wallpaperDefault =
-    "https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2FdefaultWallpaper.jpeg?alt=media&token=eafdf402-296d-4eb6-b14a-3d814fc3d905";
+    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2FdefaultWallpaper.jpeg?alt=media&token=eafdf402-296d-4eb6-b14a-3d814fc3d905';
 
   return (
     <div className={classes.container}>
@@ -148,7 +148,7 @@ const ProfileUp = () => {
                     }
                     className={classes.wallpaper}
                     onClick={() =>
-                      handleOpenModalPicture(profileInfo.wallpaper, "wallpaper")
+                      handleOpenModalPicture(profileInfo.wallpaper, 'wallpaper')
                     }
                   />
                   <label for="uploadWallpaper">
@@ -156,14 +156,14 @@ const ProfileUp = () => {
                       <i className={classes.iconEditWallpaper}></i>
                       <Typography className={classes.editWallpaperText}>
                         {profileInfo.wallpaper
-                          ? "Thay ảnh bìa"
-                          : "Thêm ảnh bìa"}
+                          ? 'Thay ảnh bìa'
+                          : 'Thêm ảnh bìa'}
                       </Typography>
                     </div>
                     <input
                       type="file"
                       id="uploadWallpaper"
-                      style={{ display: "none" }}
+                      style={{ display: 'none' }}
                       accept="image/png, image/jpeg"
                       onChange={(e) => handleUploadWallpaper(e)}
                     />
@@ -180,7 +180,7 @@ const ProfileUp = () => {
                         }
                         className={classes.avatarBig}
                         onClick={() =>
-                          handleOpenModalPicture(profileInfo.avatar, "avatar")
+                          handleOpenModalPicture(profileInfo.avatar, 'avatar')
                         }
                       />
                       <label for="uploadAvatar">
@@ -190,19 +190,22 @@ const ProfileUp = () => {
                         <input
                           type="file"
                           id="uploadAvatar"
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                           accept="image/png, image/jpeg"
                           onChange={(e) => handleUploadAvatar(e)}
                         />
                       </label>
                     </div>
                     <Typography className={classes.nameBig}>
-                      {profileInfo.username ? profileInfo.username : ""}
+                      {profileInfo.username ? profileInfo.username : ''}
                     </Typography>
                   </div>
                   <div className={classes.right}>
                     <div className={classes.containerButtons}>
-                      <button className={classes.addContainer}>
+                      <button
+                        className={classes.addContainer}
+                        style={{ cursor: 'not-allowed' }}
+                      >
                         <img src={addIcon} className={classes.iconRight} />
                         <Typography className={classes.iconRightText}>
                           Thêm vào tin
@@ -219,7 +222,7 @@ const ProfileUp = () => {
                 </div>
               </>
             ) : (
-              ""
+              ''
             )}
             <div className={classes.navigationContainer}>
               {handleRenderTabs()}

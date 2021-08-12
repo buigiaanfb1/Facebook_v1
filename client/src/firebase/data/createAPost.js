@@ -31,7 +31,6 @@ export const createAPost = () => {
         sad: [],
         angry: [],
       },
-      comments: [],
       createdAt: new Date(),
     };
     // create in collection Post (let everyone sees)
@@ -58,7 +57,6 @@ export const createAPost = () => {
         angry: [],
         total: 0,
       },
-      comments: [],
       createdAt: new Date(),
     };
     // create in collection Post (let everyone sees)

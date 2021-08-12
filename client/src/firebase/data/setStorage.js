@@ -18,6 +18,21 @@ export const setStorage = () => {
     }
   };
 
+  const uploadPictureComment = async (postID, pictureBase64, uuid) => {
+    console.log(postID, pictureBase64, uuid);
+    filePath = `picture-public-comment-posts/${postID}/${uuid}`;
+    const storageRef = projectStorage.ref(filePath);
+    try {
+      const res = await storageRef.putString(...pictureBase64, 'data_url', {
+        contentType: 'image/jpg',
+      });
+      let url = await res.ref.getDownloadURL();
+      return { url };
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const uploadWallpaper = async (userID, file) => {
     filePath = `users/${userID}/wallpaper/${file.name}`;
     const storageRef = projectStorage.ref(filePath);
@@ -41,5 +56,10 @@ export const setStorage = () => {
       console.log(err.message);
     }
   };
-  return { uploadPictureOfPost, uploadWallpaper, uploadAvatar };
+  return {
+    uploadPictureOfPost,
+    uploadWallpaper,
+    uploadAvatar,
+    uploadPictureComment,
+  };
 };

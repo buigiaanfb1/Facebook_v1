@@ -9,6 +9,18 @@ const setCollection = () => {
     }
   };
 
+  const addDocToGlobalComment = async (
+    doc,
+    idUserPostsSubCollection,
+    where
+  ) => {
+    try {
+      await db.collection(where).doc(idUserPostsSubCollection).set(doc);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const addDocSubCollection = async (
     collection,
     userID,
@@ -41,7 +53,13 @@ const setCollection = () => {
     }
   };
 
-  const updatePostProfile = async (collection, subCollection, id, subId, reactionArr) => {
+  const updatePostProfile = async (
+    collection,
+    subCollection,
+    id,
+    subId,
+    reactionArr
+  ) => {
     try {
       await db
         .collection(collection)
@@ -65,7 +83,15 @@ const setCollection = () => {
       console.log(err);
     }
   };
-  return { addDocToGlobalPost, addDocSubCollection, updateDoc, updatePostReactionGlobal, updatePostProfile };
+
+  return {
+    addDocToGlobalPost,
+    addDocSubCollection,
+    updateDoc,
+    updatePostReactionGlobal,
+    updatePostProfile,
+    addDocToGlobalComment,
+  };
 };
 
 module.exports = setCollection;

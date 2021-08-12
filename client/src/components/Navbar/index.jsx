@@ -34,14 +34,18 @@ const Navbar = () => {
       return (
         <>
           <div className={classes.userContainer}>
-            <Link to={`/profile/${res.uid}`}>
+            <NavLink
+              to={`/profile/${res.uid}`}
+              activeClassName={classes.activeProfileTag}
+              style={{ textDecoration: 'none' }}
+            >
               <div className={classes.userContainer2}>
                 <img src={logo} className={classes.avatar} />
                 <Typography className={classes.nameUser}>
                   {res.displayName}
                 </Typography>
               </div>
-            </Link>
+            </NavLink>
           </div>
           <div className={classes.iconNavRightContainer}>
             <div className={classes.containerIconRight}>

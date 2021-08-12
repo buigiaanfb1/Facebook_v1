@@ -51,6 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '1rem 0',
   },
   slogan: {
+    paddingTop: '1rem',
     textAlign: 'center',
   },
   textAreaContainer: {
@@ -145,5 +146,30 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '15px',
     fontWeight: '500',
     color: 'var(----primary-text-button)',
+  },
+
+  containerEditing: {
+    position: 'relative',
+  },
+
+  loadingCmp: {
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'var(--background-post)',
+      opacity: '0.8',
+      transform: 'scaleX(1.1)',
+    },
+  },
+  upperLoadingDiv: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
 }));

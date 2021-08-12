@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { theme } from '../../common/theme';
 import fullCombo from '../../common/images/full-combo.png';
+import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -139,6 +140,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   nameUser: {
     fontWeight: '700',
+    fontSize: '15px',
     margin: '0rem 0.5rem 0rem 0.25rem',
   },
 
@@ -159,5 +161,18 @@ export const useStyles = makeStyles((theme) => ({
   titleButton: {
     fontSize: '15px',
     fontWeight: '500',
+  },
+  activeProfileTag: {
+    textDecoration: 'none',
+    '& $userContainer2': {
+      backgroundColor: 'var(--primary-deemphasized-button-background)',
+      '&:hover': {
+        transition: 'all 0.3s',
+        opacity: 0.9,
+      },
+      '& $nameUser': {
+        color: 'var(--primary-deemphasized-button-text)',
+      },
+    },
   },
 }));

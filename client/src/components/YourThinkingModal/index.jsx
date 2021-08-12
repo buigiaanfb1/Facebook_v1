@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useSelector, useDispatch } from 'react-redux';
-import {POST_UPLOAD_STATUS} from "../../common/constants"
+import { POST_UPLOAD_STATUS } from '../../common/constants';
 //Firebase
 import { createAPost } from '../../firebase/data/createAPost';
 
@@ -69,9 +69,9 @@ const YourThinkingModal = (props) => {
     if (status === 200) {
       dispatch({
         type: POST_UPLOAD_STATUS,
-      })
+      });
     }
-  }
+  };
 
   const handleInputFiles = (e) => {
     // copy deep of state imageBlob
@@ -101,7 +101,7 @@ const YourThinkingModal = (props) => {
   };
 
   const handleChangeText = (e) => {
-    let textarea = document.getElementById('textareaYourThinkingModal');
+    let textarea = document.getElementById('textareaYourThinkingModalPost');
     let heightLimit = 1000000; /* Maximum height: 200px */
     let lengthOfText = textarea.value.length; // get length
     if (lengthOfText > 0) {
@@ -215,7 +215,7 @@ const YourThinkingModal = (props) => {
               <div className={classes.paper}>
                 <div className={classes.textAreaContainer}>
                   <textarea
-                    id="textareaYourThinkingModal"
+                    id="textareaYourThinkingModalPost"
                     onChange={(e) => handleChangeText(e)}
                     onPaste={(e) => handleDetectPastePicture(e)}
                     placeholder="Bạn đang nghĩ gì?"
@@ -239,14 +239,14 @@ const YourThinkingModal = (props) => {
                 <Typography className={classes.textAdd}>
                   Thêm vào bài viết
                 </Typography>
-                <label for="upload">
+                <label for="uploadPictureThinking">
                   <div className={classes.containerIconPicture}>
                     <i className={classes.pictureIcon}></i>
                   </div>
                   <input
                     type="file"
                     multiple
-                    id="upload"
+                    id="uploadPictureThinking"
                     style={{ display: 'none' }}
                     accept="image/png, image/jpeg"
                     onChange={(e) => handleInputFiles(e)}

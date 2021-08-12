@@ -33,7 +33,13 @@ const ProfileDown = () => {
             {/*  */}
             {/*  */}
             <Grid container spacing={0}>
-              <Grid item lg={5} md={5} sm={5}>
+              <Grid
+                item
+                lg={5}
+                md={5}
+                sm={5}
+                className={classes.positionSticky}
+              >
                 <div className={classes.item}>
                   <IntroductionProfile />
                 </div>
@@ -52,7 +58,7 @@ const ProfileDown = () => {
                 style={{ marginTop: '1rem', width: '100%' }}
               >
                 {handleRenderYourThinking()}
-                <Posts/>
+                <Posts />
               </Grid>
             </Grid>
           </div>

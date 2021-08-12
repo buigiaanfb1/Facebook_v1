@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import avatar from '../../../common/images/avatar.png';
-import { set } from 'mongoose';
-
-const Comments = ({ postID }) => {
+import { setCollection } from '../../../firebase/data/setCollection';
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
+const CommentInput = ({ postID }) => {
+  const currentUser = useSelector((state) => state.shareStore.currentUser);
   const classes = useStyles();
+  const { addCommentWithID } = setCollection('comments-post');
   const [info, setInfo] = useState({
+    postID: postID,
+    user: currentUser,
     text: '',
     imageBlob: [],
+    id: uuidv4(),
   });
-  const [checkInput, setCheckInput] = useState(false);
   const types = ['image/png', 'image/jpeg'];
 
   const handleChangeText = (e) => {
@@ -18,17 +23,6 @@ const Comments = ({ postID }) => {
     let heightLimit = 1000000; /* Maximum height: 200px */
     let moreHeight = 0;
     let lengthOfText = textarea.value.length; // get length
-    if (lengthOfText > 0) {
-      setInfo({
-        ...info,
-        text: textarea.value,
-      });
-      setCheckInput(true);
-    } else {
-      setCheckInput(false);
-    }
-
-    console.log(textarea.scrollHeight);
     // length >= 85, fontSize will auto resize to 15px,
     if (textarea.scrollHeight > 36) {
       textarea.style.borderRadius = '16px';
@@ -44,7 +38,6 @@ const Comments = ({ postID }) => {
       iconContainer.style.bottom = '50%';
       moreHeight = 0;
     }
-    console.log(moreHeight);
     /* Reset the height just to make sure correct height*/
     textarea.style.height = '';
     // If < 210, defaultHeight, else heightLimit
@@ -108,11 +101,13 @@ const Comments = ({ postID }) => {
     setInfo({
       ...info,
       imageBlob: [],
+      id: uuidv4(),
     });
   };
 
   const handleInputFiles = (e) => {
     const files = e.target.files;
+    console.log(e.target.files);
     // loop an object
     Object.keys(files).map((key) => {
       // init reader file
@@ -134,37 +129,85 @@ const Comments = ({ postID }) => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(info);
+  const handleResetTextInState = () => {
+    setInfo({
+      ...info,
+      text: '',
+      id: uuidv4(),
+    });
+  };
+  // choose file is work perfect but if we delete a picture and
+  // choose it again it can't detected that it have change
+  // so we need to ( delete the memory of the input tag) like
+  // a trick
+  const handleClickFile = (e) => {
+    const element = e.target;
+    console.log(element);
+    element.value = '';
+  };
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      text: e.target.value,
+    });
+  };
+
+  const handleDetectEnter = (e) => {
+    let textarea = document.getElementById(`${postID}`);
+    let lengthOfText = textarea.value.length; // get length
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      if (lengthOfText < 35) {
+        e.preventDefault();
+        handleResetTextInState();
+        handleSubmit();
+        textarea.value = '';
+      } else {
+        e.preventDefault();
+        handleResetTextInState();
+        handleSubmit();
+        textarea.style.height = '36px';
+        textarea.value = '';
+      }
+    } else {
+      handleChangeText();
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (info.text.length > 0 || info.imageBlob.length > 0) {
+      await addCommentWithID(info, postID);
+      setInfo({
+        ...info,
+        imageBlob: [],
+      });
+    }
   };
 
   return (
     <>
       <div className={classes.yourThinking}>
         <img src={avatar} className={classes.avatarOtherPeople} />
-        <form style={{ width: '100%' }} onSubmit={handleSubmit}>
-          <textarea
-            id={`${postID}`}
-            onChange={(e) => handleChangeText(e)}
-            onPaste={(e) => handleDetectPastePicture(e)}
-            placeholder="Bạn đang nghĩ gì?"
-            className={classes.input}
-            enter
-          />
-          <button type="submit" style={{ display: 'none' }}></button>
-        </form>
+        <textarea
+          id={`${postID}`}
+          onChange={(e) => handleChange(e)}
+          onPaste={(e) => handleDetectPastePicture(e)}
+          placeholder="Bạn đang nghĩ gì?"
+          className={classes.input}
+          onKeyDown={(e) => handleDetectEnter(e)}
+        />
         <div id={`${postID}IconContainer`} className={classes.containerIcon}>
-          <label for="upload">
+          <label for="uploadPictureComment">
             <div className={classes.containerIconPicture}>
               <i className={classes.icon}></i>
             </div>
             <input
               type="file"
-              id="upload"
+              id="uploadPictureComment"
               style={{ display: 'none' }}
               accept="image/png, image/jpeg"
               onChange={(e) => handleInputFiles(e)}
+              onClick={(e) => handleClickFile(e)}
             />
           </label>
         </div>
@@ -174,4 +217,4 @@ const Comments = ({ postID }) => {
   );
 };
 
-export default Comments;
+export default React.memo(CommentInput);
