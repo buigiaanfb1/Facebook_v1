@@ -28,7 +28,8 @@ export const setCollection = (collection) => {
 
   const addCommentWithID = async (doc, id) => {
     const { text, imageBlob: picture, postID } = doc;
-    console.log(text, picture);
+    console.log(doc);
+    delete doc.user.createdAt;
     if (picture.length > 0) {
       const { uploadPictureComment } = setStorage();
       // upload ảnh lên

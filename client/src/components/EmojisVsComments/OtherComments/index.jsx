@@ -55,7 +55,7 @@ const OtherComments = ({ postID }) => {
       return (
         <div className={classes.commentsSection} key={comment.id}>
           <img
-            src={comment.user.avatar}
+            src={comment.user?.avatar}
             className={classes.avatarOtherPeople}
             alt="avatar pic"
           />
@@ -69,7 +69,7 @@ const OtherComments = ({ postID }) => {
               }
             >
               <Typography className={classes.nameOtherPeople}>
-                {comment.user.username}
+                {comment.user?.username}
               </Typography>
               <Linkify
                 componentDecorator={(decoratedHref, decoratedText, key) => (

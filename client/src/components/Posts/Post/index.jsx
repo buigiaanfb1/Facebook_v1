@@ -10,7 +10,7 @@ import Image from './Image';
 import OtherComments from '../../EmojisVsComments/OtherComments';
 import Linkify from 'react-linkify';
 
-const Post = ({ post }) => {
+const Post = ({ post, profileID }) => {
   console.log('post rerender');
   const classes = useStyles();
   const [state, setState] = useState({ post, first: false });
@@ -18,12 +18,14 @@ const Post = ({ post }) => {
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
+  console.log(state);
+
   useEffect(() => {
     // gán vào biến subcriber để khi component will unmount
     // sẽ đóng bandwidth không listen nữa tránh ảnh hưởng performance
     const subscriber = projectFirestore
       .collection('user-posts')
-      .doc(res.uid)
+      .doc(profileID)
       .collection('posts')
       .doc(state.post.id)
       .onSnapshot((doc) => {
@@ -87,7 +89,7 @@ const Post = ({ post }) => {
   };
 
   const handleRenderTime = () => {
-    if (post.createdAt) {
+    if (state.post && state.post.createdAt) {
       let date = new Date(state.post?.createdAt);
       date.toISOString().substring(0, 10);
       let time = formatDistanceToNowStrict(date, {

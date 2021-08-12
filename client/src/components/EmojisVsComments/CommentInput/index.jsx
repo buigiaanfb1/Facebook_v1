@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 const CommentInput = ({ postID }) => {
   const currentUser = useSelector((state) => state.shareStore.currentUser);
+  console.log(currentUser);
   const classes = useStyles();
   const { addCommentWithID } = setCollection('comments-post');
   const [info, setInfo] = useState({
