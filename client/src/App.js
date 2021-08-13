@@ -29,8 +29,9 @@ const showLayoutClient = () => {
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('App render');
     checkToCreateProfile();
-  }, []);
+  });
 
   const checkToCreateProfile = async () => {
     const { res } = getUser();
@@ -50,7 +51,7 @@ const App = () => {
         <Navbar />
         <Switch>{showLayoutClient()}</Switch>
       </Router>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Box from '@material-ui/core/Box';
+import { Link } from 'react-router-dom';
 import Popper from '@material-ui/core/Popper';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
@@ -36,17 +36,22 @@ const DropdownTools = (props) => {
         style={{ zIndex: '999', marginRight: '14px', marginTop: '5px' }}
       >
         <div className={classes.container}>
-          <div className={classes.profile}>
-            <img src={props.user.photoURL} className={classes.picture} />
-            <div className={classes.nameVsDes}>
-              <Typography className={classes.name}>
-                {props.user.displayName}
-              </Typography>
-              <Typography className={classes.des}>
-                Xem trang cá nhân của bạn
-              </Typography>
+          <Link
+            style={{ textDecoration: 'none' }}
+            to={`profile/${props.user.uid}`}
+          >
+            <div className={classes.profile}>
+              <img src={props.avatar} className={classes.picture} />
+              <div className={classes.nameVsDes}>
+                <Typography className={classes.name}>
+                  {props.username}
+                </Typography>
+                <Typography className={classes.des}>
+                  Xem trang cá nhân của bạn
+                </Typography>
+              </div>
             </div>
-          </div>
+          </Link>
           <div className={classes.tools}>
             <div className={classes.item} onClick={handleLogout}>
               <div className={classes.iconContainer}>

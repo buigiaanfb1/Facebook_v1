@@ -14,7 +14,7 @@ const LayoutClient = (props) => {
 const ClientTemplate = ({ component, path, exact }) => {
   return (
     <LayoutClient>
-      <Route exact={exact} path={path} component={component} />
+      <Route exact={exact} path={path} component={component} key={uuidv4()} />
     </LayoutClient>
   );
 };

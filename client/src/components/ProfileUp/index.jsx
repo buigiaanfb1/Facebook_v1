@@ -3,6 +3,9 @@ import { useStyles } from './styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import addIcon from '../../common/images/addIcon.png';
+import wallpaper from '../../common/images/defaultWallpaper.jpeg';
+import addFriend from '../../common/images/addFriend.png';
+import messenger from '../../common/images/messenger.png';
 import editIcon from '../../common/images/editIcon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { PROFILE_INFO, TAB_PROFILE } from '../../common/constants';
@@ -13,6 +16,8 @@ import { setCollection } from '../../firebase/data/setCollection';
 import { useParams } from 'react-router-dom';
 import { projectFirestore } from '../../firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
+import WallpaperLoader from '../../componentsLoader/WallpaperLoader';
+import AvatarLoader from '../../componentsLoader/AvatarLoader';
 
 const ProfileUp = () => {
   console.log('ProfileUp render');
@@ -53,12 +58,12 @@ const ProfileUp = () => {
     if (from === 'avatar') {
       setPostPictureModal({
         open: true,
-        picture: picture ? picture : avatarDefault,
+        picture: picture,
       });
     } else {
       setPostPictureModal({
         open: true,
-        picture: picture ? picture : wallpaperDefault,
+        picture: picture,
       });
     }
   };
@@ -125,105 +130,135 @@ const ProfileUp = () => {
     }
   };
 
-  const avatarDefault =
-    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
-
-  const wallpaperDefault =
-    'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2FdefaultWallpaper.jpeg?alt=media&token=eafdf402-296d-4eb6-b14a-3d814fc3d905';
+  const handleRenderDependOnUser = () => {
+    if (profileInfo?.userID === currentUser?.userID) {
+      return (
+        <>
+          <button
+            className={classes.addContainer}
+            style={{ cursor: 'not-allowed' }}
+          >
+            <img src={addIcon} className={classes.iconRight} />
+            <Typography className={classes.iconRightText}>
+              Thêm vào tin
+            </Typography>
+          </button>
+          <button className={classes.editContainer}>
+            <img src={editIcon} className={classes.iconRight} />
+            <Typography className={classes.iconRightText}>
+              Chỉnh sửa trang cá nhân
+            </Typography>
+          </button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            className={classes.messageContainer}
+            style={{ cursor: 'not-allowed' }}
+          >
+            <img src={messenger} className={classes.iconRight} />
+            <Typography className={classes.iconRightText}>Nhắn tin</Typography>
+          </button>
+          <button className={classes.addFriendContainer}>
+            <img src={addFriend} className={classes.iconRight} />
+            <Typography className={classes.iconRightText}>
+              Thêm bạn bè
+            </Typography>
+          </button>
+        </>
+      );
+    }
+  };
 
   return (
     <div className={classes.container}>
       <div className={classes.root}>
         <Grid container spacing={0}>
           <Grid item lg={2} md={1} sm={0}></Grid>
-          <Grid item lg={8} md={10} sm={12}>
-            {profileInfo ? (
-              <>
-                <div className={classes.wallpaperContainer}>
+          <Grid item lg={8} md={10} sm={12} xs={12}>
+            <div className={classes.wallpaperContainer}>
+              {profileInfo?.wallpaper ? (
+                <>
                   <img
-                    src={
-                      profileInfo.wallpaper
-                        ? profileInfo.wallpaper
-                        : wallpaperDefault
-                    }
+                    src={profileInfo.wallpaper}
                     className={classes.wallpaper}
                     onClick={() =>
                       handleOpenModalPicture(profileInfo.wallpaper, 'wallpaper')
                     }
+                    alt="wallpaper"
                   />
-                  <label for="uploadWallpaper">
-                    <div className={classes.buttonEditWallpaper}>
-                      <i className={classes.iconEditWallpaper}></i>
-                      <Typography className={classes.editWallpaperText}>
-                        {profileInfo.wallpaper
-                          ? 'Thay ảnh bìa'
-                          : 'Thêm ảnh bìa'}
-                      </Typography>
-                    </div>
-                    <input
-                      type="file"
-                      id="uploadWallpaper"
-                      style={{ display: 'none' }}
-                      accept="image/png, image/jpeg"
-                      onChange={(e) => handleUploadWallpaper(e)}
-                    />
-                  </label>
+                  {currentUser?.userID === profileInfo?.userID ? (
+                    <label for="uploadWallpaper">
+                      <div className={classes.buttonEditWallpaper}>
+                        <i className={classes.iconEditWallpaper}></i>
+                        <Typography className={classes.editWallpaperText}>
+                          {profileInfo?.wallpaper
+                            ? 'Thay ảnh bìa'
+                            : 'Thêm ảnh bìa'}
+                        </Typography>
+                      </div>
+                      <input
+                        type="file"
+                        id="uploadWallpaper"
+                        style={{ display: 'none' }}
+                        accept="image/png, image/jpeg"
+                        onChange={(e) => handleUploadWallpaper(e)}
+                      />
+                    </label>
+                  ) : null}
+                </>
+              ) : (
+                <div className={classes.wallpaper}>
+                  <WallpaperLoader />
                 </div>
-                <div className={classes.avatarVsButtonContainer}>
-                  <div className={classes.left}>
-                    <div className={classes.avatarContainer}>
+              )}
+            </div>
+            <div className={classes.avatarVsButtonContainer}>
+              <div className={classes.left}>
+                <div className={classes.avatarContainer}>
+                  {profileInfo?.avatar ? (
+                    <>
                       <img
-                        src={
-                          profileInfo.avatar
-                            ? profileInfo.avatar
-                            : avatarDefault
-                        }
+                        src={profileInfo.avatar}
                         className={classes.avatarBig}
                         onClick={() =>
-                          handleOpenModalPicture(profileInfo.avatar, 'avatar')
+                          handleOpenModalPicture(profileInfo?.avatar, 'avatar')
                         }
+                        alt="avatar"
                       />
-                      <label for="uploadAvatar">
-                        <div className={classes.containerEditAvatar}>
-                          <i className={classes.iconEditAvatar}></i>
-                        </div>
-                        <input
-                          type="file"
-                          id="uploadAvatar"
-                          style={{ display: 'none' }}
-                          accept="image/png, image/jpeg"
-                          onChange={(e) => handleUploadAvatar(e)}
-                        />
-                      </label>
+                      {currentUser?.userID === profileInfo?.userID ? (
+                        <label for="uploadAvatar">
+                          <div className={classes.containerEditAvatar}>
+                            <i className={classes.iconEditAvatar}></i>
+                          </div>
+                          <input
+                            type="file"
+                            id="uploadAvatar"
+                            style={{ display: 'none' }}
+                            accept="image/png, image/jpeg"
+                            onChange={(e) => handleUploadAvatar(e)}
+                          />
+                        </label>
+                      ) : null}
+                    </>
+                  ) : (
+                    <div className={classes.avatarBig}>
+                      <AvatarLoader />
                     </div>
-                    <Typography className={classes.nameBig}>
-                      {profileInfo.username ? profileInfo.username : ''}
-                    </Typography>
-                  </div>
-                  <div className={classes.right}>
-                    <div className={classes.containerButtons}>
-                      <button
-                        className={classes.addContainer}
-                        style={{ cursor: 'not-allowed' }}
-                      >
-                        <img src={addIcon} className={classes.iconRight} />
-                        <Typography className={classes.iconRightText}>
-                          Thêm vào tin
-                        </Typography>
-                      </button>
-                      <button className={classes.editContainer}>
-                        <img src={editIcon} className={classes.iconRight} />
-                        <Typography className={classes.iconRightText}>
-                          Chỉnh sửa trang cá nhân
-                        </Typography>
-                      </button>
-                    </div>
-                  </div>
+                  )}
                 </div>
-              </>
-            ) : (
-              ''
-            )}
+                <Typography className={classes.nameBig}>
+                  {profileInfo?.username ? profileInfo.username : ''}
+                </Typography>
+              </div>
+              <div className={classes.right}>
+                <div className={classes.containerButtons}>
+                  {handleRenderDependOnUser()}
+                </div>
+              </div>
+            </div>
             <div className={classes.navigationContainer}>
               {handleRenderTabs()}
             </div>

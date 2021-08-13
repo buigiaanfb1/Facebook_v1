@@ -137,6 +137,7 @@ export const useStyles = makeStyles((theme) => ({
   avatar: {
     width: '28px',
     height: '28px',
+    borderRadius: '50%',
   },
   nameUser: {
     fontWeight: '700',

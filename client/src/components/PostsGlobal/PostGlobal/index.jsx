@@ -6,6 +6,7 @@ import { formatDistanceToNowStrict } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import EmojisVsComments from '../../EmojisVsComments';
 import { Link } from 'react-router-dom';
+import Linkify from 'react-linkify';
 
 const PostGlobal = ({ post }) => {
   const classes = useStyles();
@@ -172,9 +173,17 @@ const PostGlobal = ({ post }) => {
         </div>
       </div>
       <div className={classes.content}>
-        <Typography style={{ wordBreak: 'break-word' }}>
-          {post.content}
-        </Typography>
+        <Linkify
+          componentDecorator={(decoratedHref, decoratedText, key) => (
+            <a target="blank" href={decoratedHref} key={key}>
+              {decoratedText}
+            </a>
+          )}
+        >
+          <Typography style={{ wordBreak: 'break-word' }}>
+            {post.content}
+          </Typography>
+        </Linkify>
         {checkHowManyPictures(post.picture)}
       </div>
       {handleGetReaction(post)}

@@ -4,7 +4,8 @@ import {
   TAB_PROFILE,
   PROFILE_INFO,
   PROFILE_POSTS,
-  POST_UPLOAD_STATUS
+  POST_UPLOAD_STATUS,
+  CLEAR_PROFILE,
 } from '../../common/constants';
 
 const initialState = {
@@ -23,7 +24,7 @@ export default (state = initialState, { type, payload }) => {
     }
     case PROFILE_POSTS: {
       state.profilePosts = payload;
-      return {  ...state };
+      return { ...state };
     }
     case PROFILE_INFO: {
       state.profileInfo = payload;
@@ -35,7 +36,12 @@ export default (state = initialState, { type, payload }) => {
     }
     case POST_UPLOAD_STATUS: {
       state.postUploadStatus += 1;
-      return {...state};
+      return { ...state };
+    }
+    case CLEAR_PROFILE: {
+      state.profilePosts = null;
+      state.profileInfo = null;
+      return { ...state };
     }
     default:
       return { ...state };

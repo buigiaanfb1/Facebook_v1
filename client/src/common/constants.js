@@ -14,3 +14,5 @@ export const CURRENT_USER = 'CURRENT_USER';
 export const PROFILE_POSTS = 'PROFILE_POSTS';
 // success status when posted successfully a new post
 export const POST_UPLOAD_STATUS = 'POST_UPLOAD_STATUS';
+// clear Profile Post when unmount
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';

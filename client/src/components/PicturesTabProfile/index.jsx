@@ -14,7 +14,7 @@ const PicturesTabProfile = () => {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item lg={2} md={1} sm={0}></Grid>
+        <Grid item lg={2} md={1} sm={0} xs={0}></Grid>
         <Grid item lg={8} md={10} sm={12} xs={12}>
           <div className={classes.container}>
             <Typography className={classes.title}>Ảnh</Typography>
@@ -46,7 +46,7 @@ const PicturesTabProfile = () => {
             </div>
           </div>
         </Grid>
-        <Grid item lg={2} md={1} sm={0}></Grid>
+        <Grid item lg={2} md={1} sm={0} xs={0}></Grid>
       </Grid>
     </div>
   );

@@ -162,7 +162,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '100%',
       backgroundColor: 'var(--background-post)',
       opacity: '0.8',
-      transform: 'scaleX(1.1)',
+      transform: 'scaleX(1)',
     },
   },
   upperLoadingDiv: {

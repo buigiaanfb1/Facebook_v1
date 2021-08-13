@@ -22,10 +22,12 @@ import { getUser } from '../../firebase/data/currentUser';
 import { login } from '../../firebase/data/login';
 //
 import DropdownTools from './DropdownTools';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const classes = useStyles();
   const { res } = getUser();
+  const currentUser = useSelector((state) => state.shareStore.currentUser);
   console.log('navbar');
 
   // render button Login or buttonProfile
@@ -40,9 +42,9 @@ const Navbar = () => {
               style={{ textDecoration: 'none' }}
             >
               <div className={classes.userContainer2}>
-                <img src={logo} className={classes.avatar} />
+                <img src={currentUser?.avatar} className={classes.avatar} />
                 <Typography className={classes.nameUser}>
-                  {res.displayName}
+                  {currentUser?.username}
                 </Typography>
               </div>
             </NavLink>
@@ -55,7 +57,11 @@ const Navbar = () => {
               <img src={bell} className={classes.iconNavRight} />
             </div>
             <div className={classes.containerIconRight}>
-              <DropdownTools user={res} />
+              <DropdownTools
+                user={res}
+                avatar={currentUser?.avatar}
+                username={currentUser?.username}
+              />
             </div>
           </div>
         </>
