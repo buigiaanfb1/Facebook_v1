@@ -14,7 +14,24 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: '0.5rem',
     borderRadius: '50%',
   },
-  nameVsCommentVsToolsContainer: {},
+  nameVsCommentVsToolsContainer: {
+    width: '100%',
+    /* These are technically the same, but use both */
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+
+    MsWordBreak: 'break-all',
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    wordBreak: 'break-all',
+    /* Instead use this non-standard one: */
+    wordBreak: 'break-word',
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    MsHyphens: 'auto',
+    MozHyphens: 'auto',
+    WebkitHyphens: 'auto',
+    hyphens: 'auto',
+  },
   nameVsComment: {
     display: 'inline-flex',
     flexDirection: 'column',
@@ -36,6 +53,12 @@ export const useStyles = makeStyles((theme) => ({
   commentOtherPeople: {
     fontSize: '15px',
     display: 'inline',
+  },
+  linkify: {
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    display: '-webkit-box',
   },
   toolsComment: {
     display: 'flex',

@@ -18,6 +18,7 @@ import { projectFirestore } from '../../firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import WallpaperLoader from '../../componentsLoader/WallpaperLoader';
 import AvatarLoader from '../../componentsLoader/AvatarLoader';
+import FriendButton from './FriendButton';
 
 const ProfileUp = () => {
   console.log('ProfileUp render');
@@ -26,7 +27,7 @@ const ProfileUp = () => {
   const dispatch = useDispatch();
   const tabCon = useSelector((state) => state.shareStore.tabProfile);
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   const [openPostPictureModal, setPostPictureModal] = useState({
     open: false,
     picture: null,
@@ -161,12 +162,7 @@ const ProfileUp = () => {
             <img src={messenger} className={classes.iconRight} />
             <Typography className={classes.iconRightText}>Nhắn tin</Typography>
           </button>
-          <button className={classes.addFriendContainer}>
-            <img src={addFriend} className={classes.iconRight} />
-            <Typography className={classes.iconRightText}>
-              Thêm bạn bè
-            </Typography>
-          </button>
+          <FriendButton profileInfo={profileInfo} currentUser={currentUser} />
         </>
       );
     }

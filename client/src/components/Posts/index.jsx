@@ -6,6 +6,7 @@ import Post from './Post';
 import { useParams } from 'react-router-dom';
 
 const Posts = () => {
+  console.log('Posts render');
   const profilePosts = useSelector((state) => state.shareStore.profilePosts);
   const { id } = useParams();
   const handleRenderPost = () => {

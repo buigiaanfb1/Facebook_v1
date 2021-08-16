@@ -5,7 +5,7 @@ import { setCollection } from '../../../firebase/data/setCollection';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 const CommentInput = ({ postID }) => {
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   console.log(currentUser);
   const classes = useStyles();
   const { addCommentWithID } = setCollection('comments-post');

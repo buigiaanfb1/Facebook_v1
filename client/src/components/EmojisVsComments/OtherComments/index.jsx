@@ -9,7 +9,7 @@ import { formatDistanceToNowStrict } from 'date-fns';
 const OtherComments = ({ postID }) => {
   const classes = useStyles();
   const [comments, setComments] = useState(null);
-  const [responseComment, setResponseCommnet] = useState();
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     const subscriber = projectFirestore
@@ -53,7 +53,7 @@ const OtherComments = ({ postID }) => {
   const handleComments = () => {
     return comments.comments.map((comment, index) => {
       return (
-        <div className={classes.commentsSection} key={comment.id}>
+        <div className={classes.commentsSection} key={index}>
           <img
             src={comment.user?.avatar}
             className={classes.avatarOtherPeople}
@@ -73,7 +73,12 @@ const OtherComments = ({ postID }) => {
               </Typography>
               <Linkify
                 componentDecorator={(decoratedHref, decoratedText, key) => (
-                  <a target="blank" href={decoratedHref} key={key}>
+                  <a
+                    target="blank"
+                    href={decoratedHref}
+                    key={key}
+                    className={classes.linkify}
+                  >
                     {decoratedText}
                   </a>
                 )}
@@ -103,9 +108,7 @@ const OtherComments = ({ postID }) => {
       );
     });
   };
-  return (
-    <>{comments && comments.comments?.length > 0 ? handleComments() : null}</>
-  );
+  return comments && comments.comments?.length > 0 ? handleComments() : null;
 };
 
 export default OtherComments;

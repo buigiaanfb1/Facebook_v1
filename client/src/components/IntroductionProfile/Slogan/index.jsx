@@ -8,7 +8,7 @@ import { setCollection } from '../../../firebase/data/setCollection';
 const Slogan = () => {
   console.log('slogan render');
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   const classes = useStyles();
   const { updateSloganFieldDoc } = setCollection('users');
 

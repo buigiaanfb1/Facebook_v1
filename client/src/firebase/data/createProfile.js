@@ -20,32 +20,50 @@ export const createProfile = async (user) => {
         slogan: '',
         info: {
           createdAt: {
+            label: 'Tham gia vào',
             time: timestamp(),
             display: true,
           },
           highSchool: {
+            label: 'Học tại trường THPT',
             schools: [],
             display: false,
           },
           universitySchool: {
+            label: 'Học tại Đại học',
             schools: [],
             display: false,
           },
           currentResidence: {
+            label: 'Sống tại',
             currentResidence: '',
             display: false,
           },
           homeTown: {
+            label: 'Đến từ',
             homeTown: '',
             display: false,
           },
           currentJobs: {
+            label: 'Làm việc tại',
             currentJobs: [],
             display: false,
           },
         },
       };
-      await addDocWithID(doc, user.uid);
+      const friendsRequesting = {
+        requested: [],
+      };
+      const friendsIncoming = {
+        incoming: [],
+      };
+      const friends = {
+        friends: [],
+      };
+      await addDocWithID('users', doc, user.uid);
+      await addDocWithID('friendsRequested', friendsRequesting, user.uid);
+      await addDocWithID('friendsIncoming', friendsIncoming, user.uid);
+      await addDocWithID('friends', friends, user.uid);
       return doc;
     }
     return res;

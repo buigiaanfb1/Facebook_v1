@@ -1,7 +1,9 @@
 import { combineReducers, createStore } from 'redux';
 import shareStore from './shareStore';
+import userStore from './userStore';
+import friendsStore from './friendsStore';
 
-const reducer = combineReducers({ shareStore });
+const reducer = combineReducers({ shareStore, userStore, friendsStore });
 
 const store = createStore(
   reducer,

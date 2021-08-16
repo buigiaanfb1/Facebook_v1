@@ -144,6 +144,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '15px',
     margin: '0rem 0.5rem 0rem 0.25rem',
   },
+  logo: {
+    width: '50px',
+    verticalAlign: 'middle',
+  },
 
   button: {
     // width: '100%',

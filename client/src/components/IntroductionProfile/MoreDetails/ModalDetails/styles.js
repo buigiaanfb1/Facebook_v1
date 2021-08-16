@@ -84,7 +84,7 @@ export const useStyles = makeStyles((theme) => ({
   itemText: {
     marginLeft: '12px',
     fontSize: '15px',
-    fontWeight: '300',
+    fontWeight: '400',
   },
   footer: {
     position: 'absolute',

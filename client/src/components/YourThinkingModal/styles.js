@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
   },
   containerPrivacy: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     height: '24px',
     padding: '0 8px',

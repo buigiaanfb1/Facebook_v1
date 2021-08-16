@@ -33,6 +33,7 @@
   --button-blue: #2d88ff;
   --button-blue-hover: #4b99ff;
   --color-text-tab: #2e89ff;
+  --base-blue: #1877f2;
   --primary-deemphasized-button-background: rgba(45, 136, 255, 0.2);
   --primary-deemphasized-button-text: #2d88ff;
   --disabled-button-background: rgba(255, 255, 255, 0.2);
@@ -47,6 +48,7 @@ body {
 
 a {
   color: #2d88ff;
+  text-decoration: none;
 }
 
 ::-webkit-input-placeholder {

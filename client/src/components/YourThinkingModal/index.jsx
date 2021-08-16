@@ -23,7 +23,7 @@ const YourThinkingModal = (props) => {
     imageBlob: [],
   });
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   const types = ['image/png', 'image/jpeg'];
 
   useEffect(() => {
@@ -199,9 +199,15 @@ const YourThinkingModal = (props) => {
               <Typography className={classes.title}>Tạo bài viết</Typography>
             </div>
             <div className={classes.avatarVsName}>
-              <img src={avatar} className={classes.avatar} />
+              <img
+                src={props.currentUser?.avatar}
+                className={classes.avatar}
+                alt="user avatar pic"
+              />
               <div className={classes.nameVsPrivacy}>
-                <Typography className={classes.name}>An An</Typography>
+                <Typography className={classes.name}>
+                  {props.currentUser?.username}
+                </Typography>
                 <div className={classes.containerPrivacy}>
                   <img src={earth} className={classes.earth} />
                   <Typography className={classes.privacyText}>

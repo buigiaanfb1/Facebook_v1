@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       width: 'auto',
     },
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
 
   searchIcon: {
@@ -38,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: '2.25rem',
     transition: theme.transitions.create('width'),
     width: '100%',
-    width: '24ch',
+    width: '28ch',
     [theme.breakpoints.down('md')]: {
       width: '20ch',
     },

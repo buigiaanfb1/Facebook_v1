@@ -27,7 +27,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
   const classes = useStyles();
   const { res } = getUser();
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   console.log('navbar');
 
   // render button Login or buttonProfile
@@ -82,7 +82,7 @@ const Navbar = () => {
         {/* Left */}
         <div className={classes.left}>
           <Link to="/">
-            <img src={logo} />
+            <img src={logo} className={classes.logo} />
           </Link>
           <SearchBar />
         </div>

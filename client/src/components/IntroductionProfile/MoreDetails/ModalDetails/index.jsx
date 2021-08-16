@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Typography, withStyles } from '@material-ui/core';
+import { formatThangMMNamYYYYY } from '../../../../helpers/formatThangMMNamYYYY';
+import { setCollection } from '../../../../firebase/data/setCollection';
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -62,15 +62,23 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-const ModalDetails = () => {
+const ModalDetails = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [state, setState] = useState({
-    checked: true,
-  });
+  const [info, setInfo] = useState(null);
+  const { updateInfoFieldDoc } = setCollection('users');
+
+  useEffect(() => {
+    if (props.profileInfo) {
+      setInfo(props.profileInfo.info);
+    }
+  }, [props.profileInfo]);
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    let obj = info[event.target.name];
+    let checked = event.target.checked;
+    obj.display = checked;
+    setInfo({ ...info, createdAt: obj });
   };
 
   const handleOpen = () => {
@@ -81,6 +89,28 @@ const ModalDetails = () => {
     setOpen(false);
   };
 
+  const handleRenderDayJoined = () => {
+    if (info) {
+      const result = formatThangMMNamYYYYY(info.createdAt.time);
+      return (
+        <div className={classes.itemSwitch}>
+          <IOSSwitch
+            checked={info?.createdAt.display}
+            onChange={(e) => handleChange(e)}
+            name="createdAt"
+          />
+          <Typography className={classes.itemText}>
+            {info?.createdAt.label} {result}
+          </Typography>
+        </div>
+      );
+    }
+  };
+
+  const handleSave = async () => {
+    await updateInfoFieldDoc(info, props.profileInfo.userID);
+    handleClose();
+  };
   return (
     <div>
       <button className={classes.button} onClick={handleOpen}>
@@ -126,61 +156,7 @@ const ModalDetails = () => {
                 <Typography className={classes.titleDetailItem}>
                   Tham gia Facebook
                 </Typography>
-                <div className={classes.itemSwitch}>
-                  <IOSSwitch
-                    checked={state.checkedB}
-                    onChange={handleChange}
-                    name="checkedB"
-                  />
-                  <Typography className={classes.itemText}>
-                    Tham gia vào Tháng 10 năm 2019
-                  </Typography>
-                </div>
-              </div>
-              <div className={classes.detailItem}>
-                <Typography className={classes.titleDetailItem}>
-                  Tham gia Facebook
-                </Typography>
-                <div className={classes.itemSwitch}>
-                  <IOSSwitch
-                    checked={state.checkedB}
-                    onChange={handleChange}
-                    name="checkedB"
-                  />
-                  <Typography className={classes.itemText}>
-                    Tham gia vào Tháng 10 năm 2019
-                  </Typography>
-                </div>
-              </div>
-              <div className={classes.detailItem}>
-                <Typography className={classes.titleDetailItem}>
-                  Tham gia Facebook
-                </Typography>
-                <div className={classes.itemSwitch}>
-                  <IOSSwitch
-                    checked={state.checkedB}
-                    onChange={handleChange}
-                    name="checkedB"
-                  />
-                  <Typography className={classes.itemText}>
-                    Tham gia vào Tháng 10 năm 2019
-                  </Typography>
-                </div>
-              </div>
-              <div className={classes.detailItem}>
-                <Typography className={classes.titleDetailItem}>
-                  Tham gia Facebook
-                </Typography>
-                <div className={classes.itemSwitch}>
-                  <IOSSwitch
-                    checked={state.checkedB}
-                    onChange={handleChange}
-                    name="checkedB"
-                  />
-                  <Typography className={classes.itemText}>
-                    Tham gia vào Tháng 10 năm 2019
-                  </Typography>
-                </div>
+                {handleRenderDayJoined()}
               </div>
             </div>
             <div className={classes.footer}>
@@ -191,7 +167,10 @@ const ModalDetails = () => {
                 >
                   <Typography className={classes.iconRightText}>Huỷ</Typography>
                 </button>
-                <button className={classes.saveContainer}>
+                <button
+                  className={classes.saveContainer}
+                  onClick={() => handleSave()}
+                >
                   <Typography className={classes.iconRightText}>Lưu</Typography>
                 </button>
               </div>

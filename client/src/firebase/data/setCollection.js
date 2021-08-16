@@ -13,12 +13,12 @@ export const setCollection = (collection) => {
     }
   };
 
-  const addDocWithID = async (doc, userID) => {
+  const addDocWithID = async (subCollection, doc, userID) => {
     try {
       const res = await projectFirestore
         .collection(collection)
         .doc(userID)
-        .collection(collection)
+        .collection(subCollection)
         .doc(userID)
         .set(doc);
     } catch (err) {
@@ -112,6 +112,190 @@ export const setCollection = (collection) => {
       console.log(err);
     }
   };
+
+  const updateInfoFieldDoc = async (info, userID) => {
+    try {
+      const res = await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(collection)
+        .doc(userID)
+        .update({
+          info: info,
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** 
+    @user currentUser in redux
+    @subCollectionUser collection trong firebase user --> collection (2 level)
+    @userID id of current user
+    @userProfile profileInfo in redux
+    @subCollectionProfile collection trong firebase user --> collection (2 level)
+    @userProfileID id of profile user
+  */
+  const addRequestFriend = async (
+    user,
+    subCollectionUser,
+    userID,
+    userProfile,
+    subCollectionProfile,
+    userProfileID
+  ) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(subCollectionUser)
+        .doc(userID)
+        .update({
+          requested: firebase.firestore.FieldValue.arrayUnion({
+            ...user,
+          }),
+        });
+      await projectFirestore
+        .collection(collection)
+        .doc(userProfileID)
+        .collection(subCollectionProfile)
+        .doc(userProfileID)
+        .update({
+          incoming: firebase.firestore.FieldValue.arrayUnion({
+            ...userProfile,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** 
+    @user currentUser in redux
+    @subCollectionUser collection trong firebase user --> collection (2 level)
+    @userID id of current user
+    @userProfile profileInfo in redux
+    @subCollectionProfile collection trong firebase user --> collection (2 level)
+    @userProfileID id of profile user
+  */
+  const removeRequestFriend = async (
+    user,
+    subCollectionUser,
+    userID,
+    userProfile,
+    subCollectionProfile,
+    userProfileID
+  ) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(subCollectionUser)
+        .doc(userID)
+        .update({
+          requested: firebase.firestore.FieldValue.arrayRemove({
+            ...user,
+          }),
+        });
+      await projectFirestore
+        .collection(collection)
+        .doc(userProfileID)
+        .collection(subCollectionProfile)
+        .doc(userProfileID)
+        .update({
+          incoming: firebase.firestore.FieldValue.arrayRemove({
+            ...userProfile,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** 
+    @user currentUser in redux
+    @subCollectionUser collection trong firebase user --> collection (2 level)
+    @userID id of current user
+    @userProfile profileInfo in redux
+    @subCollectionProfile collection trong firebase user --> collection (2 level)
+    @userProfileID id of profile user
+  */
+  const addFriendToBothUser = async (
+    user,
+    subCollectionUser,
+    userID,
+    userProfile,
+    subCollectionProfile,
+    userProfileID
+  ) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(subCollectionUser)
+        .doc(userID)
+        .update({
+          friends: firebase.firestore.FieldValue.arrayUnion({
+            ...userProfile,
+          }),
+        });
+      await projectFirestore
+        .collection(collection)
+        .doc(userProfileID)
+        .collection(subCollectionProfile)
+        .doc(userProfileID)
+        .update({
+          friends: firebase.firestore.FieldValue.arrayUnion({
+            ...user,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** 
+    @user currentUser in redux
+    @subCollectionUser collection trong firebase user --> collection (2 level)
+    @userID id of current user
+    @userProfile profileInfo in redux
+    @subCollectionProfile collection trong firebase user --> collection (2 level)
+    @userProfileID id of profile user
+  */
+  const unfriendToBothUser = async (
+    user,
+    subCollectionUser,
+    userID,
+    userProfile,
+    subCollectionProfile,
+    userProfileID
+  ) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(subCollectionUser)
+        .doc(userID)
+        .update({
+          friends: firebase.firestore.FieldValue.arrayRemove({
+            ...userProfile,
+          }),
+        });
+      await projectFirestore
+        .collection(collection)
+        .doc(userProfileID)
+        .collection(subCollectionProfile)
+        .doc(userProfileID)
+        .update({
+          friends: firebase.firestore.FieldValue.arrayRemove({
+            ...user,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return {
     addDoc,
     addDocWithID,
@@ -119,5 +303,10 @@ export const setCollection = (collection) => {
     updateAvatarFieldDoc,
     addCommentWithID,
     updateSloganFieldDoc,
+    updateInfoFieldDoc,
+    addRequestFriend,
+    removeRequestFriend,
+    addFriendToBothUser,
+    unfriendToBothUser,
   };
 };

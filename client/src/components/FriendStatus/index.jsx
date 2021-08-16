@@ -4,6 +4,7 @@ import avatar from '../../common/images/avatar.png';
 import { Typography } from '@material-ui/core';
 import wow from '../../common/images/wow.svg';
 import haha from '../../common/images/haha.svg';
+import { Link } from 'react-router-dom';
 import content1 from '../../common/images/content1.jpeg';
 import content2 from '../../common/images/content2.jpeg';
 import content3 from '../../common/images/content3.jpeg';
@@ -17,7 +18,9 @@ const FriendStatus = () => {
         <div className={classes.friendInviteContainer}>
           <div className={classes.friendInviteTitle}>
             <Typography className={classes.title}>Lời mời kết bạn</Typography>
-            <Typography className={classes.linkAll}>Xem tất cả</Typography>
+            <Link to={`/friends`}>
+              <Typography className={classes.linkAll}>Xem tất cả</Typography>
+            </Link>
           </div>
           <div className={classes.item}>
             <img src={avatar} className={classes.pictureAvatarInvite} />

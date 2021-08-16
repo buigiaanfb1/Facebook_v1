@@ -100,6 +100,8 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   logo: {
+    width: '50px',
+
     marginLeft: '0.22rem',
   },
 

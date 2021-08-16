@@ -18,8 +18,6 @@ const Post = ({ post, profileID }) => {
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
-  console.log(state);
-
   useEffect(() => {
     // gán vào biến subcriber để khi component will unmount
     // sẽ đóng bandwidth không listen nữa tránh ảnh hưởng performance

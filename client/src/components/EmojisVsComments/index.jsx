@@ -26,7 +26,7 @@ const EmojisVsComments = ({
   console.log('EmojisVsComments render');
   const classes = useStyles();
   const check = useRef(false);
-  const currentUser = useSelector((state) => state.shareStore.currentUser);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   const [reactionPicker, setReactionPicker] = useState({
     userID: null,
     userReactionOld: userReaction,
@@ -320,8 +320,8 @@ const EmojisVsComments = ({
         </div>
       </div>
       <div className={classes.sortContainer}>
-        <Typography className={classes.sortText}>Tất cả câu trả lời</Typography>
-        <i className={classes.sortIcon}></i>
+        {/* <Typography className={classes.sortText}>Tất cả câu trả lời</Typography>
+        <i className={classes.sortIcon}></i> */}
       </div>
       <OtherComments postID={postID} />
       {/*  */}
