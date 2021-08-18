@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
 import earth from '../../common/images/earth.png';
 import { Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
@@ -10,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { POST_UPLOAD_STATUS } from '../../common/constants';
 //Firebase
 import { createAPost } from '../../firebase/data/createAPost';
+import FormatPresets from './FormatPresets';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
@@ -234,7 +234,8 @@ const YourThinkingModal = (props) => {
                 <div className={classes.containerImage}>
                   {handleRenderPicture()}
                 </div>
-              </div>{' '}
+              </div>
+              <FormatPresets />
               {/* Exit Icon */}
               <div className={classes.exitContainer} onClick={handleClose}>
                 <i className={classes.exit}></i>

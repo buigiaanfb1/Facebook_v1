@@ -232,7 +232,7 @@ const EmojisVsComments = ({
   };
   return (
     <div className={classes.commentContainer}>
-      {/* {comments || reactions ? (
+      {reactions ? (
         <div className={classes.emojiContainer}>
           <div className={classes.emojis}>
             <div className={classes.emojisPicture}>
@@ -240,13 +240,13 @@ const EmojisVsComments = ({
             </div>
             {handleRenderReactionStatistics()}
           </div>
-          <Typography className={classes.amountPeopleComment}>
+          {/* <Typography className={classes.amountPeopleComment}>
             {comments.length > 0 ? comments.length + 'bình luận' : ''}
-          </Typography>
+          </Typography> */}
         </div>
       ) : (
         ''
-      )} */}
+      )}
       <div className={classes.tools}>
         <div className={`like-btn-${id} ${classes.toolReaction}`}>
           <div className={`${classes.reactionBox}`}>

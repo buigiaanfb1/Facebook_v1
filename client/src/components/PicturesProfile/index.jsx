@@ -297,7 +297,7 @@ const PictureProfile = () => {
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
-        <Typography className={classes.title}>Ảnh</Typography>
+        <Typography className={classes.title}>Ảnh cá nhân</Typography>
         <Typography className={classes.linkAll}>Xem tất cả ảnh</Typography>
       </div>
       <div className={classes.imagesContainer}>{handleRenderPicture()}</div>

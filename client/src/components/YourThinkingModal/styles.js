@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
   avatar: {
     width: '40px',
     height: '40px',
+    objectFit: 'cover',
     borderRadius: '50%',
   },
   nameVsPrivacy: {
@@ -216,5 +217,22 @@ export const useStyles = makeStyles((theme) => ({
   scroll: {
     maxHeight: '50vh',
     overflowY: 'auto',
+  },
+
+  formatPresetsContainer: {
+    padding: '0 1rem',
+  },
+  formatPresetsTitle: {
+    height: '38px',
+    width: '38px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+  },
+  formatPresetsItem: {
+    margin: '0.25rem',
+    height: '38px',
+    width: '38px',
+    borderRadius: '8px',
+    cursor: 'pointer',
   },
 }));

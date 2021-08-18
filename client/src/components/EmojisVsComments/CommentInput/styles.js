@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
   yourThinking: {
     position: 'relative',
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   input: {
     height: '36px',
@@ -27,8 +27,9 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   avatarOtherPeople: {
-    minWidth: '32px',
+    width: '32px',
     height: '32px',
+    objectFit: 'cover',
     marginRight: '0.5rem',
     borderRadius: '50%',
   },

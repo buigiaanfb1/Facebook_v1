@@ -9,10 +9,11 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '2px',
   },
   avatarOtherPeople: {
-    minWidth: '32px',
+    width: '32px',
     height: '32px',
     marginRight: '0.5rem',
     borderRadius: '50%',
+    objectFit: 'cover',
   },
   nameVsCommentVsToolsContainer: {
     width: '100%',
@@ -77,6 +78,6 @@ export const useStyles = makeStyles((theme) => ({
   imageOtherComment: {
     borderRadius: '16px',
     margin: '0rem 0rem',
-    maxWidth: '400px',
+    maxWidth: '300px',
   },
 }));
