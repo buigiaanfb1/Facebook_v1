@@ -144,6 +144,14 @@ export const setCollection = (collection) => {
     subCollectionProfile,
     userProfileID
   ) => {
+    console.log(
+      user,
+      subCollectionUser,
+      userID,
+      userProfile,
+      subCollectionProfile,
+      userProfileID
+    );
     try {
       await projectFirestore
         .collection(collection)
@@ -270,6 +278,14 @@ export const setCollection = (collection) => {
     subCollectionProfile,
     userProfileID
   ) => {
+    console.log(
+      user,
+      subCollectionUser,
+      userID,
+      userProfile,
+      subCollectionProfile,
+      userProfileID
+    );
     try {
       await projectFirestore
         .collection(collection)

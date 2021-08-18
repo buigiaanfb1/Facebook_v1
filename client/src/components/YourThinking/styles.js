@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '40px',
     height: '40px',
     marginRight: '0.5rem',
+    objectFit: 'cover',
     borderRadius: '50%',
   },
   input: {

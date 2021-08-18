@@ -10,7 +10,7 @@ export const getDocument = async (collection, id) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return { ...doc.data(), id: doc.id };
+        return { ...doc.data() };
       } else {
         // doc.data() will be undefined in this case
         return null;

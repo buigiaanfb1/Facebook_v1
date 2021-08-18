@@ -46,7 +46,7 @@ const MoreDetails = () => {
   return (
     <>
       {handleRenderInfo()}
-      <ModalDetails profileInfo={profileInfo} />
+      <ModalDetails profileInfo={profileInfo} currentUser={currentUser} />
     </>
   );
 };

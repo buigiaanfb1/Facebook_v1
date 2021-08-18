@@ -17,7 +17,7 @@ const ProfileDown = () => {
 
   const handleRenderYourThinking = () => {
     if (currentUser && profileInfo) {
-      if (currentUser.uid === profileInfo.id) {
+      if (currentUser.uid === profileInfo.userID) {
         return <YourThinking />;
       }
       return;

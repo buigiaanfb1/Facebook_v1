@@ -7,6 +7,7 @@ import Switch from '@material-ui/core/Switch';
 import { Typography, withStyles } from '@material-ui/core';
 import { formatThangMMNamYYYYY } from '../../../../helpers/formatThangMMNamYYYY';
 import { setCollection } from '../../../../firebase/data/setCollection';
+import ComboBox from './ComboBox';
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -111,13 +112,22 @@ const ModalDetails = (props) => {
     await updateInfoFieldDoc(info, props.profileInfo.userID);
     handleClose();
   };
+
+  const handleRenderButton = () => {
+    if (props.profileInfo && props.currentUser) {
+      return props.profileInfo?.userID === props.currentUser?.userID ? (
+        <button className={classes.button} onClick={handleOpen}>
+          <Typography className={classes.titleButton}>
+            Chỉnh sửa chi tiết
+          </Typography>
+        </button>
+      ) : null;
+    }
+  };
   return (
     <div>
-      <button className={classes.button} onClick={handleOpen}>
-        <Typography className={classes.titleButton}>
-          Chỉnh sửa chi tiết
-        </Typography>
-      </button>
+      {handleRenderButton()}
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -157,6 +167,27 @@ const ModalDetails = (props) => {
                   Tham gia Facebook
                 </Typography>
                 {handleRenderDayJoined()}
+              </div>
+              <div className={classes.detailItem}>
+                <Typography className={classes.titleDetailItem}>
+                  Tỉnh/Thành phố hiện tại
+                </Typography>
+                <div style={{ padding: '12px 0 8px 0' }}>
+                  {/* <Autocomplete
+                    id="combo-box-demo"
+                    options={top100Films}
+                    getOptionLabel={(option) => option.title}
+                    style={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Combo box"
+                        variant="outlined"
+                      />
+                    )}
+                  /> */}
+                  <ComboBox classes={classes} />
+                </div>
               </div>
             </div>
             <div className={classes.footer}>

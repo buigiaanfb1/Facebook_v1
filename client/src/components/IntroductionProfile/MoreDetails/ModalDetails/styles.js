@@ -160,4 +160,32 @@ export const useStyles = makeStyles((theme) => ({
     filter: 'invert(70%)',
     // verticalAlign: '-0.25em',
   },
+
+  textField: {
+    width: '50%',
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'var(--border-bottom-nav)',
+      },
+      '&:hover fieldset': {
+        borderColor: 'rgba(255,255,255, 0.6)',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'rgba(255,255,255, 0.6)',
+      },
+      '& input': {
+        color: 'white',
+        fontWeight: '400',
+      },
+    },
+  },
+  inputLabelProps: {
+    color: 'rgba(255,255,255, 0.6)',
+  },
 }));

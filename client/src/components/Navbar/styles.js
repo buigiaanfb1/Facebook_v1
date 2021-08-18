@@ -138,6 +138,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '28px',
     height: '28px',
     borderRadius: '50%',
+    objectFit: 'cover',
   },
   nameUser: {
     fontWeight: '700',

@@ -1,42 +1,43 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
-import content2 from '../../common/images/content2.jpeg';
-import content3 from '../../common/images/content3.jpeg';
-import content4 from '../../common/images/content4.jpeg';
+import { Link } from 'react-router-dom';
 
 const FriendsProfile = () => {
   const classes = useStyles();
+  const friends = useSelector((state) => state.friendsProfileStore.friends);
+
+  const handleRenderFriends = () => {
+    if (friends && friends.length > 0) {
+      return friends.map((item, index) => {
+        return (
+          <div className={classes.item}>
+            <Link to={`/profile/${item.userID}`}>
+              <div className={classes.rectImgContainer}>
+                <img src={item.avatar} className={classes.rectImg} />
+              </div>
+              <Typography className={classes.friendName}>
+                {item.username}
+              </Typography>
+            </Link>
+          </div>
+        );
+      });
+    }
+  };
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
         <div className={classes.titleContainer1}>
           <Typography className={classes.title}>Bạn bè</Typography>
           <Typography className={classes.amountFriends}>
-            123 người bạn
+            {friends?.length || 0} người bạn
           </Typography>
         </div>
         <Typography className={classes.linkAll}>Xem tất cả bạn bè</Typography>
       </div>
-      <div className={classes.friendsContainer}>
-        <div className={classes.item}>
-          <img src={avatar} className={classes.friendsAvatar} />
-          <Typography className={classes.friendName}>Nguyễn Văn A</Typography>
-        </div>
-        <div className={classes.item}>
-          <img src={content2} className={classes.friendsAvatar} />
-          <Typography className={classes.friendName}>Nguyễn Văn B</Typography>
-        </div>
-        <div className={classes.item}>
-          <img src={content3} className={classes.friendsAvatar} />
-          <Typography className={classes.friendName}>Nguyễn Văn C</Typography>
-        </div>
-        <div className={classes.item}>
-          <img src={content4} className={classes.friendsAvatar} />
-          <Typography className={classes.friendName}>Nguyễn Văn D</Typography>
-        </div>
-      </div>
+      <div className={classes.friendsContainer}>{handleRenderFriends()}</div>
     </div>
   );
 };

@@ -17,5 +17,8 @@ export const POST_UPLOAD_STATUS = 'POST_UPLOAD_STATUS';
 // clear Profile Post when unmount
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
-// Friend Store
+// Friend Store (current user)
 export const FRIENDS_INITIAL = 'FRIENDS_INITIAL';
+
+// Friend Store (profile user)
+export const FRIENDS_PROFILE = 'FRIENDS_PROFILE';

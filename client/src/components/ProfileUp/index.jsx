@@ -42,8 +42,7 @@ const ProfileUp = () => {
       .collection('users')
       .doc(id)
       .onSnapshot((doc) => {
-        let id = doc.id;
-        let data = { ...doc.data(), id };
+        let data = { ...doc.data() };
         dispatch({
           type: PROFILE_INFO,
           payload: data,

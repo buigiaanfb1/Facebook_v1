@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: 'var(--background-main)',
+    minHeight: '150vh',
   },
   container: {
     padding: '0rem 2rem',

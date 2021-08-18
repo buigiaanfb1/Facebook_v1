@@ -1,5 +1,6 @@
 import { getDocument } from './getDocument';
 import { setCollection } from './setCollection';
+import firebase from 'firebase/app';
 import { timestamp } from '../config';
 
 export const createProfile = async (user) => {
@@ -14,14 +15,14 @@ export const createProfile = async (user) => {
         username: user.displayName,
         email: user.email,
         avatar:
-          'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default-picture%2Fdefault-avatar.png?alt=media&token=54546a7c-a8c1-4173-a674-ea677dedd81e',
+          'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default-picture%2Favatar.jpeg?alt=media&token=aea5710f-8f9a-436d-b0f2-62a53efe30b8',
         wallpaper:
-          'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default-picture%2Fdefault-wallpaper.jpeg?alt=media&token=a0dccaaa-64ad-4d7a-9487-42ea90736a7d',
+          'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default-picture%2FNo5Xby.jpeg?alt=media&token=14d84c1f-c587-4358-93bb-50b12eafec38',
         slogan: '',
         info: {
           createdAt: {
             label: 'Tham gia vào',
-            time: timestamp(),
+            time: firebase.firestore.Timestamp.now(),
             display: true,
           },
           highSchool: {

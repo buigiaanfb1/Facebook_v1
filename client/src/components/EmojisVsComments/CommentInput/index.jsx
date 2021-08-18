@@ -188,7 +188,7 @@ const CommentInput = ({ postID }) => {
   return (
     <>
       <div className={classes.yourThinking}>
-        <img src={avatar} className={classes.avatarOtherPeople} />
+        <img src={currentUser?.avatar} className={classes.avatarOtherPeople} />
         <textarea
           id={`${postID}`}
           onChange={(e) => handleChange(e)}

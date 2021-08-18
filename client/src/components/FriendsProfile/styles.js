@@ -23,20 +23,6 @@ export const useStyles = makeStyles((theme) => ({
   amountFriends: {
     color: 'var(--secondary-text)',
   },
-  friendsContainer: {
-    marginTop: '1rem',
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-  },
-  item: {
-    width: 'calc(95% / 3)',
-    display: 'flex',
-    flexDirection: 'column',
-    // paddingRight: '0.75rem',
-    paddingBottom: '0.75rem',
-  },
   friendsAvatar: {
     width: '100%',
     borderRadius: '8px',
@@ -50,5 +36,35 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '4px',
     fontSize: '13px',
     fontWeight: '500',
+  },
+
+  friendsContainer: {
+    marginTop: '1rem',
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+  },
+
+  item: {
+    width: 'calc(100% / 3)',
+    padding: '0px 4px 16px 4px',
+  },
+
+  rectImgContainer: {
+    position: 'relative',
+    width: 'calc(100%)',
+    border: '2px solid var(--background-post)',
+    '&:after': {
+      content: '""',
+      display: 'block',
+      paddingBottom: '100%',
+    },
+  },
+  rectImg: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '8px',
   },
 }));

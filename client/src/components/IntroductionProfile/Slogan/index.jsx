@@ -71,81 +71,83 @@ const Slogan = () => {
   // if user does not have slogan, show the Text and Button else
   // show Button Edit
   const handleRenderSloganOrButton = () => {
-    if (!slogan.edited) {
-      if (profileInfo?.slogan && profileInfo?.slogan.length > 1) {
-        return (
-          <>
-            <Typography className={classes.slogan}>
-              {profileInfo.slogan}
-            </Typography>
-            {currentUser?.userID === profileInfo?.userID ? (
-              <button className={classes.button} onClick={handleOpenTextArea}>
-                <Typography className={classes.titleButton}>
-                  Chỉnh sửa tiểu sử
-                </Typography>
-              </button>
-            ) : null}
-          </>
-        );
-      } else {
-        return currentUser?.userID === profileInfo?.userID ? (
-          <button className={classes.button} onClick={handleOpenTextArea}>
-            <Typography className={classes.titleButton}>
-              Thêm tiểu sử
-            </Typography>
-          </button>
-        ) : null;
-      }
-    } else {
-      return (
-        <div className={classes.containerEditing}>
-          <div className={slogan.submit ? classes.loadingCmp : null}>
-            {slogan.submit ? (
-              <div className={classes.upperLoadingDiv}>
-                <ThreeDots />
-              </div>
-            ) : null}
-            <div className={classes.containerSlogan}>
-              <div className={classes.textAreaContainer}>
-                <textarea
-                  id="textAreaIntroduce"
-                  className={classes.textArea}
-                  placeholder="Mô tả về bạn"
-                  maxLength="100"
-                  value={slogan.newSlogan}
-                  onChange={(e) => handleChangeEditText(e)}
-                ></textarea>
-              </div>
-              <Typography className={classes.characterLeft}>
-                Còn {slogan.lengthOfSlogan} ký tự
+    if (profileInfo && currentUser) {
+      if (!slogan.edited) {
+        if (profileInfo?.slogan && profileInfo?.slogan.length > 1) {
+          return (
+            <>
+              <Typography className={classes.slogan}>
+                {profileInfo.slogan}
               </Typography>
-              <div className={classes.buttonSaveVsRemoveVsPublic}>
-                <div className={classes.earthContainer}>
-                  <i className={classes.earthIcon}></i>
-                  <Typography className={classes.earthIconText}>
-                    Công khai
+              {currentUser?.userID === profileInfo?.userID ? (
+                <button className={classes.button} onClick={handleOpenTextArea}>
+                  <Typography className={classes.titleButton}>
+                    Chỉnh sửa tiểu sử
                   </Typography>
+                </button>
+              ) : null}
+            </>
+          );
+        } else {
+          return currentUser?.userID === profileInfo?.userID ? (
+            <button className={classes.button} onClick={handleOpenTextArea}>
+              <Typography className={classes.titleButton}>
+                Thêm tiểu sử
+              </Typography>
+            </button>
+          ) : null;
+        }
+      } else {
+        return (
+          <div className={classes.containerEditing}>
+            <div className={slogan.submit ? classes.loadingCmp : null}>
+              {slogan.submit ? (
+                <div className={classes.upperLoadingDiv}>
+                  <ThreeDots />
                 </div>
-                <div className={classes.buttonSaveVsRemove}>
-                  <button
-                    className={classes.buttonRemoveContainer}
-                    onClick={handleCloseTextArea}
-                    style={{
-                      cursor: `${slogan.submit ? 'not-allowed' : null}`,
-                    }}
-                    disabled={slogan.submit ? true : false}
-                  >
-                    <Typography className={classes.textRemoveButton}>
-                      Huỷ
+              ) : null}
+              <div className={classes.containerSlogan}>
+                <div className={classes.textAreaContainer}>
+                  <textarea
+                    id="textAreaIntroduce"
+                    className={classes.textArea}
+                    placeholder="Mô tả về bạn"
+                    maxLength="100"
+                    value={slogan.newSlogan}
+                    onChange={(e) => handleChangeEditText(e)}
+                  ></textarea>
+                </div>
+                <Typography className={classes.characterLeft}>
+                  Còn {slogan.lengthOfSlogan} ký tự
+                </Typography>
+                <div className={classes.buttonSaveVsRemoveVsPublic}>
+                  <div className={classes.earthContainer}>
+                    <i className={classes.earthIcon}></i>
+                    <Typography className={classes.earthIconText}>
+                      Công khai
                     </Typography>
-                  </button>
-                  {handleRenderButtonSave()}
+                  </div>
+                  <div className={classes.buttonSaveVsRemove}>
+                    <button
+                      className={classes.buttonRemoveContainer}
+                      onClick={handleCloseTextArea}
+                      style={{
+                        cursor: `${slogan.submit ? 'not-allowed' : null}`,
+                      }}
+                      disabled={slogan.submit ? true : false}
+                    >
+                      <Typography className={classes.textRemoveButton}>
+                        Huỷ
+                      </Typography>
+                    </button>
+                    {handleRenderButtonSave()}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     }
   };
 

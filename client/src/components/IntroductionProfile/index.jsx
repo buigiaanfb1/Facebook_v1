@@ -12,14 +12,14 @@ const IntroductionProfile = () => {
     <div className={classes.container}>
       <Slogan />
       <MoreDetails />
-      <button className={classes.button}>
+      {/* <button className={classes.button}>
         <Typography className={classes.titleButton}>Thêm sở thích</Typography>
       </button>
       <button className={classes.button}>
         <Typography className={classes.titleButton}>
           Thêm nội dung đáng chú ý
         </Typography>
-      </button>
+      </button> */}
     </div>
   );
 };
