@@ -53,6 +53,7 @@ export const useStyles = makeStyles((theme) => ({
   picture: {
     height: '60px',
     width: '60px',
+    objectFit: 'cover',
     borderRadius: '50%',
   },
   nameVsDes: {

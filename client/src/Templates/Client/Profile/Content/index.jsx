@@ -1,11 +1,9 @@
 import React from 'react';
-import { useStyles } from './styles';
 import { useSelector } from 'react-redux';
 import { arrTab } from '../../../../common/TabsProfileArray';
 
 const Content = () => {
-  const classes = useStyles();
-  const currentTab = useSelector((state) => state.shareStore.tabProfile);
+  const currentTab = useSelector((state) => state.tabsStore.tabProfile);
 
   // find the Component that same name with currentTab in Redux Store;
   const handleRenderComponent = () => {

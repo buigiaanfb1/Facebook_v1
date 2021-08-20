@@ -221,6 +221,8 @@ export const useStyles = makeStyles((theme) => ({
 
   formatPresetsContainer: {
     padding: '0 1rem',
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   formatPresetsTitle: {
     height: '38px',
@@ -228,11 +230,49 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     cursor: 'pointer',
   },
+
   formatPresetsItem: {
     margin: '0.25rem',
-    height: '38px',
-    width: '38px',
+    height: '32px',
+    width: '32px',
     borderRadius: '8px',
+    cursor: 'pointer',
+  },
+  backgroundPresetsContainer: {
+    width: 'calc(100% + 2rem)',
+    margin: '-1rem',
+    position: 'relative',
+  },
+  backgroundPresets: {
+    width: '100%',
+  },
+  textAreaContainerTextPresets: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& textarea': {
+      textAlign: 'center',
+      fontSize: '2rem',
+      fontWeight: '700',
+      width: '90%',
+      '&::placeholder': {
+        fontSize: '2rem',
+        fontWeight: '700',
+      },
+    },
+  },
+  resetPresets: {
+    backgroundColor: '#18191A',
+    margin: '0.25rem',
+    height: '32px',
+    width: '32px',
+    borderRadius: '8px',
+    border: '2px solid #33363A',
     cursor: 'pointer',
   },
 }));

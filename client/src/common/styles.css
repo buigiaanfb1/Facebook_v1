@@ -10,6 +10,7 @@
   --background-post: rgba(36, 37, 38);
   --border-bottom-nav: rgba(57, 58, 59);
   --hover-overlay: rgba(255, 255, 255, 0.1);
+  --hover-overlay-005: rgba(255, 255, 255, 0.05);
   --background-icon: rgba(255, 255, 255, 0.1);
   --border-item: rgba(255, 255, 255, 0.05);
   --background-icon-arrow: rgba(255, 255, 255, 0.05);
@@ -21,6 +22,7 @@
   --background-button: rgba(255, 255, 255, 0.1);
   --background-button-hover: rgba(255, 255, 255, 0.2);
   --background-main: rgba(24, 25, 26);
+  --messenger-card-background: rgba(36, 37, 38);
   --background-black: rgba(0, 0, 0);
   --card-background: #242526;
   --shadow-1: rgba(0, 0, 0, 0.05);
@@ -37,6 +39,7 @@
   --primary-deemphasized-button-background: rgba(45, 136, 255, 0.2);
   --primary-deemphasized-button-text: #2d88ff;
   --disabled-button-background: rgba(255, 255, 255, 0.2);
+  --disabled-icon: rgba(255, 255, 255, 0.3);
   --scrollbar-thumb: #3b3d41;
   --scrollbar-background: #18191a;
   --secondary-button-background: rgba(255, 255, 255, 0.1);

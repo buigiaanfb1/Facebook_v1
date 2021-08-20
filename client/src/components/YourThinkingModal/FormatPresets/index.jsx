@@ -3,7 +3,7 @@ import { useStyles } from '../styles';
 import { getFormatPresets } from '../../../firebase/data/getDocument';
 import formatPresets from '../../../common/images/formatPresets.png';
 
-const FormatPresets = () => {
+const FormatPresets = (props) => {
   const classes = useStyles();
   const [presets, setPresets] = useState(null);
   const handleFetchFormatPresets = async () => {
@@ -13,38 +13,58 @@ const FormatPresets = () => {
     }
   };
 
+  const handleChoosePresets = (item) => {
+    props.handleSetTextPresetsFromChild(item.background_image.uri, item.color);
+  };
+
+  const handleResetPresets = () => {
+    props.handleResetPresetsFromChild();
+  };
+
   const handleRenderPresets = () => {
     if (presets && presets.length > 0) {
       return presets.map((item, index) => {
-        console.log(item);
-        return (
-          item.custom_thumbnail && (
-            <img
+        if (item.custom_thumbnail) {
+          return item.custom_thumbnail && index !== 0 ? (
+            <div
+              className={classes.item}
+              onClick={() => handleChoosePresets(item)}
               key={index}
-              alt="format-presets"
-              src={item.custom_thumbnail?.uri}
-              className={classes.formatPresetsItem}
-            />
-          )
-        );
+            >
+              <img
+                alt="format-presets"
+                src={item.custom_thumbnail?.uri}
+                className={classes.formatPresetsItem}
+              />
+            </div>
+          ) : (
+            <div
+              className={classes.item}
+              onClick={() => handleResetPresets()}
+              key={index}
+            >
+              <div className={classes.resetPresets}></div>
+            </div>
+          );
+        }
       });
     }
   };
   return (
     <div className={classes.formatPresetsContainer}>
-      <div>
-        {!presets && (
+      {!presets && (
+        <div>
           <img
             alt="format-presets"
             src={formatPresets}
             className={classes.formatPresetsTitle}
             onClick={handleFetchFormatPresets}
           />
-        )}
-        {handleRenderPresets()}
-      </div>
+        </div>
+      )}
+      {handleRenderPresets()}
     </div>
   );
 };
 
-export default FormatPresets;
+export default React.memo(FormatPresets);

@@ -187,32 +187,37 @@ const CommentInput = ({ postID }) => {
 
   return (
     <>
-      <div className={classes.yourThinking}>
-        <img src={currentUser?.avatar} className={classes.avatarOtherPeople} />
-        <textarea
-          id={`${postID}`}
-          onChange={(e) => handleChange(e)}
-          onPaste={(e) => handleDetectPastePicture(e)}
-          placeholder="Bạn đang nghĩ gì?"
-          className={classes.input}
-          onKeyDown={(e) => handleDetectEnter(e)}
-        />
-        <div id={`${postID}IconContainer`} className={classes.containerIcon}>
-          <label for="uploadPictureComment">
-            <div className={classes.containerIconPicture}>
-              <i className={classes.icon}></i>
-            </div>
-            <input
-              type="file"
-              id="uploadPictureComment"
-              style={{ display: 'none' }}
-              accept="image/png, image/jpeg"
-              onChange={(e) => handleInputFiles(e)}
-              onClick={(e) => handleClickFile(e)}
-            />
-          </label>
+      {currentUser && (
+        <div className={classes.yourThinking}>
+          <img
+            src={currentUser?.avatar}
+            className={classes.avatarOtherPeople}
+          />
+          <textarea
+            id={`${postID}`}
+            onChange={(e) => handleChange(e)}
+            onPaste={(e) => handleDetectPastePicture(e)}
+            placeholder="Bạn đang nghĩ gì?"
+            className={classes.input}
+            onKeyDown={(e) => handleDetectEnter(e)}
+          />
+          <div id={`${postID}IconContainer`} className={classes.containerIcon}>
+            <label for="uploadPictureComment">
+              <div className={classes.containerIconPicture}>
+                <i className={classes.icon}></i>
+              </div>
+              <input
+                type="file"
+                id="uploadPictureComment"
+                style={{ display: 'none' }}
+                accept="image/png, image/jpeg"
+                onChange={(e) => handleInputFiles(e)}
+                onClick={(e) => handleClickFile(e)}
+              />
+            </label>
+          </div>
         </div>
-      </div>
+      )}
       {handleRenderPicture()}
     </>
   );

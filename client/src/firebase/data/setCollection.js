@@ -29,7 +29,6 @@ export const setCollection = (collection) => {
   const addCommentWithID = async (doc, id) => {
     const { text, imageBlob: picture, postID } = doc;
     console.log(doc);
-    delete doc.user.createdAt;
     if (picture.length > 0) {
       const { uploadPictureComment } = setStorage();
       // upload ảnh lên
@@ -77,6 +76,21 @@ export const setCollection = (collection) => {
         .doc(userID)
         .update({
           wallpaper: wallpaperURL,
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateNameFieldDoc = async (newName, userID) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection(collection)
+        .doc(userID)
+        .update({
+          username: newName,
         });
     } catch (err) {
       console.log(err);
@@ -324,5 +338,6 @@ export const setCollection = (collection) => {
     removeRequestFriend,
     addFriendToBothUser,
     unfriendToBothUser,
+    updateNameFieldDoc,
   };
 };

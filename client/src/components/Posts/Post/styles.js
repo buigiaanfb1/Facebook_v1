@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: 'var(--background-post)',
     borderRadius: '8px',
     padding: '12px 16px 0px 16px',
-    marginTop: '1rem',
+    marginBottom: '1rem',
   },
   avatarVsName: {
     display: 'flex',
@@ -45,7 +45,21 @@ export const useStyles = makeStyles((theme) => ({
     filter: 'invert(60%)',
   },
   content: {
+    position: 'relative',
     whiteSpace: 'pre-line',
+  },
+  presetsBackground: {
+    margin: '0 -1rem',
+    width: 'calc(100% + 2rem)',
+  },
+  textPresets: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: '2rem',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   commentContainer: {
     padding: '10px 0',

@@ -39,12 +39,20 @@ export const createAPost = () => {
     return status;
   };
 
-  const createAPostWithNoPicture = async (text, user, avatar = '') => {
+  const createAPostWithNoPicture = async (
+    text,
+    color = null,
+    backgroundPresetsUri = null,
+    user,
+    avatar = ''
+  ) => {
     // create Post
     const post = {
       username: user.username,
       userID: user.userID,
       content: text,
+      backgroundPresetsUri: backgroundPresetsUri,
+      color: color,
       avatar: avatar,
       picture: [],
       reaction: {

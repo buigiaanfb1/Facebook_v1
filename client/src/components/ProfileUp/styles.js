@@ -166,8 +166,13 @@ export const useStyles = makeStyles((theme) => ({
 
   nameBig: {
     fontSize: '32px',
+    lineHeight: '36px',
     fontWeight: '700',
-    padding: '0.25rem 1rem',
+    width: 'auto',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    padding: '1rem',
     [theme.breakpoints.down('sm')]: {
       fontSize: '28px',
       padding: '0.1rem 1rem',

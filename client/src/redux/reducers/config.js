@@ -3,12 +3,14 @@ import shareStore from './shareStore';
 import userStore from './userStore';
 import friendsStore from './friendsStore';
 import friendsProfileStore from './friendsProfileStore';
+import tabsStore from './tabsStore';
 
 const reducer = combineReducers({
   shareStore,
   userStore,
   friendsStore,
   friendsProfileStore,
+  tabsStore,
 });
 
 const store = createStore(

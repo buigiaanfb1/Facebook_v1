@@ -9,7 +9,6 @@ import store from '../../common/images/store-nav.svg';
 import video from '../../common/images/video-nav.svg';
 // Right
 import bell from '../../common/images/bell-nav.svg';
-import messenger from '../../common/images/messenger-nav.svg';
 // Mui Lib
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
@@ -23,6 +22,7 @@ import { login } from '../../firebase/data/login';
 //
 import DropdownTools from './DropdownTools';
 import { useSelector } from 'react-redux';
+import DropDownMessages from './DropDownMessages';
 
 const Navbar = () => {
   const classes = useStyles();
@@ -51,7 +51,11 @@ const Navbar = () => {
           </div>
           <div className={classes.iconNavRightContainer}>
             <div className={classes.containerIconRight}>
-              <img src={messenger} className={classes.iconNavRight} />
+              <DropDownMessages
+                user={res}
+                avatar={currentUser?.avatar}
+                username={currentUser?.username}
+              />
             </div>
             <div className={classes.containerIconRight}>
               <img src={bell} className={classes.iconNavRight} />

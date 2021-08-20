@@ -53,7 +53,7 @@ const OtherComments = ({ postID }) => {
   const handleComments = () => {
     return comments.comments.map((comment, index) => {
       return (
-        <div className={classes.commentsSection} key={index}>
+        <div className={classes.commentsSection} key={comment.id}>
           <img
             src={comment.user?.avatar}
             className={classes.avatarOtherPeople}

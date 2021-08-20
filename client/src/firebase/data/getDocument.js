@@ -64,7 +64,10 @@ export const getDocumentPostProfile = async (
 
 export const getDocumentPostGlobal = async (collection) => {
   const snapshot = await projectFirestore.collection(collection).get();
-  return snapshot.docs.map((doc) => doc.data());
+  return snapshot.docs.map((doc) => {
+    let id = doc.id;
+    return { ...doc.data(), id: id };
+  });
 };
 
 export const getFormatPresets = async (collection) => {

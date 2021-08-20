@@ -97,6 +97,56 @@ const Post = ({ post, profileID }) => {
     }
   };
 
+  const handleRenderPresetsOrNormal = () => {
+    if (state.post.backgroundPresetsUri) {
+      return (
+        <div className={classes.content}>
+          <img
+            src={state.post.backgroundPresetsUri}
+            className={classes.presetsBackground}
+            alt="preset"
+          />
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}
+          >
+            <Typography
+              style={{
+                wordBreak: 'break-word',
+                color: `#${
+                  state.post.color === 'FF000000' ? '000' : state.post.color
+                }`,
+              }}
+              className={classes.textPresets}
+            >
+              {state.post.content}
+            </Typography>
+          </Linkify>
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.content}>
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}
+          >
+            <Typography style={{ wordBreak: 'break-word' }}>
+              {state.post.content}
+            </Typography>
+          </Linkify>
+          <Image picturesArr={state.post.picture} />
+        </div>
+      );
+    }
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.avatarVsName}>
@@ -117,22 +167,8 @@ const Post = ({ post, profileID }) => {
           </div>
         </div>
       </div>
-      <div className={classes.content}>
-        <Linkify
-          componentDecorator={(decoratedHref, decoratedText, key) => (
-            <a target="blank" href={decoratedHref} key={key}>
-              {decoratedText}
-            </a>
-          )}
-        >
-          <Typography style={{ wordBreak: 'break-word' }}>
-            {state.post.content}
-          </Typography>
-        </Linkify>
-        <Image picturesArr={state.post.picture} />
-      </div>
+      {handleRenderPresetsOrNormal()}
       {handleGetReaction(state.post)}
-      <OtherComments />
     </div>
   );
 };

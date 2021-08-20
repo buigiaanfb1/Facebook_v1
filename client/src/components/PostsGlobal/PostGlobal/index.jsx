@@ -7,11 +7,12 @@ import { vi } from 'date-fns/locale';
 import EmojisVsComments from '../../EmojisVsComments';
 import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
+import Image from './Image';
 
 const PostGlobal = ({ post }) => {
   const classes = useStyles();
   const { res } = getUser();
-
+  console.log(post);
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
 
@@ -133,6 +134,8 @@ const PostGlobal = ({ post }) => {
                 comments={post.comments}
                 reactions={post.reaction}
                 userReaction={indexReaction[i]}
+                userPostedID={post.userID}
+                postID={post.id}
               />
             );
           }
@@ -142,11 +145,61 @@ const PostGlobal = ({ post }) => {
     return (
       <EmojisVsComments
         id={post.id}
+        userPostedID={post.userID}
         comments={post.comments}
         reactions={post.reaction}
         userReaction={null}
+        postID={post.id}
       />
     );
+  };
+
+  const handleRenderPresetsOrNormal = () => {
+    if (post.backgroundPresetsUri) {
+      return (
+        <div className={classes.content}>
+          <img
+            src={post.backgroundPresetsUri}
+            className={classes.presetsBackground}
+            alt="preset"
+          />
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}
+          >
+            <Typography
+              style={{
+                wordBreak: 'break-word',
+                color: `#${post.color === 'FF000000' ? '000' : post.color}`,
+              }}
+              className={classes.textPresets}
+            >
+              {post.content}
+            </Typography>
+          </Linkify>
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.content}>
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}
+          >
+            <Typography style={{ wordBreak: 'break-word' }}>
+              {post.content}
+            </Typography>
+          </Linkify>
+          <Image picturesArr={post.picture} />
+        </div>
+      );
+    }
   };
 
   let time = formatDistanceToNowStrict(new Date(post.createdAt), {
@@ -163,7 +216,9 @@ const PostGlobal = ({ post }) => {
           />
         </Link>
         <div className={classes.nameVsTimeContainer}>
-          <Typography className={classes.name}>{post.username}</Typography>
+          <Link to={`profile/${post.userID}`}>
+            <Typography className={classes.name}>{post.username}</Typography>
+          </Link>
           <div className={classes.timeContainer}>
             <Typography className={classes.time}>
               {time}&nbsp;·&nbsp;
@@ -172,20 +227,7 @@ const PostGlobal = ({ post }) => {
           </div>
         </div>
       </div>
-      <div className={classes.content}>
-        <Linkify
-          componentDecorator={(decoratedHref, decoratedText, key) => (
-            <a target="blank" href={decoratedHref} key={key}>
-              {decoratedText}
-            </a>
-          )}
-        >
-          <Typography style={{ wordBreak: 'break-word' }}>
-            {post.content}
-          </Typography>
-        </Linkify>
-        {checkHowManyPictures(post.picture)}
-      </div>
+      {handleRenderPresetsOrNormal()}
       {handleGetReaction(post)}
     </div>
   );

@@ -33,7 +33,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state };
     }
     case CLEAR_PROFILE: {
-      state.profilePosts = null;
+      state.profilePosts = [];
       state.profileInfo = null;
       return { ...state };
     }

@@ -19,13 +19,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import WallpaperLoader from '../../componentsLoader/WallpaperLoader';
 import AvatarLoader from '../../componentsLoader/AvatarLoader';
 import FriendButton from './FriendButton';
+import EditNameModal from './EditNameModal';
+import Tabs from './Tabs';
 
 const ProfileUp = () => {
   console.log('ProfileUp render');
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const tabCon = useSelector((state) => state.shareStore.tabProfile);
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const [openPostPictureModal, setPostPictureModal] = useState({
@@ -75,36 +76,6 @@ const ProfileUp = () => {
         picture: null,
       });
     }
-  };
-
-  const handleChangeTab = (tabName) => {
-    dispatch({
-      type: TAB_PROFILE,
-      payload: tabName,
-    });
-  };
-
-  const handleRenderTabs = () => {
-    // arrTab is import from common folder
-    return arrTab.map((tab, index) => {
-      return (
-        <div
-          className={`${
-            tabCon === tab.cons ? classes.itemSelected : classes.item
-          }`}
-          key={index}
-          onClick={() => handleChangeTab(tab.cons)}
-        >
-          <Typography
-            className={`${
-              tabCon === tab.cons ? classes.itemTextSelected : classes.itemText
-            }`}
-          >
-            {tab.view}
-          </Typography>
-        </div>
-      );
-    });
   };
 
   const handleUploadWallpaper = async (e) => {
@@ -247,6 +218,9 @@ const ProfileUp = () => {
                 <Typography className={classes.nameBig}>
                   {profileInfo?.username ? profileInfo.username : ''}
                 </Typography>
+                {currentUser?.userID === profileInfo?.userID && (
+                  <EditNameModal profileInfo={profileInfo} />
+                )}
               </div>
               <div className={classes.right}>
                 <div className={classes.containerButtons}>
@@ -255,7 +229,7 @@ const ProfileUp = () => {
               </div>
             </div>
             <div className={classes.navigationContainer}>
-              {handleRenderTabs()}
+              <Tabs />
             </div>
           </Grid>
           <Grid item lg={2} md={1} sm={0}></Grid>

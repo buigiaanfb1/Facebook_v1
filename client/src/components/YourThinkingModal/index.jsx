@@ -13,24 +13,47 @@ import FormatPresets from './FormatPresets';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-  const [checkInput, setCheckInput] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();
-  const [info, setInfo] = useState({
-    text: '',
-    imageBlob: [],
-  });
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
   const currentUser = useSelector((state) => state.userStore.currentUser);
+  const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();
+  const dispatch = useDispatch();
   const types = ['image/png', 'image/jpeg'];
+  const [open, setOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [checkInput, setCheckInput] = useState({
+    isValid: false,
+    isShowPresets: true,
+  });
+  const [textPreset, setTextPreset] = useState({
+    isPreset: false,
+    isShow: false,
+    backgroundPresetsUri: null,
+    color: '#FFF',
+  });
+  const [info, setInfo] = useState({
+    text: '',
+    color: null,
+    backgroundPresetsUri: null,
+    imageBlob: [],
+  });
+  console.log(info);
 
   useEffect(() => {
     if (props.openModal) {
       handleOpen();
     }
   }, [props.openModal]);
+
+  useEffect(() => {
+    if (!textPreset.isShow) {
+      console.log('use');
+      info.color = null;
+      info.backgroundPresetsUri = null;
+    } else {
+      info.color = textPreset.color;
+      info.backgroundPresetsUri = textPreset.backgroundPresetsUri;
+    }
+  }, [textPreset]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -41,7 +64,9 @@ const YourThinkingModal = (props) => {
   };
 
   const handleSubmit = async () => {
+    console.log(info);
     if (info.imageBlob && info.imageBlob.length > 0) {
+      console.log('picture');
       setSubmitting(true);
       const res = await createAPostWithPicture(
         info.text,
@@ -53,9 +78,12 @@ const YourThinkingModal = (props) => {
       handleClose();
       setSubmitting(false);
     } else {
+      console.log('text');
       setSubmitting(true);
       const res = await createAPostWithNoPicture(
         info.text,
+        info.color,
+        info.backgroundPresetsUri,
         profileInfo,
         currentUser?.avatar
       );
@@ -104,20 +132,51 @@ const YourThinkingModal = (props) => {
     let textarea = document.getElementById('textareaYourThinkingModalPost');
     let heightLimit = 1000000; /* Maximum height: 200px */
     let lengthOfText = textarea.value.length; // get length
+    setInfo({
+      ...info,
+      text: textarea.value,
+    });
     if (lengthOfText > 0) {
-      setInfo({
-        ...info,
-        text: textarea.value,
+      setCheckInput({
+        isValid: lengthOfText > 0 ? true : false,
+        isShowPresets: lengthOfText >= 85 ? false : true,
       });
-      setCheckInput(true);
-    } else {
-      setCheckInput(false);
     }
     // length >= 85, fontSize will auto resize to 15px,
     if (lengthOfText >= 85) {
+      if (textPreset.isPreset) {
+        setTextPreset({
+          ...textPreset,
+          isShow: false,
+        });
+      }
       textarea.style.fontSize = '15px';
     } else {
+      if (textPreset.isPreset) {
+        info.color = textPreset.color;
+        info.backgroundPresetsUri = textPreset.backgroundPresetsUri;
+        setTextPreset({
+          ...textPreset,
+          isShow: true,
+        });
+      }
       textarea.style.fontSize = '24px';
+    }
+    if (textarea.scrollHeight > 105) {
+      setCheckInput({
+        ...checkInput,
+        isShowPresets: false,
+      });
+      setTextPreset({
+        ...textPreset,
+        isShow: false,
+      });
+    } else {
+      setCheckInput({
+        isValid: lengthOfText > 0 ? true : false,
+        isShowPresets:
+          lengthOfText >= 85 || textarea.scrollHeight > 105 ? false : true,
+      });
     }
     /* Reset the height just to make sure correct height*/
     textarea.style.height = '';
@@ -160,6 +219,7 @@ const YourThinkingModal = (props) => {
         return (
           <img
             id="haveImage"
+            alt="haveImage"
             src={image}
             key={index}
             className={classes.image}
@@ -176,6 +236,28 @@ const YourThinkingModal = (props) => {
     setInfo({
       ...info,
       imageBlob: arrPicture,
+    });
+  };
+
+  const handleSetTextPresetsFromChild = (presets, color) => {
+    setTextPreset({
+      isShow: true,
+      isPreset: true,
+      backgroundPresetsUri: presets,
+      color: color,
+    });
+    info.color = color;
+    info.backgroundPresetsUri = presets;
+  };
+
+  const handleResetPresetsFromChild = () => {
+    info.color = null;
+    info.backgroundPresetsUri = null;
+    setTextPreset({
+      isPreset: false,
+      isShow: false,
+      backgroundPresetsUri: null,
+      color: '#FFF',
     });
   };
 
@@ -219,23 +301,70 @@ const YourThinkingModal = (props) => {
             </div>
             <div className={classes.scroll}>
               <div className={classes.paper}>
-                <div className={classes.textAreaContainer}>
-                  <textarea
-                    id="textareaYourThinkingModalPost"
-                    onChange={(e) => handleChangeText(e)}
-                    onPaste={(e) => handleDetectPastePicture(e)}
-                    placeholder="Bạn đang nghĩ gì?"
-                    className={classes.textArea}
-                    // style={{
-                    //   minHeight: `${imageBlob.length > 0 ? '50px' : ''}`,
-                    // }}
-                  ></textarea>
-                </div>
-                <div className={classes.containerImage}>
-                  {handleRenderPicture()}
-                </div>
+                {/* No Presets Background ?  */}
+                {!textPreset.isShow ? (
+                  <>
+                    <div className={classes.textAreaContainer}>
+                      <textarea
+                        ref={(ref) => ref && ref.focus()}
+                        onFocus={(e) =>
+                          e.currentTarget.setSelectionRange(
+                            e.currentTarget.value.length,
+                            e.currentTarget.value.length
+                          )
+                        }
+                        id="textareaYourThinkingModalPost"
+                        value={info.text}
+                        onChange={(e) => handleChangeText(e)}
+                        onPaste={(e) => handleDetectPastePicture(e)}
+                        placeholder="Bạn đang nghĩ gì?"
+                        className={classes.textArea}
+                      ></textarea>
+                    </div>
+                    <div className={classes.containerImage}>
+                      {handleRenderPicture()}
+                    </div>
+                  </>
+                ) : (
+                  <div className={classes.backgroundPresetsContainer}>
+                    <img
+                      src={textPreset.backgroundPresetsUri}
+                      className={classes.backgroundPresets}
+                      alt="background presets"
+                    />
+                    <div className={classes.textAreaContainerTextPresets}>
+                      <textarea
+                        ref={(ref) => ref && ref.focus()}
+                        onFocus={(e) =>
+                          e.currentTarget.setSelectionRange(
+                            e.currentTarget.value.length,
+                            e.currentTarget.value.length
+                          )
+                        }
+                        id="textareaYourThinkingModalPost"
+                        style={{
+                          color: `#${
+                            textPreset.color === 'FF000000'
+                              ? '000'
+                              : textPreset.color
+                          }`,
+                        }}
+                        value={info.text}
+                        onChange={(e) => handleChangeText(e)}
+                        onPaste={(e) => handleDetectPastePicture(e)}
+                        placeholder="Bạn đang nghĩ gì?"
+                        className={classes.textArea}
+                      ></textarea>
+                    </div>
+                  </div>
+                )}
               </div>
-              <FormatPresets />
+              {checkInput.isShowPresets && (
+                <FormatPresets
+                  handleSetTextPresetsFromChild={handleSetTextPresetsFromChild}
+                  handleResetPresetsFromChild={handleResetPresetsFromChild}
+                />
+              )}
               {/* Exit Icon */}
               <div className={classes.exitContainer} onClick={handleClose}>
                 <i className={classes.exit}></i>
@@ -261,7 +390,7 @@ const YourThinkingModal = (props) => {
                 </label>
               </div>
               <div className={classes.buttonPostContainer}>
-                {!checkInput || submitting ? (
+                {!checkInput.isValid || submitting ? (
                   <button className={classes.buttonPostDisabled}>
                     <Typography className={classes.buttonPostTextDisabled}>
                       Đăng
