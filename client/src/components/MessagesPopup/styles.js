@@ -12,6 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     right: '5rem',
     width: '55vw',
     height: '50vh',
-    // pointerEvents: 'none',
+    pointerEvents: 'none',
   },
 }));

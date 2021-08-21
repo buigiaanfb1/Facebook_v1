@@ -22,3 +22,9 @@ export const FRIENDS_INITIAL = 'FRIENDS_INITIAL';
 
 // Friend Store (profile user)
 export const FRIENDS_PROFILE = 'FRIENDS_PROFILE';
+
+// Messages Store (profile user)
+export const OPEN_MESSAGES = 'OPEN_MESSAGES';
+
+// Messages Store (profile user)
+export const CLOSE_MESSAGES_ID = 'CLOSE_MESSAGES_ID';

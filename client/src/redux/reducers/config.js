@@ -4,6 +4,7 @@ import userStore from './userStore';
 import friendsStore from './friendsStore';
 import friendsProfileStore from './friendsProfileStore';
 import tabsStore from './tabsStore';
+import messagesStore from './messagesStore';
 
 const reducer = combineReducers({
   shareStore,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   friendsStore,
   friendsProfileStore,
   tabsStore,
+  messagesStore,
 });
 
 const store = createStore(

@@ -3,19 +3,16 @@ import { useStyles } from './styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import addIcon from '../../common/images/addIcon.png';
-import wallpaper from '../../common/images/defaultWallpaper.jpeg';
-import addFriend from '../../common/images/addFriend.png';
 import messenger from '../../common/images/messenger.png';
 import editIcon from '../../common/images/editIcon.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { PROFILE_INFO, TAB_PROFILE } from '../../common/constants';
-import { arrTab } from '../../common/TabsProfileArray';
+import { OPEN_MESSAGES, PROFILE_INFO } from '../../common/constants';
 import WallpaperVsAvatarModal from '../WallpaperVsAvatarModal';
 import { setStorage } from '../../firebase/data/setStorage';
 import { setCollection } from '../../firebase/data/setCollection';
 import { useParams } from 'react-router-dom';
 import { projectFirestore } from '../../firebase/config';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import WallpaperLoader from '../../componentsLoader/WallpaperLoader';
 import AvatarLoader from '../../componentsLoader/AvatarLoader';
 import FriendButton from './FriendButton';
@@ -67,6 +64,13 @@ const ProfileUp = () => {
         picture: picture,
       });
     }
+  };
+
+  const handleOpenMessagePopup = () => {
+    dispatch({
+      type: OPEN_MESSAGES,
+      payload: profileInfo,
+    });
   };
 
   const listenModalChildren = (close) => {
@@ -126,10 +130,10 @@ const ProfileUp = () => {
       return (
         <>
           <button
+            onClick={handleOpenMessagePopup}
             className={classes.messageContainer}
-            style={{ cursor: 'not-allowed' }}
           >
-            <img src={messenger} className={classes.iconRight} />
+            <img src={messenger} className={classes.iconRight} alt="message" />
             <Typography className={classes.iconRightText}>Nhắn tin</Typography>
           </button>
           <FriendButton profileInfo={profileInfo} currentUser={currentUser} />

@@ -1,6 +1,8 @@
 import { Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import avatar from '../../../common/images/avatar.png';
+import { projectFirestore } from '../../../firebase/config';
+import BodyRealtime from './BodyRealtime';
 import {
   lineIcon,
   phoneIcon,
@@ -14,24 +16,28 @@ import {
   happyFaceIcon,
   likeIcon,
 } from './iconSvg';
-import SearchBar from './SearchBar';
+import InputMessage from './InputMessage';
 import { useStyles } from './styles';
 
-const Message = ({ handleClosePopupFromChild, item }) => {
+const Message = ({ handleClosePopupFromChild, user, currentUser }) => {
   const classes = useStyles();
-
   const handleClose = () => {
-    handleClosePopupFromChild(item.id);
+    handleClosePopupFromChild(user.userID);
   };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.containerAvatarVsName}>
           <div className={classes.containerAvatar}>
-            <img src={avatar} className={classes.avatar} alt="other people" />
+            <img
+              src={user.avatar}
+              className={classes.avatar}
+              alt="other people"
+            />
           </div>
           <div className={classes.containerName}>
-            <Typography className={classes.nameBig}>Gia An</Typography>
+            <Typography className={classes.nameBig}>{user.username}</Typography>
           </div>
         </div>
         <div className={classes.containerTools}>
@@ -45,8 +51,10 @@ const Message = ({ handleClosePopupFromChild, item }) => {
       </div>
       <div className={classes.body}>
         <div className={classes.introduce}>
-          <img src={avatar} />
-          <Typography className={classes.nameIntroduce}>Gia An</Typography>
+          <img src={user.avatar} alt="people" style={{ objectFit: 'cover' }} />
+          <Typography className={classes.nameIntroduce}>
+            {user.username}
+          </Typography>
           <Typography className={classes.infoIntroduce}>Facebook</Typography>
           <Typography className={classes.infoIntroduce}>
             Các bạn là bạn bè trên Facebook
@@ -55,17 +63,11 @@ const Message = ({ handleClosePopupFromChild, item }) => {
             Sống tại Thành phố Hồ Chí Minh
           </Typography>
         </div>
-      </div>
-      <div className={classes.inputContainer}>
-        <div className={classes.iconInput}>{addIcon}</div>
-        <div className={classes.iconInput}>{pictureIcon}</div>
-        <div className={classes.iconInput}>{stickerIcon}</div>
-        <div className={classes.iconInput}>{gifIcon}</div>
-        <div style={{ padding: '0 0.5rem 0 0rem' }}>
-          <SearchBar icon={happyFaceIcon} />
+        <div className={classes.messagesContainer}>
+          <BodyRealtime currentUser={currentUser} user={user} />
         </div>
-        <div className={classes.iconInput}>{likeIcon}</div>
       </div>
+      <InputMessage icon={happyFaceIcon} user={user} />
     </div>
   );
 };

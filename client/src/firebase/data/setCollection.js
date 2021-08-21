@@ -326,6 +326,27 @@ export const setCollection = (collection) => {
     }
   };
 
+  const addMessageCollection = async (doc, userID, otherUserID) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection('with-user')
+        .doc(otherUserID)
+        .collection(collection)
+        .add(doc);
+      await projectFirestore
+        .collection(collection)
+        .doc(otherUserID)
+        .collection('with-user')
+        .doc(userID)
+        .collection(collection)
+        .add(doc);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return {
     addDoc,
     addDocWithID,
@@ -339,5 +360,6 @@ export const setCollection = (collection) => {
     addFriendToBothUser,
     unfriendToBothUser,
     updateNameFieldDoc,
+    addMessageCollection,
   };
 };
