@@ -35,21 +35,73 @@ const BodyRealtime = ({ currentUser, user }) => {
   const scrollToBottom = () => {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleRenderRightMessage = (message) => {
+    console.log(message);
+    if (message.like && !message.content && !message.images) {
+      return <div className={classes.iconLike}>{likeIconInBody}</div>;
+    } else if (message.content && !message.images) {
+      return (
+        <div className={classes.messageContainer}>
+          <Typography className={classes.content}>{message.content}</Typography>
+        </div>
+      );
+    } else if (message.content && message.images) {
+      return (
+        <div className={classes.containerImageVsContentRight}>
+          <div className={classes.wrapperContainerImageVsContentRight}>
+            <div className={classes.messageContainer}>
+              <Typography className={classes.content}>
+                {message.content}
+              </Typography>
+            </div>
+          </div>
+          <img src={message.images[0]} alt="pic" />
+        </div>
+      );
+    } else {
+      return (
+        <img src={message.images[0]} className={classes.imageTest} alt="pic" />
+      );
+    }
+  };
+
+  const handleRenderLeftMessage = (message) => {
+    console.log(message);
+    if (message.like && !message.content && !message.images) {
+      return <div className={classes.iconLike}>{likeIconInBody}</div>;
+    } else if (message.content && !message.images) {
+      return (
+        <div className={classes.messageContainer}>
+          <Typography className={classes.content}>{message.content}</Typography>
+        </div>
+      );
+    } else if (message.content && message.images) {
+      return (
+        <div className={classes.containerImageVsContentLeft}>
+          <div className={classes.wrapperContainerImageVsContentLeft}>
+            <div className={classes.messageContainer}>
+              <Typography className={classes.content}>
+                {message.content}
+              </Typography>
+            </div>
+          </div>
+          <img src={message.images[0]} alt="pic" />
+        </div>
+      );
+    } else {
+      return (
+        <img src={message.images[0]} className={classes.imageTest} alt="pic" />
+      );
+    }
+  };
   const handleRenderMessage = () => {
     return messagesRealtime?.map((message, index) => {
       return (
         <>
           {message.userID === currentUser.userID ? (
             <div className={classes.right} key={index}>
-              {message.content ? (
-                <div className={classes.messageContainer}>
-                  <Typography className={classes.content}>
-                    {message.content}
-                  </Typography>
-                </div>
-              ) : (
-                <div className={classes.iconLike}>{likeIconInBody}</div>
-              )}
+              {handleRenderRightMessage(message)}
             </div>
           ) : (
             <div className={classes.left} key={index}>
@@ -60,15 +112,7 @@ const BodyRealtime = ({ currentUser, user }) => {
                   alt="avatar"
                 />
               </div>
-              {message.content ? (
-                <div className={classes.messageContainer}>
-                  <Typography className={classes.content}>
-                    {message.content}
-                  </Typography>
-                </div>
-              ) : (
-                <div className={classes.iconLike}>{likeIconInBody}</div>
-              )}
+              {handleRenderLeftMessage(message)}
             </div>
           )}
         </>

@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { projectFirestore } from '../../../firebase/config';
 import { OPEN_MESSAGES } from '../../../common/constants';
 import { setCollection } from '../../../firebase/data/setCollection';
+import { formatTime } from '../../../helpers/formatTime';
 
 const DropDownMessages = ({ currentUser }) => {
   console.log('DropDownMessages mount');
@@ -33,6 +34,7 @@ const DropDownMessages = ({ currentUser }) => {
       .collection('messages-notification')
       .doc(currentUser.userID)
       .collection('newest-message')
+      .orderBy('createdAt', 'desc')
       .onSnapshot((querySnapshot) => {
         let messages = [];
         let seen = 0;
@@ -79,6 +81,7 @@ const DropDownMessages = ({ currentUser }) => {
 
   const handleRenderNewestMessages = () => {
     return messages.messages.map((user, index) => {
+      console.log(user);
       return (
         <div
           className={classes.messItem}
@@ -103,6 +106,8 @@ const DropDownMessages = ({ currentUser }) => {
                 }`}
               >
                 {user.content}
+                <span>&nbsp; · &nbsp;</span>
+                {formatTime(user.createdAt)}
               </Typography>
             )}
             {user.like && <img src={L1KE} style={{ marginTop: '0.15rem' }} />}

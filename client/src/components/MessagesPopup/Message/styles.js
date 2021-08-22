@@ -62,7 +62,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   body: {
     height: 'calc(455px - 53px - 41px)',
-    overflow: 'auto',
+    overflow: 'hidden',
+    '&:hover': {
+      overflowY: 'auto',
+      overflowY: 'overlay',
+    },
   },
   introduce: {
     display: 'flex',
@@ -154,5 +158,42 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: '0.5rem',
+  },
+  imageTest: {
+    display: 'block',
+    maxWidth: '70%',
+    borderRadius: '20px',
+    maxHeight: '200px',
+  },
+  containerImageVsContentRight: {
+    width: '100%',
+    '& img': {
+      display: 'block',
+      maxWidth: '70%',
+      borderRadius: '20px',
+      maxHeight: '200px',
+      marginLeft: 'auto',
+    },
+  },
+  wrapperContainerImageVsContentRight: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
+  containerImageVsContentLeft: {
+    width: '100%',
+    '& img': {
+      display: 'block',
+      maxWidth: '70%',
+      borderRadius: '20px',
+      maxHeight: '200px',
+      marginRight: 'auto',
+    },
+  },
+  wrapperContainerImageVsContentLeft: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
 }));

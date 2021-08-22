@@ -48,7 +48,7 @@ const Message = ({ handleClosePopupFromChild, user, currentUser }) => {
         </div>
       </div>
       <div onClick={handleSeen}>
-        <div className={classes.body}>
+        <div className={classes.body} id="#bodyChat">
           <div className={classes.introduce}>
             <img
               src={user.avatar}

@@ -110,6 +110,30 @@ a {
   background: var(--scrollbar-thumb);
 }
 
+/* Chat Scrollbar */
+#bodyChat::-webkit-scrollbar {
+  width: 8px;
+  height: 100%;
+  border-radius: 50px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+  background: var(--messenger-card-background);
+  border-radius: 100px;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb);
+}
+
 .show {
   opacity: 1 !important;
   transform: translate(0, 0) scale(1) !important;
