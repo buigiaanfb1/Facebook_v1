@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '18px',
   },
   containerIconRight: {
+    position: 'relative',
     width: '40px',
     height: '40px',
     display: 'flex',
@@ -61,7 +62,10 @@ export const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
   },
   nameVsLastMess: {
-    // marginLeft,
+    // marginLeft: '0.5rem',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   username: {
     fontWeight: '500',
@@ -74,6 +78,9 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     lineHeight: '17px',
     color: 'var(--secondary-text)',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   footer: {
     borderTop: '1px solid var(--border-item)',
@@ -91,5 +98,33 @@ export const useStyles = makeStyles((theme) => ({
   searchBar: {
     marginLeft: '-8px',
     padding: '1rem 0 0.5rem 0',
+  },
+
+  alertContainer: {
+    position: 'absolute',
+    top: '-10%',
+    right: '-20%',
+    height: '19px',
+    width: '19px',
+    backgroundColor: 'var(--notification-badge)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+  },
+  alert: {
+    fontSize: '13px',
+    color: 'var(--always-white)',
+    fontWeight: '500',
+  },
+  unSeen: {
+    color: 'var(--accent)',
+    marginTop: '0.15rem',
+    fontWeight: '500',
+    fontSize: '14px',
+    lineHeight: '17px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 }));

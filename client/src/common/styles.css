@@ -29,6 +29,8 @@
   --shadow-2: rgba(0, 0, 0, 0.1);
   --primary-text: #e4e6eb;
   --primary-text-button: #fff;
+  --always-white: #fff;
+  --notification-badge: #f02849;
   --secondary-text: #b0b3b8;
   --color-search: #b0b3b8;
   --color-blue: #4394f5;
@@ -36,6 +38,7 @@
   --button-blue-hover: #4b99ff;
   --color-text-tab: #2e89ff;
   --base-blue: #1877f2;
+  --accent: hsl(214, 100%, 59%);
   --primary-deemphasized-button-background: rgba(45, 136, 255, 0.2);
   --primary-deemphasized-button-text: #2d88ff;
   --disabled-button-background: rgba(255, 255, 255, 0.2);

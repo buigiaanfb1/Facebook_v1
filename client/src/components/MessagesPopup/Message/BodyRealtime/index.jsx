@@ -60,11 +60,15 @@ const BodyRealtime = ({ currentUser, user }) => {
                   alt="avatar"
                 />
               </div>
-              <div className={classes.messageContainer}>
-                <Typography className={classes.content}>
-                  {message.content}
-                </Typography>
-              </div>
+              {message.content ? (
+                <div className={classes.messageContainer}>
+                  <Typography className={classes.content}>
+                    {message.content}
+                  </Typography>
+                </div>
+              ) : (
+                <div className={classes.iconLike}>{likeIconInBody}</div>
+              )}
             </div>
           )}
         </>

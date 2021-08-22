@@ -335,6 +335,18 @@ export const setCollection = (collection) => {
         .doc(otherUserID)
         .collection(collection)
         .add(doc);
+      // Khi gửi tin nhắn thì bên sẽ add vào
+      // doc của người nhận tin nhắn cái mới nhất
+      // messages-notification => otherUser => newest-message => currentUser
+      await projectFirestore
+        .collection('messages-notification')
+        .doc(otherUserID)
+        .collection('newest-message')
+        .doc(userID)
+        .set({ ...doc, seen: false });
+      // Khi gửi tin nhắn thì bên sẽ add vào
+      // doc của người nhận tin nhắn cái mới nhất
+      // messages => otherUser => with-user => currentUser => messages => doc
       await projectFirestore
         .collection(collection)
         .doc(otherUserID)
@@ -342,6 +354,21 @@ export const setCollection = (collection) => {
         .doc(userID)
         .collection(collection)
         .add(doc);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateSeenMessageField = async (userID, otherUserID) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection('newest-message')
+        .doc(otherUserID)
+        .update({
+          seen: true,
+        });
     } catch (err) {
       console.log(err);
     }
@@ -361,5 +388,6 @@ export const setCollection = (collection) => {
     unfriendToBothUser,
     updateNameFieldDoc,
     addMessageCollection,
+    updateSeenMessageField,
   };
 };

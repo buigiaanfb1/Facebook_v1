@@ -32,7 +32,7 @@ const Navbar = () => {
 
   // render button Login or buttonProfile
   const handleRenderLoginOrNot = () => {
-    if (res) {
+    if (currentUser) {
       return (
         <>
           <div className={classes.userContainer}>
@@ -42,7 +42,11 @@ const Navbar = () => {
               style={{ textDecoration: 'none' }}
             >
               <div className={classes.userContainer2}>
-                <img src={currentUser?.avatar} className={classes.avatar} />
+                <img
+                  src={currentUser?.avatar}
+                  className={classes.avatar}
+                  alt="avatar"
+                />
                 <Typography className={classes.nameUser}>
                   {currentUser?.username}
                 </Typography>
@@ -51,14 +55,10 @@ const Navbar = () => {
           </div>
           <div className={classes.iconNavRightContainer}>
             <div className={classes.containerIconRight}>
-              <DropDownMessages
-                user={res}
-                avatar={currentUser?.avatar}
-                username={currentUser?.username}
-              />
+              <DropDownMessages currentUser={currentUser} />
             </div>
             <div className={classes.containerIconRight}>
-              <img src={bell} className={classes.iconNavRight} />
+              <img src={bell} className={classes.iconNavRight} alt="bell" />
             </div>
             <div className={classes.containerIconRight}>
               <DropdownTools
