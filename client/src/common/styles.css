@@ -18,6 +18,7 @@
   --hover-icon-overlay: rgba(255, 255, 255, 0.2);
   --hover-1: rgba(255, 255, 255, 0.1);
   --hover-2: rgba(255, 255, 255, 0.2);
+  --hosted-view-selected-state: rgba(45, 136, 255, 0.1);
   --background-searchBar: rgba(255, 255, 255, 0.1);
   --background-button: rgba(255, 255, 255, 0.1);
   --background-button-hover: rgba(255, 255, 255, 0.2);
@@ -46,6 +47,7 @@
   --scrollbar-thumb: #3b3d41;
   --scrollbar-background: #18191a;
   --secondary-button-background: rgba(255, 255, 255, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
 }
 
 body {

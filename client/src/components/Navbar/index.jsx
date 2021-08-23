@@ -28,6 +28,9 @@ const Navbar = () => {
   const classes = useStyles();
   const { res } = getUser();
   const currentUser = useSelector((state) => state.userStore.currentUser);
+  const iconMessageNotification = useSelector(
+    (state) => state.hideStore.iconMessageNotification
+  );
   console.log('navbar');
 
   // render button Login or buttonProfile
@@ -54,9 +57,11 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className={classes.iconNavRightContainer}>
-            <div className={classes.containerIconRight}>
-              <DropDownMessages currentUser={currentUser} />
-            </div>
+            {iconMessageNotification && (
+              <div className={classes.containerIconRight}>
+                <DropDownMessages currentUser={currentUser} />
+              </div>
+            )}
             <div className={classes.containerIconRight}>
               <img src={bell} className={classes.iconNavRight} alt="bell" />
             </div>

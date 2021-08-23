@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: 'var(--background-post)',
     borderRadius: '8px',
     padding: '12px 16px 10px 16px',
+    marginBottom: '1rem',
   },
 
   avatarVsInput: {

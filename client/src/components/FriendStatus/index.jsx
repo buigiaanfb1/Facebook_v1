@@ -38,7 +38,7 @@ const FriendStatus = () => {
         </div>
         <div className={classes.friendOnlineContainer}>
           <div className={classes.titleFriendOnlineContainer}>
-            <Typography className={classes.title}>Người liên hệ</Typography>
+            <Typography className={classes.title}>Bạn bè</Typography>
           </div>
           <div className={classes.friendContainer}>
             <img src={haha} className={classes.avatarFriend} />

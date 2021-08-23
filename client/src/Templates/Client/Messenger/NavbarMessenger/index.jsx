@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Popper from '@material-ui/core/Popper';
-import messenger from '../../../common/images/messenger-nav.svg';
-import L1KE from '../../../common/images/L1KE.png';
+import messenger from '../../../../common/images/messenger-nav.svg';
+import avatar from '../../../../common/images/avatar.png';
+import L1KE from '../../../../common/images/L1KE.png';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import SearchBar from '../../SearchBar';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import SearchBar from '../../../../components/SearchBar';
 import { useDispatch } from 'react-redux';
-import { projectFirestore } from '../../../firebase/config';
-import { OPEN_MESSAGES } from '../../../common/constants';
-import { setCollection } from '../../../firebase/data/setCollection';
-import { formatTime } from '../../../helpers/formatTime';
-import Player from '../../../hooks/useAudio';
+import { projectFirestore } from '../../../../firebase/config';
+import {
+  OPEN_MESSAGES,
+  SELECTED_MESSAGE_MESSENGER,
+} from '../../../../common/constants';
+import { setCollection } from '../../../../firebase/data/setCollection';
+import { formatTime } from '../../../../helpers/formatTime';
+import Player from '../../../../hooks/useAudio';
 
-const DropDownMessages = ({ currentUser }) => {
-  console.log('DropDownMessages mount');
+const NavbarMessenger = ({ currentUser }) => {
   const { updateSeenMessageField } = setCollection('messages-notification');
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState(null);
   const [messages, setMessages] = useState({
     messages: null,
     alert: false,
+    selectedID: null,
   });
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
 
   console.log(messages);
 
   useEffect(() => {
-    console.log(currentUser.userID);
     const subscriber = projectFirestore
       .collection('messages-notification')
       .doc(currentUser.userID)
@@ -58,14 +57,6 @@ const DropDownMessages = ({ currentUser }) => {
     return () => subscriber();
   }, []);
 
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
-
-  const handleClickAway = () => {
-    setAnchorEl(false);
-  };
-
   // Call firebase đổi seen thành true
   /**
    * hierarchy:
@@ -73,18 +64,26 @@ const DropDownMessages = ({ currentUser }) => {
    * @param {id} otherUserID
    */
   const handleClickMessage = (otherUser) => {
-    updateSeenMessageField(currentUser.userID, otherUser.userID);
+    setMessages({
+      ...messages,
+      selectedID: otherUser.userID,
+    });
     dispatch({
-      type: OPEN_MESSAGES,
+      type: SELECTED_MESSAGE_MESSENGER,
       payload: otherUser,
     });
+    updateSeenMessageField(currentUser.userID, otherUser.userID);
   };
 
   const handleRenderNewestMessages = () => {
     return messages.messages.map((user, index) => {
       return (
         <div
-          className={classes.messItem}
+          className={`${
+            user.userID === messages.selectedID
+              ? classes.messItemSelected
+              : classes.messItem
+          }`}
           key={index}
           onClick={() => handleClickMessage(user)}
         >
@@ -138,48 +137,22 @@ const DropDownMessages = ({ currentUser }) => {
     });
   };
   return (
-    <div>
-      <div className={classes.containerIconRight} onClick={handleClick}>
-        <img src={messenger} className={classes.iconMuiNavRight} />
-        {messages.alert > 0 && (
-          <div className={classes.alertContainer}>
-            <Typography className={classes.alert}>{messages.alert}</Typography>
-          </div>
-        )}
+    <div className={classes.containerAll}>
+      <div className={classes.containerHeader}>
+        <div className={classes.containerTitle}>
+          <Typography className={classes.title}>Chat</Typography>
+        </div>
+        <div className={classes.searchBar}>
+          <SearchBar />
+        </div>
       </div>
-      <Popper
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        style={{ zIndex: '999', marginRight: '14px', marginTop: '5px' }}
-      >
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <div className={classes.containerAll}>
-            <div className={classes.container}>
-              <div className={classes.containerTitle}>
-                <Typography className={classes.title}>Messenger</Typography>
-              </div>
-              <div className={classes.searchBar}>
-                <SearchBar />
-              </div>
-              <div className={classes.containerMess}>
-                {messages.messages && messages.messages.length > 0
-                  ? handleRenderNewestMessages()
-                  : null}
-              </div>
-            </div>
-            <div className={classes.footer}>
-              <Link to={`/messages/t/${currentUser.userID}`}>
-                <Typography className={classes.link}>
-                  Xem tất cả trong Messenger
-                </Typography>
-              </Link>
-            </div>
-          </div>
-        </ClickAwayListener>
-      </Popper>
+      <div className={classes.containerMess}>
+        {messages.messages && messages.messages.length > 0
+          ? handleRenderNewestMessages()
+          : null}
+      </div>
     </div>
   );
 };
 
-export default React.memo(DropDownMessages);
+export default React.memo(NavbarMessenger);

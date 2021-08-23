@@ -1,11 +1,12 @@
 import { Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { projectFirestore } from '../../../../firebase/config';
+import { projectFirestore } from '../../../../../firebase/config';
 import { likeIconInBody } from '../iconSvg';
-import { formatTimeMessage } from '../../../../helpers/formatTime';
+import { formatTimeMessage } from '../../../../../helpers/formatTime';
 import { useStyles } from '../styles';
 
 const BodyRealtime = ({ currentUser, user }) => {
+  console.log('BodyRealtime');
   const classes = useStyles();
   const dummy = useRef();
   const [messagesRealtime, setMessagesRealtime] = useState(null);
@@ -18,18 +19,16 @@ const BodyRealtime = ({ currentUser, user }) => {
       .doc(user.userID)
       .collection('messages')
       .orderBy('createdAt', 'asc')
-      // .limitToLast(25)
       .onSnapshot((querySnapshot) => {
         let messages = [];
         querySnapshot.forEach((doc) => {
-          let id = doc.id;
-          messages.push({ ...doc.data(), id });
+          messages.push(doc.data());
         });
         setMessagesRealtime(messages);
       });
     // Stop listening for updates when no longer required
     return () => subscriber();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     scrollToBottom();
@@ -102,8 +101,10 @@ const BodyRealtime = ({ currentUser, user }) => {
     return messagesRealtime?.map((message, index) => {
       if (message && message.createdAt?.seconds && index > 0) {
         if (message.createdAt.seconds - 300 < flag) {
+          console.log(`${message.createdAt.seconds} - 1000 < ${flag}`);
         } else {
           flag = message.createdAt.seconds;
+          console.log(`${message.createdAt.seconds} - 1000 > ${flag} .`);
           return (
             <>
               <Typography className={classes.time}>
@@ -114,7 +115,7 @@ const BodyRealtime = ({ currentUser, user }) => {
                   {handleRenderRightMessage(message)}
                 </div>
               ) : (
-                <div className={classes.left} key={message.id}>
+                <div className={classes.left} key={index}>
                   <div className={classes.avatarInChatContainer}>
                     <img
                       src={message.avatar}
@@ -151,6 +152,7 @@ const BodyRealtime = ({ currentUser, user }) => {
       );
     });
   };
+
   return (
     <div>
       {messagesRealtime && messagesRealtime.length > 0

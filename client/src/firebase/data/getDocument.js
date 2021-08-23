@@ -52,7 +52,7 @@ export const getDocumentPostProfile = async (
     .collection(collectionMain)
     .doc(userId)
     .collection(collectionSub)
-    .orderBy('createdAt')
+    .orderBy('createdAt', 'desc')
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {

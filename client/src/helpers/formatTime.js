@@ -1,4 +1,4 @@
-import { formatDistanceToNowStrict } from 'date-fns';
+import { formatDistanceToNowStrict, format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 
 export function formatTime(timeFormat) {
@@ -8,4 +8,12 @@ export function formatTime(timeFormat) {
     locale: vi,
   });
   return time;
+}
+
+export function formatTimeMessage(timeFormat) {
+  let date = timeFormat.toDate();
+  let result = format(new Date(date), "iiiii HH':'mm", {
+    locale: vi,
+  });
+  return result;
 }

@@ -1,5 +1,6 @@
 import Friends from '../Templates/Client/Friends';
 import Home from '../Templates/Client/Home';
+import Messenger from '../Templates/Client/Messenger';
 import Profile from '../Templates/Client/Profile';
 
 export const homeRoutes = [
@@ -18,4 +19,5 @@ export const homeRoutes = [
     path: '/friends',
     component: Friends,
   },
+  { exact: true, path: '/messages/t/:id', component: Messenger },
 ];

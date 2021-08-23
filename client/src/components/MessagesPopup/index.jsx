@@ -7,7 +7,7 @@ import { CLOSE_MESSAGES_ID } from '../../common/constants';
 const MessagesPopup = () => {
   const classes = useStyles();
   const messagesOpening = useSelector(
-    (state) => state.messagesStore.messagesOpening
+    (state) => state.messagesWindowStore.messagesOpening
   );
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const dispatch = useDispatch();

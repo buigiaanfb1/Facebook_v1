@@ -1,22 +1,17 @@
 import { makeStyles } from '@material-ui/core';
-import { theme } from '../../../common/theme';
+import { theme } from '../../../../common/theme';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
-    width: '328px',
-    height: '455px',
+    width: '100%',
+    height: 'calc(100vh - 56px)',
     background: 'pink',
-    borderTopLeftRadius: '8px',
-    borderTopRightRadius: '8px',
-    margin: '0 0.25rem',
     backgroundColor: 'var(--messenger-card-background)',
-    boxShadow: theme.shadows[5],
-    pointerEvents: 'auto',
   },
   header: {
-    padding: '8px',
-    borderBottom: '1px solid var(--border-item)',
+    padding: '1rem',
+    boxShadow: '0 0 4px var(--shadow-2)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -61,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   body: {
-    height: 'calc(455px - 53px - 41px)',
+    height: 'calc(100vh - 85px - 41px - 56px)',
     overflow: 'hidden',
     '&:hover': {
       overflowY: 'auto',
