@@ -1,13 +1,15 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import BodyRealtime from './BodyRealtime';
-import { phoneIcon, videoIcon } from './iconSvg';
+import { phoneIcon, videoIcon, toggleIcon } from './iconSvg';
 import InputMessage from './InputMessage';
 import { setCollection } from '../../../../firebase/data/setCollection';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
-const Message = ({ currentUser }) => {
+const Message = ({ currentUser, handleToggleFromChild }) => {
+  console.log('Message render');
   const classes = useStyles();
   const messageSelected = useSelector(
     (state) => state.messengerStore.messageSelected
@@ -17,6 +19,10 @@ const Message = ({ currentUser }) => {
   // update seen in firebase to true
   const handleSeen = () => {
     // updateSeenMessageField(currentUser.userID, user.userID);
+  };
+
+  const handleToggle = () => {
+    handleToggleFromChild();
   };
 
   return (
@@ -32,18 +38,23 @@ const Message = ({ currentUser }) => {
               />
             </div>
             <div className={classes.containerName}>
-              <Typography className={classes.nameBig}>
-                {messageSelected.username}
-              </Typography>
+              <Link to={`/profile/${messageSelected.userID}`}>
+                <Typography className={classes.nameBig}>
+                  {messageSelected.username}
+                </Typography>
+              </Link>
             </div>
           </div>
           <div className={classes.containerTools}>
-            <div className={classes.icon}>{videoIcon}</div>
-            <div className={classes.icon}>{phoneIcon}</div>
+            {/* <div className={classes.icon}>{videoIcon}</div> */}
+            {/* <div className={classes.icon}>{phoneIcon}</div> */}
+            <div className={classes.icon} onClick={handleToggle}>
+              {toggleIcon}
+            </div>
           </div>
         </div>
         <div onClick={handleSeen}>
-          <div className={classes.body} id="#bodyChat">
+          <div className={classes.body} id="bodyChatMessenger">
             <div className={classes.introduce}>
               <img
                 src={messageSelected.avatar}

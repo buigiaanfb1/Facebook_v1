@@ -11,11 +11,10 @@ import { POST_UPLOAD_STATUS } from '../../common/constants';
 import { createAPost } from '../../firebase/data/createAPost';
 import FormatPresets from './FormatPresets';
 import { useAudio } from '../../hooks/useAudio';
-import noti from '../../common/sounds/notification.mp3';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
-  const [playing, toggle] = useAudio(noti);
+  const { toggle } = useAudio();
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();

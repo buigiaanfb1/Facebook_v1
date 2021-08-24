@@ -33,10 +33,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   nameBig: {
     fontWeight: '500',
-    maxWidth: '145px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   containerTools: {
     display: 'flex',

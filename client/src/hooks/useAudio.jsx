@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import noti from '../common/sounds/notification.mp3';
 
-export const useAudio = (url) => {
-  const [audio] = useState(new Audio(url));
-  const [playing, setPlaying] = useState(false);
+export const useAudio = () => {
+  const audio = new Audio(noti);
 
-  const toggle = () => setPlaying(!playing);
+  const toggle = () => {
+    audio.play();
+  };
 
-  useEffect(() => {
-    playing ? audio.play() : audio.pause();
-  }, [playing]);
-
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
-
-  return [playing, toggle];
+  return { toggle };
 };

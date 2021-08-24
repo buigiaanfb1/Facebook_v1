@@ -38,3 +38,13 @@ export const CLOSE_MESSAGES_ID = 'CLOSE_MESSAGES_ID';
 
 // Messenger selected
 export const SELECTED_MESSAGE_MESSENGER = 'SELECTED_MESSAGE_MESSENGER';
+
+// Messenger selected
+export const GET_NEW_MESSENGER_PICTURES = 'GET_NEW_MESSENGER_PICTURES';
+
+// Clear picture
+export const CLEAR_MESSENGER_PICTURES = 'CLEAR_MESSENGER_PICTURES';
+
+// LOADER
+export const LOADING = 'LOADING';
+export const LOADED = 'LOADED';

@@ -6,7 +6,9 @@ import friendsProfileStore from './friendsProfileStore';
 import tabsStore from './tabsStore';
 import messagesWindowStore from './messagesWindowStore';
 import messengerStore from './messengerStore';
+import messengerPicturesStore from './messengerPicturesStore';
 import hideStore from './hideStore';
+import loaderStore from './loaderStore';
 
 const reducer = combineReducers({
   shareStore,
@@ -16,7 +18,9 @@ const reducer = combineReducers({
   tabsStore,
   messagesWindowStore,
   messengerStore,
+  messengerPicturesStore,
   hideStore,
+  loaderStore,
 });
 
 const store = createStore(

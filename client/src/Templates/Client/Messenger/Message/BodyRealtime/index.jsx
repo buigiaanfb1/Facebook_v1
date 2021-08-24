@@ -3,11 +3,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { projectFirestore } from '../../../../../firebase/config';
 import { likeIconInBody } from '../iconSvg';
 import { formatTimeMessage } from '../../../../../helpers/formatTime';
+import { useDispatch } from 'react-redux';
 import { useStyles } from '../styles';
+import { GET_NEW_MESSENGER_PICTURES } from '../../../../../common/constants';
 
 const BodyRealtime = ({ currentUser, user }) => {
   console.log('BodyRealtime');
   const classes = useStyles();
+  const dispatch = useDispatch();
   const dummy = useRef();
   const [messagesRealtime, setMessagesRealtime] = useState(null);
 
@@ -21,9 +24,20 @@ const BodyRealtime = ({ currentUser, user }) => {
       .orderBy('createdAt', 'asc')
       .onSnapshot((querySnapshot) => {
         let messages = [];
+        let imagesArr = [];
         querySnapshot.forEach((doc) => {
           messages.push(doc.data());
+          if (doc.data()?.images) {
+            imagesArr.push(doc.data().images[0]);
+          }
         });
+        if (imagesArr.length > 0) {
+          console.log(imagesArr);
+          dispatch({
+            type: GET_NEW_MESSENGER_PICTURES,
+            payload: imagesArr,
+          });
+        }
         setMessagesRealtime(messages);
       });
     // Stop listening for updates when no longer required
@@ -101,10 +115,8 @@ const BodyRealtime = ({ currentUser, user }) => {
     return messagesRealtime?.map((message, index) => {
       if (message && message.createdAt?.seconds && index > 0) {
         if (message.createdAt.seconds - 300 < flag) {
-          console.log(`${message.createdAt.seconds} - 1000 < ${flag}`);
         } else {
           flag = message.createdAt.seconds;
-          console.log(`${message.createdAt.seconds} - 1000 > ${flag} .`);
           return (
             <>
               <Typography className={classes.time}>

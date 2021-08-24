@@ -25,4 +25,12 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '170%',
     fontWeight: 'normal',
   },
+  container: {
+    height: 'calc(100vh - 65px)',
+    overflow: 'hidden',
+    '&:hover': {
+      overflowY: 'auto',
+      overflowY: 'overlay',
+    },
+  },
 }));

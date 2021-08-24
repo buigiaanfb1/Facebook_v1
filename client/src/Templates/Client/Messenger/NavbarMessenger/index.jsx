@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Popper from '@material-ui/core/Popper';
-import messenger from '../../../../common/images/messenger-nav.svg';
-import avatar from '../../../../common/images/avatar.png';
+import React, { useEffect, useState, useRef } from 'react';
 import L1KE from '../../../../common/images/L1KE.png';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
@@ -10,15 +6,19 @@ import SearchBar from '../../../../components/SearchBar';
 import { useDispatch } from 'react-redux';
 import { projectFirestore } from '../../../../firebase/config';
 import {
+  CLEAR_MESSENGER_PICTURES,
   OPEN_MESSAGES,
   SELECTED_MESSAGE_MESSENGER,
 } from '../../../../common/constants';
 import { setCollection } from '../../../../firebase/data/setCollection';
 import { formatTime } from '../../../../helpers/formatTime';
-import Player from '../../../../hooks/useAudio';
+import { useAudio } from '../../../../hooks/useAudio';
 
 const NavbarMessenger = ({ currentUser }) => {
+  console.log('NavbarMessenger');
   const { updateSeenMessageField } = setCollection('messages-notification');
+  const firstRef = useRef(false);
+  const { toggle } = useAudio();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [messages, setMessages] = useState({
@@ -26,8 +26,6 @@ const NavbarMessenger = ({ currentUser }) => {
     alert: false,
     selectedID: null,
   });
-
-  console.log(messages);
 
   useEffect(() => {
     const subscriber = projectFirestore
@@ -47,6 +45,12 @@ const NavbarMessenger = ({ currentUser }) => {
           }
         });
         if (messagesRealtime.length > 0) {
+          if (!firstRef.current) {
+            handleClickMessage(messagesRealtime[0]);
+            firstRef.current = true;
+          } else {
+            toggle();
+          }
           setMessages({
             alert: seen,
             messages: messagesRealtime,
@@ -67,6 +71,9 @@ const NavbarMessenger = ({ currentUser }) => {
     setMessages({
       ...messages,
       selectedID: otherUser.userID,
+    });
+    dispatch({
+      type: CLEAR_MESSENGER_PICTURES,
     });
     dispatch({
       type: SELECTED_MESSAGE_MESSENGER,
@@ -136,6 +143,7 @@ const NavbarMessenger = ({ currentUser }) => {
       );
     });
   };
+
   return (
     <div className={classes.containerAll}>
       <div className={classes.containerHeader}>

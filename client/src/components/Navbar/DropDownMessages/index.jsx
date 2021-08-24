@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Popper from '@material-ui/core/Popper';
 import messenger from '../../../common/images/messenger-nav.svg';
@@ -12,10 +12,12 @@ import { projectFirestore } from '../../../firebase/config';
 import { OPEN_MESSAGES } from '../../../common/constants';
 import { setCollection } from '../../../firebase/data/setCollection';
 import { formatTime } from '../../../helpers/formatTime';
-import Player from '../../../hooks/useAudio';
+import { useAudio } from '../../../hooks/useAudio';
 
 const DropDownMessages = ({ currentUser }) => {
   console.log('DropDownMessages mount');
+  const { toggle } = useAudio();
+  const firstRef = useRef(false);
   const { updateSeenMessageField } = setCollection('messages-notification');
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -52,6 +54,11 @@ const DropDownMessages = ({ currentUser }) => {
             alert: seen,
             messages: messagesRealtime,
           });
+          if (!firstRef.current) {
+            firstRef.current = true;
+          } else {
+            toggle();
+          }
         }
       });
     // Stop listening for updates when no longer required
@@ -70,7 +77,7 @@ const DropDownMessages = ({ currentUser }) => {
   /**
    * hierarchy:
    * messages-notification => currentUserID => newest-messages => otherUserID
-   * @param {id} otherUserID
+   * @param otherUserID
    */
   const handleClickMessage = (otherUser) => {
     updateSeenMessageField(currentUser.userID, otherUser.userID);

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { LOADED, LOADING } from '../../common/constants';
 import FacebookStyle from '../../componentsLoader/PostLoader';
 import { useStyles } from './styles';
 import { getDocumentPostGlobal } from '../../firebase/data/getDocument';
+import { useDispatch } from 'react-redux';
 import PostGlobal from './PostGlobal';
 
 const PostsGlobal = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
@@ -14,9 +16,15 @@ const PostsGlobal = () => {
   }, []);
 
   const handleGetPosts = async () => {
+    dispatch({
+      type: LOADING,
+    });
     const posts = await getDocumentPostGlobal('posts');
     if (posts && posts.length > 0) {
       setPosts(posts);
+      dispatch({
+        type: LOADED,
+      });
     }
   };
 
@@ -32,9 +40,9 @@ const PostsGlobal = () => {
   };
 
   const handleRenderPosts = () => {
-    return posts.map((post) => {
+    return posts.map((post, index) => {
       return (
-        <div key={uuidv4()}>
+        <div key={index}>
           <PostGlobal post={post} />
         </div>
       );

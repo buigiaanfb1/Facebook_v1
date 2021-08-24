@@ -31,14 +31,22 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: 'flex',
   },
+  toggleContainerMessage: {
+    width: '100%',
+    backgroundColor: 'var(--messenger-card-background)',
+    transition: 'all 1s',
+  },
   containerMessage: {
     width: '75%',
+    backgroundColor: 'var(--messenger-card-background)',
+  },
+  toggleContainerTools: {
+    width: '0%',
     backgroundColor: 'var(--messenger-card-background)',
   },
   containerTools: {
     width: '25%',
     borderLeft: '1px solid var(--border-bottom-nav)',
-
     backgroundColor: 'var(--messenger-card-background)',
   },
   header: {},

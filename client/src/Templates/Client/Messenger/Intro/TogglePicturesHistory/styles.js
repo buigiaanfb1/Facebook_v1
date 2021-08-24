@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0.7rem 1rem',
     margin: '0 8px',
     borderRadius: '8px',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'var(--hover-overlay)',
     },
@@ -40,5 +41,28 @@ export const useStyles = makeStyles((theme) => ({
     verticalAlign: '-0.25em',
     filter:
       'invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg) brightness(90%) contrast(96%)',
+  },
+
+  containerPictures: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: '0 0.5rem',
+  },
+  item: {
+    width: 'calc(100% / 3)',
+    position: 'relative',
+    border: '2px solid var(--messenger-card-background)',
+    '&:after': {
+      content: '""',
+      display: 'block',
+      paddingBottom: '100%',
+    },
+  },
+  picture: {
+    position: 'absolute',
+    borderRadius: '8px',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
 }));

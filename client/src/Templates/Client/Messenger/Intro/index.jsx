@@ -8,9 +8,10 @@ const Intro = () => {
   const messageSelected = useSelector(
     (state) => state.messengerStore.messageSelected
   );
+  const currentUser = useSelector((state) => state.userStore.currentUser);
   return (
     messageSelected && (
-      <div>
+      <div className={classes.container}>
         <div className={classes.introduce}>
           <img
             src={messageSelected.avatar}
@@ -28,7 +29,10 @@ const Intro = () => {
             Sống tại Thành phố Hồ Chí Minh
           </Typography>
         </div>
-        <TogglePicturesHistory />
+        <TogglePicturesHistory
+          currentUser={currentUser}
+          messageSelected={messageSelected}
+        />
       </div>
     )
   );

@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { projectFirestore } from './firebase/config';
 import MessagesPopup from './components/MessagesPopup';
+import TopLoadingBar from './components/TopLoadingBar';
 
 const showLayoutClient = () => {
   if (homeRoutes && homeRoutes.length > 0) {
@@ -72,6 +73,7 @@ const App = () => {
     <div className="App">
       <Router history={history}>
         <Navbar />
+        <TopLoadingBar />
         <Switch>{showLayoutClient()}</Switch>
         <MessagesPopup />
       </Router>

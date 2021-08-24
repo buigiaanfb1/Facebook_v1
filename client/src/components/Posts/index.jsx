@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import FacebookStyle from '../../componentsLoader/PostLoader';
 import Post from './Post';
 import { useParams } from 'react-router-dom';
@@ -70,15 +69,10 @@ const Posts = () => {
     }
   };
   const handleRenderPost = () => {
-    // return profilePosts
-    //   .slice(0)
-    //   .reverse()
-    //   .map((post) => {
-    //     return <Post key={post.id} post={post} profileID={id} />;
-    //   });
     return (
       <InfiniteScroll
         dataLength={state.items.length} //This is important field to render the next data
+        // dataLength need to change so that next can fetchData
         next={fetchData}
         hasMore={state.hasMore}
         loader={<Typography>Loading ...</Typography>}
