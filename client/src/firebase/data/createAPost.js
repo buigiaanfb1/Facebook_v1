@@ -1,10 +1,12 @@
 import { setStorage } from '../data/setStorage';
+import { setCollection } from './setCollection';
 import { addPostToPostsAndUsersPostCollectionServices } from '../../components/YourThinkingModal/modules/backendServices';
 import { v4 as uuidv4 } from 'uuid';
 
 export const createAPost = () => {
   const createAPostWithPicture = async (text, pictures, user, avatar = '') => {
     const { uploadPictureOfPost } = setStorage();
+    const { addPictureToUserCollection } = setCollection('users');
     // tạo mảng chứa url ảnh
     const arrPicture = [];
     // lấy doc user ra
@@ -35,6 +37,7 @@ export const createAPost = () => {
     };
     // create in collection Post (let everyone sees)
     // const id = await addDoc(post);
+    addPictureToUserCollection(user.userID, arrPicture);
     const status = await addPostToPostsAndUsersPostCollectionServices(post);
     return status;
   };

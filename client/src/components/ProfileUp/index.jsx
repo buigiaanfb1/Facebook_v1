@@ -20,7 +20,6 @@ import EditNameModal from './EditNameModal';
 import Tabs from './Tabs';
 
 const ProfileUp = () => {
-  console.log('ProfileUp render');
   const { id } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -52,7 +51,6 @@ const ProfileUp = () => {
 
   // mở Modal
   const handleOpenModalPicture = (picture, from) => {
-    console.log(openPostPictureModal.open);
     if (from === 'avatar') {
       setPostPictureModal({
         open: true,
@@ -88,7 +86,7 @@ const ProfileUp = () => {
     const file = e.target.files[0];
     if (file) {
       const { url } = await uploadWallpaper(currentUser.userID, file);
-      console.log(url);
+
       await updateWallpaperFieldDoc(url, currentUser.userID);
       toast('Wow so easy !');
     }
@@ -100,7 +98,7 @@ const ProfileUp = () => {
     const file = e.target.files[0];
     if (file) {
       const { url } = await uploadAvatar(currentUser.userID, file);
-      console.log(url);
+
       await updateAvatarFieldDoc(url, currentUser.userID);
     }
   };

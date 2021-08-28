@@ -20,6 +20,8 @@ firebase.initializeApp({
  * Using JavaScript
  * RUN: node json-to-firestore/populateJsonFirestore.js [RELATIVE PATH TO FILE] [FIRESTORE METHOD] [COLLECTION NAME]
  */
+
+//  node client/src/common/uploadData/populateJsonFirestore.js client/src/common/uploadData/data.json set presets-post
 class PopulateJsonFireStore {
   // class constructor
   constructor() {

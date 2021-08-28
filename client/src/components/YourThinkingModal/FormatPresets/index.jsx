@@ -7,7 +7,7 @@ const FormatPresets = (props) => {
   const classes = useStyles();
   const [presets, setPresets] = useState(null);
   const handleFetchFormatPresets = async () => {
-    const res = await getFormatPresets('text-format-presets');
+    const res = await getFormatPresets('presets-post');
     if (res) {
       setPresets(res);
     }

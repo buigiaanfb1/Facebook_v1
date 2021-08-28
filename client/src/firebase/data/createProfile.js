@@ -61,10 +61,14 @@ export const createProfile = async (user) => {
       const friends = {
         friends: [],
       };
+      const pictures = {
+        pictures: [],
+      };
       await addDocWithID('users', doc, user.uid);
       await addDocWithID('friendsRequested', friendsRequesting, user.uid);
       await addDocWithID('friendsIncoming', friendsIncoming, user.uid);
       await addDocWithID('friends', friends, user.uid);
+      await addDocWithID('pictures', pictures, user.uid);
       return doc;
     }
     return res;

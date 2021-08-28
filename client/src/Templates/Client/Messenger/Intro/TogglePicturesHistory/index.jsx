@@ -1,7 +1,5 @@
 import { Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import avatar from '../../../../../common/images/avatar.png';
-import { getStorage } from '../../../../../firebase/data/getStorage';
 import { useSelector } from 'react-redux';
 import { useStyles } from './styles';
 const TogglePicturesHistory = ({ messageSelected, currentUser }) => {

@@ -1,29 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import NavbarMessenger from './NavbarMessenger';
 import { useStyles } from './styles';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  DISPLAY_ICON_MESSAGE_NOTIFICATION,
-  HIDE_ICON_MESSAGE_NOTIFICATION,
-} from '../../../common/constants';
+import { useSelector } from 'react-redux';
 import Message from './Message';
 import Intro from './Intro';
 const Messenger = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    dispatch({
-      type: HIDE_ICON_MESSAGE_NOTIFICATION,
-    });
-    return () => {
-      dispatch({
-        type: DISPLAY_ICON_MESSAGE_NOTIFICATION,
-      });
-    };
-  }, []);
 
   const handleToggleFromChild = () => {
     setToggle(!toggle);

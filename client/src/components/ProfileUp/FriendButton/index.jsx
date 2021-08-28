@@ -33,7 +33,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
   const incoming = useSelector((state) => state.friendsStore.incoming);
   const friends = useSelector((state) => state.friendsStore.friends);
   const dispatch = useDispatch();
-  console.log('render');
   const [state, setState] = useState({
     loading: false,
     icon: addFriend,
@@ -54,11 +53,10 @@ const FriendButton = ({ profileInfo, currentUser }) => {
     let test = 0;
     if (profileInfo && currentUser) {
       if (friends && friends.friends.length > 0) {
-        console.log('Vo friend');
         const index = friends.friends.findIndex((user, index) => {
           return user.userID === profileInfo.userID;
         });
-        console.log(index);
+
         if (index >= 0) {
           test = 1;
           setState({
@@ -71,7 +69,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
         }
       }
       if (incoming && incoming.incoming.length > 0 && test === 0) {
-        console.log('Vo incoming');
         const index = incoming.incoming.findIndex((user, index) => {
           // kiểm tra xem profile đang xem có trùng id user.userID(là của currentUser)
           // Là check xem trong incoming của currentUser có tồn tại profileInfo
@@ -90,9 +87,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
         }
       }
       if (requested && requested.requested.length > 0 && test === 0) {
-        console.log('Vo requested');
-        console.log(test);
-
         const index = requested.requested.findIndex((user, index) => {
           // kiểm tra xem profile đang xem có trùng id user.userID(là của currentUser)
           // Nghĩa là nếu tìm ra được thì chứng tỏ mình đang gửi lời mời
@@ -114,7 +108,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
 
   const handleClick = async () => {
     if (state.status === 'none') {
-      console.log('addRequestFriend ');
       setState({
         ...state,
         loading: true,
@@ -136,7 +129,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
         status: 'unInvited',
       });
     } else if (state.status === 'unInvited') {
-      console.log('removeRequestFriend ');
       setState({
         ...state,
         loading: true,
@@ -162,7 +154,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
   };
 
   const handleDeleteInvitedFromChild = async () => {
-    console.log('handleDeleteInvitedFromChild ');
     setState({
       ...state,
       loading: true,
@@ -187,7 +178,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
   };
 
   const handleAcceptInvitedFromChild = async () => {
-    console.log('handleAcceptInvitedFromChild');
     setState({
       ...state,
       loading: true,
@@ -213,7 +203,6 @@ const FriendButton = ({ profileInfo, currentUser }) => {
   };
 
   const handleUnfriendFromChild = async () => {
-    console.log('handleUnfriendFromChild');
     setState({
       ...state,
       loading: true,

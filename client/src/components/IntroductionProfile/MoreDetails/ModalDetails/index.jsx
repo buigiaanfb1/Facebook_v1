@@ -173,19 +173,6 @@ const ModalDetails = (props) => {
                   Tỉnh/Thành phố hiện tại
                 </Typography>
                 <div style={{ padding: '12px 0 8px 0' }}>
-                  {/* <Autocomplete
-                    id="combo-box-demo"
-                    options={top100Films}
-                    getOptionLabel={(option) => option.title}
-                    style={{ width: 300 }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Combo box"
-                        variant="outlined"
-                      />
-                    )}
-                  /> */}
                   <ComboBox classes={classes} />
                 </div>
               </div>

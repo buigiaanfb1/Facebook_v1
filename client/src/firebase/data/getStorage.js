@@ -1,9 +1,8 @@
 import firebase from 'firebase/app';
 import { projectStorage } from '../config';
 
-export const getStorage = (path) => {
-  console.log(path);
-  const getPictureMessenger = async () => {
+export const getStorage = () => {
+  const getPictureMessenger = async (path) => {
     const storageRef = projectStorage.ref(path);
     try {
       storageRef.listAll().then(function (result) {
@@ -18,5 +17,17 @@ export const getStorage = (path) => {
     }
   };
 
-  return { getPictureMessenger };
+  const getPictureProfile = async (path) => {
+    const storageRef = projectStorage.ref(path);
+    console.log(path);
+    try {
+      return await (
+        await storageRef.listAll()
+      ).items;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return { getPictureMessenger, getPictureProfile };
 };

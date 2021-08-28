@@ -293,4 +293,14 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
   },
+
+  moreText: {
+    position: 'absolute',
+    bottom: '50%',
+    left: '50%',
+    transform: 'translate(-50%, 50%)',
+    display: 'block',
+    fontWeight: '500',
+    fontSize: '26px',
+  },
 }));

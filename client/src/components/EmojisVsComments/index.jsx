@@ -23,7 +23,6 @@ const EmojisVsComments = ({
   userReaction,
   postID,
 }) => {
-  console.log('EmojisVsComments render');
   const classes = useStyles();
   const check = useRef(false);
   const currentUser = useSelector((state) => state.userStore.currentUser);

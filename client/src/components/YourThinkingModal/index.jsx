@@ -38,7 +38,6 @@ const YourThinkingModal = (props) => {
     backgroundPresetsUri: null,
     imageBlob: [],
   });
-  console.log(info);
 
   useEffect(() => {
     if (props.openModal) {
@@ -48,7 +47,6 @@ const YourThinkingModal = (props) => {
 
   useEffect(() => {
     if (!textPreset.isShow) {
-      console.log('use');
       info.color = null;
       info.backgroundPresetsUri = null;
     } else {
@@ -66,9 +64,7 @@ const YourThinkingModal = (props) => {
   };
 
   const handleSubmit = async () => {
-    console.log(info);
     if (info.imageBlob && info.imageBlob.length > 0) {
-      console.log('picture');
       setSubmitting(true);
       const res = await createAPostWithPicture(
         info.text,
@@ -81,7 +77,6 @@ const YourThinkingModal = (props) => {
       toggle();
       setSubmitting(false);
     } else {
-      console.log('text');
       setSubmitting(true);
       const res = await createAPostWithNoPicture(
         info.text,
@@ -194,7 +189,6 @@ const YourThinkingModal = (props) => {
     // get Picture from clipboard
     let items = (event.clipboardData || event.originalEvent.clipboardData)
       .items;
-    console.log(JSON.stringify(items)); // will give you the mime types
     for (let index in items) {
       // get one by one file
       let item = items[index];

@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     border: '2px solid var(--background-post)',
     width: 'calc(100% / 3)',
+    cursor: 'pointer',
     '&:after': {
       content: '""',
       display: 'block',

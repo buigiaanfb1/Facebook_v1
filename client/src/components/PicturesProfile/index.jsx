@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import content1 from '../../common/images/test2.jpeg';
-import content2 from '../../common/images/content2.jpeg';
-import content3 from '../../common/images/content3.jpeg';
-import content4 from '../../common/images/content4.jpeg';
 import PostPictureModal from '../PostPictureModal';
+import { getSubDocument } from '../../firebase/data/getDocument';
 
-const PictureProfile = () => {
+const PictureProfile = ({ profileInfo }) => {
   const classes = useStyles();
   const [openPostPictureModal, setPostPictureModal] = useState(false);
+  const [pictures, setPictures] = useState({
+    picturesArr: null,
+    selectedPicture: null,
+    selectedPictureIndex: null,
+  });
+
+  useEffect(() => {
+    handleFetchPicturesProfile();
+  }, [profileInfo]);
+
+  const handleFetchPicturesProfile = async () => {
+    const res = await getSubDocument('users', 'pictures', profileInfo.userID);
+    if (res) {
+      let resPicturesCopy = res.pictures.slice(0, 9).reverse();
+      setPictures({
+        ...pictures,
+        picturesArr: resPicturesCopy,
+      });
+    }
+  };
   // mở Modal
   const handleOpenModalPicture = () => {
     setPostPictureModal({
@@ -17,30 +34,42 @@ const PictureProfile = () => {
     });
   };
 
+  const handleChangePictureFromChild = (index) => {
+    setPictures({
+      ...pictures,
+      selectedPicture: pictures.picturesArr[index],
+      selectedPictureIndex: index,
+    });
+  };
+
+  const handleSetPictureSelected = (selectedPicture, index) => {
+    setPictures({
+      ...pictures,
+      selectedPicture: selectedPicture,
+      selectedPictureIndex: index,
+    });
+    handleOpenModalPicture();
+  };
+
   const handleRenderPicture = () => {
-    const arr = [
-      content1,
-      content2,
-      content3,
-      content4,
-      content1,
-      content2,
-      content3,
-      content4,
-      content1,
-    ];
-    return arr.map((image, index) => {
+    return pictures.picturesArr.map((image, index) => {
       index++;
-      if (arr.length === 1) {
+      if (pictures.picturesArr.length === 1) {
         return (
-          <div className={classes.containerImage}>
+          <div
+            className={classes.containerImage}
+            onClick={() => handleSetPictureSelected(image, index)}
+          >
             <img src={image} className={classes.image4Radius} />
           </div>
         );
-      } else if (arr.length === 2) {
+      } else if (pictures.picturesArr.length === 2) {
         if (index === 1) {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img
                 src={image}
                 className={classes.image2TopLeftBottomLeftRadius}
@@ -49,7 +78,10 @@ const PictureProfile = () => {
           );
         } else {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img
                 src={image}
                 className={classes.image2TopRightBottomRightRadius}
@@ -57,17 +89,26 @@ const PictureProfile = () => {
             </div>
           );
         }
-      } else if (arr.length === 3 || arr.length === 6) {
-        if (arr.length === 3) {
-          if (index == arr.length - 1) {
+      } else if (
+        pictures.picturesArr.length === 3 ||
+        pictures.picturesArr.length === 6
+      ) {
+        if (pictures.picturesArr.length === 3) {
+          if (index == pictures.picturesArr.length - 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
           } else if (index % 3 !== 0) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2TopLeftBottomLeftRadius}
@@ -76,7 +117,10 @@ const PictureProfile = () => {
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2TopRightBottomRightRadius}
@@ -87,47 +131,71 @@ const PictureProfile = () => {
         } else {
           if (index === 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopLeftRadius} />
               </div>
             );
           } else if (index === 3) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopRightRadius} />
               </div>
             );
           } else if (index === 4) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomLeftRadius} />
               </div>
             );
           } else if (index === 6) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomRightRadius} />
               </div>
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
           }
         }
-      } else if (arr.length === 4 || arr.length === 7) {
-        if (arr.length === 4) {
+      } else if (
+        pictures.picturesArr.length === 4 ||
+        pictures.picturesArr.length === 7
+      ) {
+        if (pictures.picturesArr.length === 4) {
           if (index === 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopLeftRadius} />
               </div>
             );
           } else if (index === 3) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2TopRightBottomRightRadius}
@@ -136,7 +204,10 @@ const PictureProfile = () => {
             );
           } else if (index === 4) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2BottomRightBottomLeftRadius}
@@ -145,7 +216,10 @@ const PictureProfile = () => {
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
@@ -153,25 +227,37 @@ const PictureProfile = () => {
         } else {
           if (index === 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopLeftRadius} />
               </div>
             );
           } else if (index === 3) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopRightRadius} />
               </div>
             );
           } else if (index === 6) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomRightRadius} />
               </div>
             );
           } else if (index === 7) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2BottomRightBottomLeftRadius}
@@ -180,23 +266,35 @@ const PictureProfile = () => {
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
           }
         }
-      } else if (arr.length === 5 || arr.length === 8) {
-        if (arr.length === 5) {
+      } else if (
+        pictures.picturesArr.length === 5 ||
+        pictures.picturesArr.length === 8
+      ) {
+        if (pictures.picturesArr.length === 5) {
           if (index === 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopLeftRadius} />
               </div>
             );
           } else if (index === 3) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img
                   src={image}
                   className={classes.image2TopRightBottomRightRadius}
@@ -205,51 +303,75 @@ const PictureProfile = () => {
             );
           } else if (index === 4) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomLeftRadius} />
               </div>
             );
           } else if (index === 5) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomRightRadius} />
               </div>
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
           }
-        } else if (arr.length === 8) {
+        } else if (pictures.picturesArr.length === 8) {
           if (index === 1) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopLeftRadius} />
               </div>
             );
           } else if (index === 3) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1TopRightRadius} />
               </div>
             );
           } else if (index === 6 || index === 8) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomRightRadius} />
               </div>
             );
           } else if (index === 7) {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image1BottomLeftRadius} />
               </div>
             );
           } else {
             return (
-              <div className={classes.containerImage}>
+              <div
+                className={classes.containerImage}
+                onClick={() => handleSetPictureSelected(image, index)}
+              >
                 <img src={image} className={classes.image0Radius} />
               </div>
             );
@@ -258,7 +380,10 @@ const PictureProfile = () => {
       } else {
         if (index === 1) {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img
                 src={image}
                 className={classes.image1TopLeftRadius}
@@ -268,25 +393,37 @@ const PictureProfile = () => {
           );
         } else if (index === 3) {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img src={image} className={classes.image1TopRightRadius} />
             </div>
           );
         } else if (index === 7) {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img src={image} className={classes.image1BottomLeftRadius} />
             </div>
           );
         } else if (index === 9) {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img src={image} className={classes.image1BottomRightRadius} />
             </div>
           );
         } else {
           return (
-            <div className={classes.containerImage}>
+            <div
+              className={classes.containerImage}
+              onClick={() => handleSetPictureSelected(image, index)}
+            >
               <img src={image} className={classes.image0Radius} />
             </div>
           );
@@ -300,9 +437,17 @@ const PictureProfile = () => {
         <Typography className={classes.title}>Ảnh cá nhân</Typography>
         <Typography className={classes.linkAll}>Xem tất cả ảnh</Typography>
       </div>
-      <div className={classes.imagesContainer}>{handleRenderPicture()}</div>
+      <div className={classes.imagesContainer}>
+        {pictures.picturesArr ? handleRenderPicture() : null}
+      </div>
       {/* ModalPicture */}
-      <PostPictureModal openModal={openPostPictureModal} />
+      {openPostPictureModal && (
+        <PostPictureModal
+          openModal={openPostPictureModal}
+          handleChangePictureFromChild={handleChangePictureFromChild}
+          pictures={pictures}
+        />
+      )}
     </div>
   );
 };

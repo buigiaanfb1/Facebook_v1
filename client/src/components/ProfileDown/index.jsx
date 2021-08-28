@@ -38,13 +38,16 @@ const ProfileDown = () => {
                 lg={5}
                 md={5}
                 sm={5}
+                xs={12}
                 className={classes.positionSticky}
               >
                 <div className={classes.item}>
                   <IntroductionProfile />
                 </div>
                 <div className={classes.item}>
-                  <PicturesProfile />
+                  {profileInfo ? (
+                    <PicturesProfile profileInfo={profileInfo} />
+                  ) : null}
                 </div>
                 <div className={classes.item}>
                   <FriendsProfile />
@@ -55,6 +58,7 @@ const ProfileDown = () => {
                 lg={7}
                 md={7}
                 sm={7}
+                xs={12}
                 style={{ marginTop: '1rem', width: '100%' }}
               >
                 {handleRenderYourThinking()}

@@ -141,7 +141,7 @@ const Post = ({ post, profileID }) => {
               {state.post.content}
             </Typography>
           </Linkify>
-          <Image picturesArr={state.post.picture} />
+          {state.post.picture && <Image picturesArr={state.post.picture} />}
         </div>
       );
     }

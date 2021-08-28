@@ -6,7 +6,11 @@ const PictureModal = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <img src={props.picturesArr ? props.picturesArr : test2} className={classes.picture} />
+      <img
+        src={props.selectedPicture}
+        className={classes.picture}
+        alt="pic post"
+      />
     </div>
   );
 };

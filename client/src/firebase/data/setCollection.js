@@ -374,6 +374,21 @@ export const setCollection = (collection) => {
     }
   };
 
+  const addPictureToUserCollection = async (userID, pictureUriArr) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc(userID)
+        .collection('pictures')
+        .doc(userID)
+        .update({
+          pictures: firebase.firestore.FieldValue.arrayUnion(...pictureUriArr),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return {
     addDoc,
     addDocWithID,
@@ -389,5 +404,6 @@ export const setCollection = (collection) => {
     updateNameFieldDoc,
     addMessageCollection,
     updateSeenMessageField,
+    addPictureToUserCollection,
   };
 };

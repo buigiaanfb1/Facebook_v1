@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 const CommentInput = ({ postID }) => {
   const currentUser = useSelector((state) => state.userStore.currentUser);
-  console.log(currentUser);
   const classes = useStyles();
   const { addCommentWithID } = setCollection('comments-post');
   const [info, setInfo] = useState({
@@ -30,7 +29,6 @@ const CommentInput = ({ postID }) => {
       iconContainer.style.bottom = '1.2rem';
       textarea.style.paddingRight = '12px';
       if (lengthOfText > 35) {
-        console.log(lengthOfText);
         moreHeight += 20;
       }
     } else {
@@ -50,11 +48,10 @@ const CommentInput = ({ postID }) => {
     // get Picture from clipboard
     let items = (event.clipboardData || event.originalEvent.clipboardData)
       .items;
-    console.log(JSON.stringify(items)); // will give you the mime types
     for (let index in items) {
       // get one by one file
       let item = items[index];
-      console.log(item);
+
       if (item.kind === 'file' && types.includes(item.type)) {
         let blob = item.getAsFile();
         let reader = new FileReader();
@@ -108,7 +105,7 @@ const CommentInput = ({ postID }) => {
 
   const handleInputFiles = (e) => {
     const files = e.target.files;
-    console.log(e.target.files);
+
     // loop an object
     Object.keys(files).map((key) => {
       // init reader file
@@ -143,7 +140,7 @@ const CommentInput = ({ postID }) => {
   // a trick
   const handleClickFile = (e) => {
     const element = e.target;
-    console.log(element);
+
     element.value = '';
   };
 

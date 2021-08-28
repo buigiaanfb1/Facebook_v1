@@ -23,12 +23,24 @@ export const useStyles = makeStyles((theme) => ({
   wrapperItem: {
     margin: '0 8px',
   },
+  itemProfile: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0.5rem 0.5rem',
+    borderRadius: '8px',
+    transition: 'all 0.1s',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'var(--hover-overlay)',
+    },
+  },
   item: {
     display: 'flex',
     alignItems: 'center',
     padding: '0.5rem 0.5rem',
     borderRadius: '8px',
     transition: 'all 0.1s',
+    cursor: 'not-allowed',
     '&:hover': {
       backgroundColor: 'var(--hover-overlay)',
     },
@@ -38,6 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '36px',
     borderRadius: '50%',
     marginRight: '12px',
+    objectFit: 'cover',
     [theme.breakpoints.down('lg')]: {
       width: '28px',
       height: '28px',

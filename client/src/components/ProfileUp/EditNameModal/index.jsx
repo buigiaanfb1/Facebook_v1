@@ -10,7 +10,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const EditNameModal = ({ profileInfo }) => {
   const classes = useStyles();
-  console.log(profileInfo);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
 

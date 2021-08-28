@@ -11,6 +11,8 @@ import { useStyles } from './styles';
 const PostPictureModal = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  console.log(props.pictures);
+  const [selectedPicture, setSelectedPicture] = useState(null);
   const [fullWidth, setFullWidth] = useState(false);
   // get data from Parent (PictureProfile)
   useEffect(() => {
@@ -20,6 +22,12 @@ const PostPictureModal = (props) => {
     }
     // observable
   }, [props.openModal]);
+
+  useEffect(() => {
+    if (props.pictures) {
+      setSelectedPicture(props.pictures.selectedPicture);
+    }
+  }, [props.pictures]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,6 +44,33 @@ const PostPictureModal = (props) => {
   const handleRedirectToHomePage = async () => {
     await setOpen(false);
     history.push('/');
+  };
+
+  const handleChangeSelectedPicture = (direction) => {
+    if (props.pictures.picturesArr.length > 1) {
+      if (direction) {
+        if (
+          props.pictures.selectedPictureIndex ===
+          props.pictures.picturesArr.length - 1
+        ) {
+          props.handleChangePictureFromChild(0);
+        } else {
+          props.handleChangePictureFromChild(
+            props.pictures.selectedPictureIndex + 1
+          );
+        }
+      } else {
+        if (props.pictures.selectedPictureIndex === 0) {
+          props.handleChangePictureFromChild(
+            props.pictures.picturesArr.length - 1
+          );
+        } else {
+          props.handleChangePictureFromChild(
+            props.pictures.selectedPictureIndex - 1
+          );
+        }
+      }
+    }
   };
   return (
     <div className={classes.root}>
@@ -72,6 +107,7 @@ const PostPictureModal = (props) => {
                       src={logo}
                       className={classes.logo}
                       onClick={handleRedirectToHomePage}
+                      alt="logo"
                     />
                   </div>
                   <div className={classes.navRight}>
@@ -85,15 +121,21 @@ const PostPictureModal = (props) => {
                 </div>
                 {/* ArrowLeft */}
                 <div className={classes.containerArrowLeft}>
-                  <div className={classes.iconContainer}>
+                  <div
+                    className={classes.iconContainer}
+                    onClick={() => handleChangeSelectedPicture(false)}
+                  >
                     <i className={classes.iconLeft}></i>
                   </div>
                 </div>
                 {/* Main Picture */}
-                <PictureModal picturesArr={props.picturesArr}/>
+                <PictureModal selectedPicture={selectedPicture} />
                 {/* ArrowRight */}
                 <div className={classes.containerArrowRight}>
-                  <div className={classes.iconContainer}>
+                  <div
+                    className={classes.iconContainer}
+                    onClick={() => handleChangeSelectedPicture(true)}
+                  >
                     <i className={classes.iconRight}></i>
                   </div>
                 </div>
