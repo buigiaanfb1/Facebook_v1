@@ -80,4 +80,15 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0rem 0rem',
     maxWidth: '300px',
   },
+  readMore: {
+    marginTop: '0.5rem',
+    fontSize: '15px',
+    fontWeight: '500',
+    display: 'inline-block',
+    color: 'var(--secondary-text)',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }));

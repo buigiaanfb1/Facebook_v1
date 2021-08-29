@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '100vh',
       position: '-webkit-sticky',
       position: 'sticky',
-      top: '-65%',
+      top: '-5%',
     },
   },
   item: {

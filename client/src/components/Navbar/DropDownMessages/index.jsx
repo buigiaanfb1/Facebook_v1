@@ -114,7 +114,7 @@ const DropDownMessages = ({ currentUser }) => {
               >
                 {user.content}
                 <span>&nbsp; · &nbsp;</span>
-                {formatTime(user.createdAt)}
+                {user.createdAt && formatTime(user.createdAt)}
               </Typography>
             ) : user.like ? (
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -125,7 +125,7 @@ const DropDownMessages = ({ currentUser }) => {
                   }`}
                 >
                   <span>&nbsp; · &nbsp;</span>
-                  {formatTime(user.createdAt)}
+                  {user.createdAt && formatTime(user.createdAt)}
                 </Typography>
               </div>
             ) : (

@@ -68,6 +68,7 @@ const Posts = () => {
       }, 500);
     }
   };
+
   const handleRenderPost = () => {
     return (
       <InfiniteScroll

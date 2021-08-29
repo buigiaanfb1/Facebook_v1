@@ -98,7 +98,7 @@ const BodyRealtime = ({ currentUser, user }) => {
   };
 
   const handleRenderMessage = () => {
-    let flag = messagesRealtime[0].createdAt.seconds || 0;
+    let flag = messagesRealtime[0].createdAt?.seconds || 0;
     return messagesRealtime?.map((message, index) => {
       if (message && message.createdAt?.seconds && index > 0) {
         if (message.createdAt.seconds - 300 < flag) {

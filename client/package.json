@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "date-fns": "^2.22.1",
+    "emoji-picker-react": "^3.4.8",
     "firebase": "^8.7.0",
     "i": "^0.3.6",
     "jquery": "^3.6.0",

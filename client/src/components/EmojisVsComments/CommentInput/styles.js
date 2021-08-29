@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
+    borderRadius: '50px',
   },
   input: {
     height: '36px',
@@ -37,10 +38,12 @@ export const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: '50%',
     right: '0rem',
-    transform: 'translate(-50%, 50%)',
+    transform: 'translate(-20%, 50%)',
     zIndex: 1,
+    display: 'flex',
   },
   containerIconPicture: {
+    position: 'relative',
     width: '30px',
     height: '30px',
     display: 'flex',
@@ -53,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: 'var(--background-button)',
     },
   },
-  icon: {
+  iconPicture: {
     backgroundImage: `url(${comboTool2})`,
     backgroundPosition: '0px -416px',
     backgroundSize: '25px 813px',
@@ -63,6 +66,17 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     display: 'inline-block',
     filter: 'invert(70%)',
+  },
+  iconEmojisPicker: {
+    backgroundImage: `url(https://www.facebook.com/rsrc.php/v3/yg/r/Zy094W0d_I1.png)`,
+    backgroundPosition: '0px -449px',
+    backgroundSize: '25px 710px',
+    width: '16px',
+    height: '16px',
+    verticalAlign: '-0.25em',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(80%)',
   },
   imageContainer: {
     padding: '1rem 3rem',
@@ -102,5 +116,25 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     display: 'inline-block',
     filter: 'invert(89%) sepia(6%) hue-rotate(185deg)',
+  },
+  emojisPickerContainer: {
+    position: 'absolute',
+    top: '45px',
+    right: '0',
+    zIndex: '999',
+    '& aside': {
+      border: '1px solid var(--border-item)',
+      boxShadow: 'none',
+      '& .emoji-categories': {
+        '& button': {
+          filter:
+            'brightness(0) saturate(100%) invert(94%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(106%) contrast(105%)',
+        },
+      },
+      backgroundColor: 'var(--background-nav)',
+      '& .emoji-group::before': {
+        backgroundColor: 'var(--background-nav)',
+      },
+    },
   },
 }));

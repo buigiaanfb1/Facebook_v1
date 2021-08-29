@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { projectFirestore } from '../../../firebase/config';
 import { useStyles } from './styles';
 import { Typography } from '@material-ui/core';
@@ -8,22 +8,92 @@ import { formatDistanceToNowStrict } from 'date-fns';
 
 const OtherComments = ({ postID }) => {
   const classes = useStyles();
+  const loaded = useRef(false);
+  const first = useRef(true);
   const [comments, setComments] = useState(null);
-  const [limit, setLimit] = useState(3);
+  const [state, setState] = useState({
+    items: [],
+    hasMore: false,
+  });
+  console.log(state);
 
   useEffect(() => {
     const subscriber = projectFirestore
       .collection('comments-post')
       .doc(postID)
       .onSnapshot((doc) => {
-        let id = doc.id;
-        // let data = { ...doc.data(), id };
-        let data = { ...doc.data() };
-        setComments(data);
+        if (doc.exists) {
+          let data = doc.data().comments.slice().reverse();
+          setComments(data);
+        }
       });
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);
+
+  useEffect(() => {
+    if (first.current) {
+      if (comments && comments.length > 5) {
+        setState({
+          hasMore: true,
+          items: comments.slice(0, 5),
+        });
+        first.current = false;
+      } else if (comments) {
+        setState({
+          hasMore: false,
+          items: comments.slice(0, comments.length) || [],
+        });
+        first.current = false;
+      }
+    } else {
+      if (comments && comments.length > 5) {
+        setState({
+          hasMore: true,
+          items: [comments[0], ...state.items],
+        });
+      } else if (comments) {
+        setState({
+          hasMore: false,
+          items: comments.slice(0, comments.length) || [],
+        });
+      }
+    }
+  }, [comments]);
+
+  const fetchData = () => {
+    // loaded.current = true;
+    if (state.items.length >= comments.length || 0) {
+      setState({
+        ...state,
+        hasMore: false,
+      });
+      return;
+    }
+
+    if (comments && comments.length > 5) {
+      setTimeout(() => {
+        setState({
+          ...state,
+          items: state.items.concat(
+            comments.slice(state.items.length, state.items.length + 5)
+          ),
+        });
+      }, 500);
+    } else {
+      setTimeout(() => {
+        setState({
+          ...state,
+          items: state.items.concat(
+            comments.slice(
+              state.items.length,
+              comments.length - state.items.length
+            )
+          ),
+        });
+      }, 500);
+    }
+  };
 
   const handleRenderTime = (comment) => {
     if (comment.createdAt) {
@@ -51,7 +121,7 @@ const OtherComments = ({ postID }) => {
   };
 
   const handleComments = () => {
-    return comments.comments.map((comment, index) => {
+    return state.items.map((comment, index) => {
       return (
         <div className={classes.commentsSection} key={comment.id}>
           <img
@@ -108,7 +178,16 @@ const OtherComments = ({ postID }) => {
       );
     });
   };
-  return comments && comments.comments?.length > 0 ? handleComments() : null;
+  return state.items.length > 0 ? (
+    <div style={{ marginTop: '0.5rem' }}>
+      {handleComments()}
+      {state.hasMore && (
+        <Typography className={classes.readMore} onClick={fetchData}>
+          Xem thêm bình luận
+        </Typography>
+      )}
+    </div>
+  ) : null;
 };
 
 export default OtherComments;

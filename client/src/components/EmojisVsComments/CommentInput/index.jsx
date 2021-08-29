@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
-import avatar from '../../../common/images/avatar.png';
+import Picker from 'emoji-picker-react';
 import { setCollection } from '../../../firebase/data/setCollection';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
+
 const CommentInput = ({ postID }) => {
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const classes = useStyles();
@@ -15,6 +16,14 @@ const CommentInput = ({ postID }) => {
     imageBlob: [],
     id: uuidv4(),
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      info.user = currentUser;
+    }
+  }, [currentUser]);
+  console.log(info.user);
+  const [emojisPickerOpen, setEmojisPickerOpen] = useState(false);
   const types = ['image/png', 'image/jpeg'];
 
   const handleChangeText = (e) => {
@@ -172,11 +181,25 @@ const CommentInput = ({ postID }) => {
     }
   };
 
+  const handleOpenEmojisPicker = () => {
+    setEmojisPickerOpen(!emojisPickerOpen);
+  };
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject);
+    setInfo({
+      ...info,
+      text: info.text + emojiObject.emoji,
+    });
+    setEmojisPickerOpen(false);
+  };
+
   const handleSubmit = async () => {
     if (info.text.length > 0 || info.imageBlob.length > 0) {
       await addCommentWithID(info, postID);
       setInfo({
         ...info,
+        id: uuidv4(),
+        text: '',
         imageBlob: [],
       });
     }
@@ -189,9 +212,11 @@ const CommentInput = ({ postID }) => {
           <img
             src={currentUser?.avatar}
             className={classes.avatarOtherPeople}
+            alt="avatar"
           />
           <textarea
             id={`${postID}`}
+            value={info.text}
             onChange={(e) => handleChange(e)}
             onPaste={(e) => handleDetectPastePicture(e)}
             placeholder="Bạn đang nghĩ gì?"
@@ -201,7 +226,7 @@ const CommentInput = ({ postID }) => {
           <div id={`${postID}IconContainer`} className={classes.containerIcon}>
             <label for="uploadPictureComment">
               <div className={classes.containerIconPicture}>
-                <i className={classes.icon}></i>
+                <i className={classes.iconPicture}></i>
               </div>
               <input
                 type="file"
@@ -212,7 +237,18 @@ const CommentInput = ({ postID }) => {
                 onClick={(e) => handleClickFile(e)}
               />
             </label>
+            <div
+              className={classes.containerIconPicture}
+              onClick={handleOpenEmojisPicker}
+            >
+              <i className={classes.iconEmojisPicker}></i>
+            </div>
           </div>
+          {emojisPickerOpen && (
+            <div className={classes.emojisPickerContainer}>
+              <Picker onEmojiClick={onEmojiClick} disableSearchBar />
+            </div>
+          )}
         </div>
       )}
       {handleRenderPicture()}

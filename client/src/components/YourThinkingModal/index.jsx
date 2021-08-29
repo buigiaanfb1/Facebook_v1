@@ -11,6 +11,7 @@ import { POST_UPLOAD_STATUS } from '../../common/constants';
 import { createAPost } from '../../firebase/data/createAPost';
 import FormatPresets from './FormatPresets';
 import { useAudio } from '../../hooks/useAudio';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const YourThinkingModal = (props) => {
   const classes = useStyles();
@@ -390,6 +391,9 @@ const YourThinkingModal = (props) => {
               <div className={classes.buttonPostContainer}>
                 {!checkInput.isValid || submitting ? (
                   <button className={classes.buttonPostDisabled}>
+                    {submitting && (
+                      <CircularProgress color="inherit" size={16} />
+                    )}
                     <Typography className={classes.buttonPostTextDisabled}>
                       Đăng
                     </Typography>

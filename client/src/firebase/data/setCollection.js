@@ -345,6 +345,15 @@ export const setCollection = (collection) => {
         .doc(userID)
         .set({ ...doc, seen: false });
       // Khi gửi tin nhắn thì bên sẽ add vào
+      // doc của người nhắn tin nhắn cái mới nhất
+      // messages-notification => otherUser => newest-message => currentUser
+      await projectFirestore
+        .collection('messages-notification')
+        .doc(userID)
+        .collection('newest-message')
+        .doc(otherUserID)
+        .set({ ...doc, seen: true });
+      // Khi gửi tin nhắn thì bên sẽ add vào
       // doc của người nhận tin nhắn cái mới nhất
       // messages => otherUser => with-user => currentUser => messages => doc
       await projectFirestore

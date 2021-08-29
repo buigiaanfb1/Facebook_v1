@@ -166,6 +166,10 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     height: '36px',
     cursor: 'not-allowed',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
   },
   buttonPostTextDisabled: {
     fontSize: '15px',

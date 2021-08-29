@@ -14,6 +14,7 @@ import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
 import CommentInput from './CommentInput';
 import OtherComments from './OtherComments';
+import Picker from 'emoji-picker-react';
 
 const EmojisVsComments = ({
   id,
@@ -322,11 +323,11 @@ const EmojisVsComments = ({
         {/* <Typography className={classes.sortText}>Tất cả câu trả lời</Typography>
         <i className={classes.sortIcon}></i> */}
       </div>
+      <CommentInput postID={postID} />
       <OtherComments postID={postID} />
       {/*  */}
       {/*  */}
       {/*  */}
-      <CommentInput postID={postID} />
     </div>
   );
 };

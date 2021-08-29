@@ -8,9 +8,10 @@ import { getUser } from '../../../firebase/data/currentUser';
 import { projectFirestore } from '../../../firebase/config';
 import Image from './Image';
 import OtherComments from '../../EmojisVsComments/OtherComments';
+import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
 
-const Post = ({ post, profileID }) => {
+const Post = ({ post }) => {
   console.log('post rerender');
   const classes = useStyles();
   const [state, setState] = useState({ post, first: false });
@@ -22,8 +23,6 @@ const Post = ({ post, profileID }) => {
     // gán vào biến subcriber để khi component will unmount
     // sẽ đóng bandwidth không listen nữa tránh ảnh hưởng performance
     const subscriber = projectFirestore
-      .collection('user-posts')
-      .doc(profileID)
       .collection('posts')
       .doc(state.post.id)
       .onSnapshot((doc) => {
@@ -152,15 +151,19 @@ const Post = ({ post, profileID }) => {
   return (
     <div className={classes.container}>
       <div className={classes.avatarVsName}>
-        <img
-          src={state.post.avatar ? state.post.avatar : avatarDefault}
-          className={classes.avatar}
-          alt="default"
-        />
+        <Link to={`profile/${state.post.userID}`}>
+          <img
+            src={state.post.avatar ? state.post.avatar : avatarDefault}
+            className={classes.avatar}
+            alt="default"
+          />
+        </Link>
         <div className={classes.nameVsTimeContainer}>
-          <Typography className={classes.name}>
-            {state.post.username}
-          </Typography>
+          <Link to={`profile/${state.post.userID}`}>
+            <Typography className={classes.name}>
+              {state.post.username}
+            </Typography>
+          </Link>
           <div className={classes.timeContainer}>
             <Typography className={classes.time}>
               {handleRenderTime()}&nbsp;·&nbsp;
