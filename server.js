@@ -13,8 +13,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => res.send('API Running'));
-
 // Define Routes
 app.use('/api/posts', require('./routes/api/posts'));
 
