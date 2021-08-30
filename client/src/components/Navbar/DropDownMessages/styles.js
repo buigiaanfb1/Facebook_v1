@@ -120,7 +120,7 @@ export const useStyles = makeStyles((theme) => ({
   unSeen: {
     color: 'var(--accent)',
     marginTop: '0.15rem',
-    fontWeight: '500',
+    fontWeight: '550',
     fontSize: '14px',
     lineHeight: '17px',
     whiteSpace: 'nowrap',

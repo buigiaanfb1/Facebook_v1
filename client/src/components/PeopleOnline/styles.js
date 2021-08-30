@@ -4,7 +4,7 @@ import { theme } from '../../common/theme';
 export const useStyles = makeStyles((theme) => ({
   containerFriendStatus: {
     position: 'fixed',
-    top: '100px',
+    bottom: '100px',
     right: '0',
     width: '360px',
     maxHeight: 'calc(100vh - 100px)',
@@ -33,6 +33,22 @@ export const useStyles = makeStyles((theme) => ({
   friendOnlineContainer: {
     paddingBottom: '1rem',
   },
+  containerAvatar: {
+    position: 'relative',
+    width: '28px',
+    height: '28px',
+    marginRight: '0.5rem',
+  },
+  dotGreenOnline: {
+    position: 'absolute',
+    bottom: '0',
+    right: '-2px',
+    width: '10px',
+    height: '10px',
+    backgroundColor: '#31A24C',
+    borderRadius: '50%',
+    border: '2px solid var(--background-up-profile)',
+  },
   friendContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -49,7 +65,6 @@ export const useStyles = makeStyles((theme) => ({
     height: '28px',
     objectFit: 'cover',
     borderRadius: '50%',
-    marginRight: '0.5rem',
   },
   nameFriend: {
     fontSize: '15px',

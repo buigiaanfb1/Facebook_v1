@@ -10,6 +10,9 @@ export const PROFILE_INFO = 'PROFILE_INFO';
 
 // current user
 export const CURRENT_USER = 'CURRENT_USER';
+
+// current user
+export const CURRENT_USER_OFFLINE = 'CURRENT_USER_OFFLINE';
 // user posts
 export const PROFILE_POSTS = 'PROFILE_POSTS';
 // success status when posted successfully a new post

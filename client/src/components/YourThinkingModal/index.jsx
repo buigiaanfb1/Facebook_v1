@@ -70,7 +70,7 @@ const YourThinkingModal = (props) => {
       const res = await createAPostWithPicture(
         info.text,
         info.imageBlob,
-        profileInfo,
+        currentUser,
         currentUser?.avatar
       );
       handleReRender(res);
@@ -83,7 +83,7 @@ const YourThinkingModal = (props) => {
         info.text,
         info.color,
         info.backgroundPresetsUri,
-        profileInfo,
+        currentUser,
         currentUser?.avatar
       );
       handleReRender(res);

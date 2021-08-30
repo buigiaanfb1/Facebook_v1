@@ -6,9 +6,14 @@ import history from './history';
 import { useEffect } from 'react';
 import { createProfile } from './firebase/data/createProfile';
 import { getSubDocument } from './firebase/data/getDocument';
+import { setCollection } from './firebase/data/setCollection';
 import { getUser } from './firebase/data/currentUser';
 import { useDispatch } from 'react-redux';
-import { CURRENT_USER, FRIENDS_INITIAL } from './common/constants';
+import {
+  CURRENT_USER,
+  CURRENT_USER_OFFLINE,
+  FRIENDS_INITIAL,
+} from './common/constants';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { projectFirestore } from './firebase/config';
@@ -39,11 +44,29 @@ const App = () => {
     checkToCreateProfile();
   });
 
+  useEffect(() => {
+    return () =>
+      window.addEventListener('beforeunload', async function (e) {
+        e.preventDefault();
+        dispatch({
+          type: CURRENT_USER_OFFLINE,
+        });
+      });
+  }, []);
+
+  window.addEventListener('beforeunload', async function (e) {
+    e.preventDefault();
+    dispatch({
+      type: CURRENT_USER_OFFLINE,
+    });
+  });
+
   const checkToCreateProfile = async () => {
     // nếu là người mới thì create profile vice versa
     if (res) {
       const profileInfo = await createProfile(res);
       await getFriendCollection(profileInfo.userID);
+      // addUserOnline;
       dispatch({
         type: CURRENT_USER,
         payload: profileInfo,

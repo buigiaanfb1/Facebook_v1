@@ -4,6 +4,7 @@ import Header from '../../../components/Header';
 import { useStyles } from './styles';
 import NewsFeed from '../../../components/NewsFeed';
 import FriendStatus from '../../../components/FriendStatus';
+import PeopleOnline from '../../../components/PeopleOnline';
 
 const Home = () => {
   const classes = useStyles();
@@ -19,6 +20,7 @@ const Home = () => {
         </Grid>
         <Grid item md={3} lg={3}>
           <FriendStatus />
+          <PeopleOnline />
         </Grid>
       </Grid>
     </div>

@@ -326,7 +326,23 @@ export const setCollection = (collection) => {
     }
   };
 
-  const addMessageCollection = async (doc, userID, otherUserID) => {
+  const addMessageCollection = async (doc, userID, otherUserID, otherUser) => {
+    console.log(otherUser);
+    // Đổi tên mình thành tên user để lưu xuống
+    // message-notification khi hiển thị là người khác
+    // chứ k phải mình
+    let { avatar, username, wallpaper } = otherUser;
+    let docCopy = { ...doc };
+    console.log(doc);
+    docCopy = {
+      ...docCopy,
+      avatar,
+      username,
+      wallpaper,
+      userID: otherUserID,
+      userIDSent: userID,
+    };
+    console.log(docCopy);
     try {
       await projectFirestore
         .collection(collection)
@@ -352,7 +368,7 @@ export const setCollection = (collection) => {
         .doc(userID)
         .collection('newest-message')
         .doc(otherUserID)
-        .set({ ...doc, seen: true });
+        .set({ ...docCopy, seen: true });
       // Khi gửi tin nhắn thì bên sẽ add vào
       // doc của người nhận tin nhắn cái mới nhất
       // messages => otherUser => with-user => currentUser => messages => doc
@@ -398,6 +414,36 @@ export const setCollection = (collection) => {
     }
   };
 
+  const addUserOnline = async (user) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc('111111111')
+        .update({
+          usersOnline: firebase.firestore.FieldValue.arrayUnion({
+            ...user,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeUserOnline = async (user) => {
+    try {
+      await projectFirestore
+        .collection(collection)
+        .doc('111111111')
+        .update({
+          usersOnline: firebase.firestore.FieldValue.arrayRemove({
+            ...user,
+          }),
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return {
     addDoc,
     addDocWithID,
@@ -414,5 +460,7 @@ export const setCollection = (collection) => {
     addMessageCollection,
     updateSeenMessageField,
     addPictureToUserCollection,
+    addUserOnline,
+    removeUserOnline,
   };
 };

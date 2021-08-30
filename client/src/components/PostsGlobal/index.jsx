@@ -1,58 +1,101 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { LOADED, LOADING } from '../../common/constants';
 import FacebookStyle from '../../componentsLoader/PostLoader';
 import { useStyles } from './styles';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getDocumentPostGlobal } from '../../firebase/data/getDocument';
-import { useDispatch } from 'react-redux';
-import PostGlobal from './PostGlobal';
+import { useDispatch, useSelector } from 'react-redux';
 import Post from './Post';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Typography } from '@material-ui/core';
+import { projectFirestore } from '../../firebase/config';
 
 const PostsGlobal = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const first = useRef(true);
   const [posts, setPosts] = useState(null);
   const [state, setState] = useState({
     items: [],
     hasMore: false,
   });
 
-  useEffect(() => {
-    handleGetPosts();
-  }, []);
+  // useEffect(() => {
+  //   if (postUploadStatus && postUploadStatus !== 0) {
+  //     console.log('@@');
+  //     setTimeout(() => {
+  //       handleGetPosts();
+  //     }, 10000);
+  //   }
+  // }, [postUploadStatus]);
+
+  // useEffect(() => {
+  //   handleGetPosts();
+  // }, []);
 
   useEffect(() => {
-    if (posts && posts.length > 20) {
-      setState({
-        hasMore: true,
-        items: posts.slice(0, 20),
+    const subscriber = projectFirestore
+      .collection('posts')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((doc) => {
+        let posts = [];
+        doc.forEach(function (doc) {
+          let id = doc.id;
+          let data = { ...doc.data(), id };
+          posts.push(data);
+        });
+        setPosts(posts);
       });
-    } else if (posts) {
-      setState({
-        hasMore: false,
-        items: posts.slice(0, posts.length) || [],
-      });
+    // Stop listening for updates when no longer required
+    return () => subscriber();
+  }, []);
+
+  // const handleGetPosts = async () => {
+  //   dispatch({
+  //     type: LOADING,
+  //   });
+  //   const posts = await getDocumentPostGlobal('posts');
+  //   if (posts && posts.length > 0) {
+  //     setPosts(posts);
+  //     dispatch({
+  //       type: LOADED,
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    if (first.current) {
+      if (posts && posts.length > 5) {
+        setState({
+          hasMore: true,
+          items: posts.slice(0, 5),
+        });
+        first.current = false;
+      } else if (posts) {
+        setState({
+          hasMore: false,
+          items: posts.slice(0, posts.length) || [],
+        });
+        first.current = false;
+      }
+    } else {
+      if (posts && posts.length > 5) {
+        setState({
+          hasMore: true,
+          items: [posts[0], ...state.items],
+        });
+      } else if (posts) {
+        setState({
+          hasMore: false,
+          items: posts.slice(0, posts.length) || [],
+        });
+      }
     }
   }, [posts]);
 
-  const handleGetPosts = async () => {
-    dispatch({
-      type: LOADING,
-    });
-    const posts = await getDocumentPostGlobal('posts');
-    if (posts && posts.length > 0) {
-      setPosts(posts);
-      dispatch({
-        type: LOADED,
-      });
-    }
-  };
-
   const fetchData = () => {
-    console.log('ok');
-    if (state.items.length >= posts?.length || 0) {
+    // loaded.current = true;
+    if (state.items.length >= posts.length || 0) {
       setState({
         ...state,
         hasMore: false,
@@ -60,18 +103,16 @@ const PostsGlobal = () => {
       return;
     }
 
-    if (posts && posts.length > 20) {
+    if (posts && posts.length > 5) {
       setTimeout(() => {
         setState({
           ...state,
           items: state.items.concat(
-            posts.slice(state.items.length, state.items.length + 20)
+            posts.slice(state.items.length, state.items.length + 5)
           ),
         });
       }, 500);
     } else {
-      console.log(state.items);
-      console.log(state.items.length, posts.length - state.items.length);
       setTimeout(() => {
         setState({
           ...state,
@@ -101,7 +142,7 @@ const PostsGlobal = () => {
         }
       >
         {state.items.map((post, index) => (
-          <div key={index}>
+          <div key={post.id}>
             <Post post={post} />
           </div>
         ))}

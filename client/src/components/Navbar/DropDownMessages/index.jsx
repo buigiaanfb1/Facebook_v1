@@ -112,6 +112,7 @@ const DropDownMessages = ({ currentUser }) => {
                   !user.seen ? classes.unSeen : null
                 }`}
               >
+                {user.userIDSent === currentUser.userID && 'Bạn:'}{' '}
                 {user.content}
                 <span>&nbsp; · &nbsp;</span>
                 {user.createdAt && formatTime(user.createdAt)}
@@ -134,7 +135,8 @@ const DropDownMessages = ({ currentUser }) => {
                   !user.seen ? classes.unSeen : null
                 }`}
               >
-                {user.username} đã gửi bạn {user.images?.length} ảnh
+                {user.userIDSent === currentUser.userID ? 'Bạn' : user.username}{' '}
+                đã gửi bạn {user.images?.length} ảnh
                 <span>&nbsp; · &nbsp;</span>
                 {formatTime(user.createdAt)}
               </Typography>

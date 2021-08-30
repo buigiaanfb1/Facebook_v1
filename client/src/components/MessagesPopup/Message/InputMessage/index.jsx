@@ -119,7 +119,7 @@ const InputMessage = ({ user }) => {
         images: null,
         createdAt: timestamp(),
       };
-      await addMessageCollection(info, userID, user.userID);
+      await addMessageCollection(info, userID, user.userID, user);
     } else {
       const arrPicture = [];
       // lấy doc user ra
@@ -143,7 +143,7 @@ const InputMessage = ({ user }) => {
         images: arrPicture,
         createdAt: timestamp(),
       };
-      await addMessageCollection(info, userID, user.userID);
+      await addMessageCollection(info, userID, user.userID, user);
     }
   };
 
@@ -182,7 +182,7 @@ const InputMessage = ({ user }) => {
       createdAt: timestamp(),
       like: true,
     };
-    await addMessageCollection(info, userID, user.userID);
+    await addMessageCollection(info, userID, user.userID, user);
   };
 
   return (
