@@ -34,7 +34,7 @@ const PeopleOnline = () => {
             <img
               src={user.avatar}
               className={classes.avatarFriend}
-              alt="avatar"
+              alt="avatar people online"
             />
             <div className={classes.dotGreenOnline}></div>
           </div>
