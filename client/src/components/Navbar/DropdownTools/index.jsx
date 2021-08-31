@@ -32,7 +32,7 @@ const DropdownTools = (props) => {
   return (
     <div>
       <div className={classes.containerIconRight} onClick={handleClick}>
-        <ArrowDropDownIcon className={classes.iconMuiNavRight} />
+        <i className={classes.iconMuiNavRight}></i>
       </div>
       <Popper
         id={id}

@@ -40,6 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: '-8px',
     borderRadius: '8px',
     transition: 'all 0.1s',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'var(--hover-overlay)',
     },

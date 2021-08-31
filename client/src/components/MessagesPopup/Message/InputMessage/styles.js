@@ -87,4 +87,24 @@ export const useStyles = makeStyles((theme) => ({
     height: '48px',
     borderRadius: '8px',
   },
+  emojisPickerContainer: {
+    position: 'absolute',
+    top: '-325px',
+    right: '48px',
+    zIndex: '999',
+    '& aside': {
+      border: '1px solid var(--border-item)',
+      boxShadow: 'none',
+      '& .emoji-categories': {
+        '& button': {
+          filter:
+            'brightness(0) saturate(100%) invert(94%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(106%) contrast(105%)',
+        },
+      },
+      backgroundColor: 'var(--background-nav)',
+      '& .emoji-group::before': {
+        backgroundColor: 'var(--background-nav)',
+      },
+    },
+  },
 }));

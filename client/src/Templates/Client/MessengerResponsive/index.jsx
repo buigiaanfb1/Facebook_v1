@@ -4,6 +4,7 @@ import MessengerMobile from '../MessengerMobile';
 import Messenger from '../Messenger';
 import { useDispatch } from 'react-redux';
 import {
+  CLOSE_ALL_MESSAGES,
   DISPLAY_ICON_MESSAGE_NOTIFICATION,
   HIDE_ICON_MESSAGE_NOTIFICATION,
 } from '../../../common/constants';
@@ -14,6 +15,9 @@ const MessengerResponsive = () => {
   useEffect(() => {
     dispatch({
       type: HIDE_ICON_MESSAGE_NOTIFICATION,
+    });
+    dispatch({
+      type: CLOSE_ALL_MESSAGES,
     });
     return () => {
       dispatch({

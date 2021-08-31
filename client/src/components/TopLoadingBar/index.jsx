@@ -10,9 +10,8 @@ const TopLoadingBar = (props) => {
         {...props}
         width={'100%'}
         height={3}
-        // viewBox="0 0 450 400"
-        backgroundColor="#97e2ff"
-        foregroundColor="#e76fff"
+        backgroundColor="#ed92ff"
+        foregroundColor="#b3e9ff"
         style={{
           position: 'fixed',
           top: '56px',

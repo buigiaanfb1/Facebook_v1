@@ -149,6 +149,15 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '400',
     lineHeight: '19px',
   },
+  messageBackground: {
+    backgroundColor: 'rgba(0, 132, 255) !important',
+  },
+  contentRight: {
+    fontSize: '15px',
+    fontWeight: '400',
+    lineHeight: '19px',
+    color: 'var(--always-white)',
+  },
   right: {
     paddingRight: '8px',
     display: 'flex',

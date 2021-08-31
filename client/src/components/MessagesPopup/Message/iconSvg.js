@@ -87,22 +87,27 @@ export const addIcon = (
   </svg>
 );
 export const pictureIcon = (
-  <svg viewBox="0 -1 17 17" height="20px" width="20px">
+  <svg
+    viewBox="0 -1 17 17"
+    height="20px"
+    width="20px"
+    class="a8c37x1j ms05siws hr662l2t b7h9ocf4"
+  >
     <g fill="none" fill-rule="evenodd">
       <path
         d="M2.882 13.13C3.476 4.743 3.773.48 3.773.348L2.195.516c-.7.1-1.478.647-1.478 1.647l1.092 11.419c0 .5.2.9.4 1.3.4.2.7.4.9.4h.4c-.6-.6-.727-.951-.627-2.151z"
-        fill="var(--disabled-icon)"
+        fill="#0084FF"
       ></path>
-      <circle cx="8.5" cy="4.5" r="1.5" fill="var(--disabled-icon)"></circle>
+      <circle cx="8.5" cy="4.5" r="1.5" fill="#0084FF"></circle>
       <path
         d="M14 6.2c-.2-.2-.6-.3-.8-.1l-2.8 2.4c-.2.1-.2.4 0 .6l.6.7c.2.2.2.6-.1.8-.1.1-.2.1-.4.1s-.3-.1-.4-.2L8.3 8.3c-.2-.2-.6-.3-.8-.1l-2.6 2-.4 3.1c0 .5.2 1.6.7 1.7l8.8.6c.2 0 .5 0 .7-.2.2-.2.5-.7.6-.9l.6-5.9L14 6.2z"
-        fill="var(--disabled-icon)"
+        fill="#0084FF"
       ></path>
       <path
         d="M13.9 15.5l-8.2-.7c-.7-.1-1.3-.8-1.3-1.6l1-11.4C5.5 1 6.2.5 7 .5l8.2.7c.8.1 1.3.8 1.3 1.6l-1 11.4c-.1.8-.8 1.4-1.6 1.3z"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke="var(--disabled-icon)"
+        stroke="#0084FF"
       ></path>
     </g>
   </svg>
@@ -125,12 +130,12 @@ export const stickerIcon = (
       ></path>
       <path
         d="M10.4 13.1c0 .9-.4 1.6-.9 2.2 4.1-1.1 6.8-5.1 6.5-9.3-.4.6-1 1.1-1.8 1.5-2 1-3.7 3.6-3.8 5.6z"
-        fill="var(--disabled-icon)"
+        fill="#0084ff"
       ></path>
       <path
         d="M2.5 13.4c.1.8.6 1.6 1.3 2 .5.4 1.2.6 1.8.6h.6l.4-.1c1.6-.4 2.6-1.5 2.7-2.9.1-2.4 2.1-5.4 4.5-6.6 1.3-.7 1.9-1.6 1.9-2.8l-.2-.9c-.1-.8-.6-1.6-1.3-2-.7-.5-1.5-.7-2.4-.5L3.6 1.5C1.9 1.8.7 3.4 1 5.2l1.5 8.2zm9-8.9c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm-3.57 6.662c.3.1.4.4.3.6-.1.3-.3.4-.5.4h-.2c-1-.4-1.9-1.3-2.3-2.3-.1-.3.1-.6.3-.7.3-.1.5 0 .6.3.4.8 1 1.4 1.8 1.7zM5.5 5.5c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"
         fill-rule="nonzero"
-        fill="var(--disabled-icon)"
+        fill="#0084ff"
       ></path>
     </g>
   </svg>

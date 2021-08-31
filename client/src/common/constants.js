@@ -39,6 +39,9 @@ export const DISPLAY_ICON_MESSAGE_NOTIFICATION =
 // Messages Store (profile user)
 export const CLOSE_MESSAGES_ID = 'CLOSE_MESSAGES_ID';
 
+// Messages Store (xoá hết window messenger (popup message) khi vào Messenger templates)
+export const CLOSE_ALL_MESSAGES = 'CLOSE_ALL_MESSAGES';
+
 // Messenger selected
 export const SELECTED_MESSAGE_MESSENGER = 'SELECTED_MESSAGE_MESSENGER';
 

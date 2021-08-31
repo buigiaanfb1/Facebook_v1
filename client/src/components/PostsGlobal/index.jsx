@@ -46,24 +46,21 @@ const PostsGlobal = () => {
         });
         setPosts(posts);
       });
+    if (first) {
+      dispatch({
+        type: LOADING,
+      });
+    }
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);
 
-  // const handleGetPosts = async () => {
-  //   dispatch({
-  //     type: LOADING,
-  //   });
-  //   const posts = await getDocumentPostGlobal('posts');
-  //   if (posts && posts.length > 0) {
-  //     setPosts(posts);
-  //     dispatch({
-  //       type: LOADED,
-  //     });
-  //   }
-  // };
-
   useEffect(() => {
+    if (posts && posts.length > 0) {
+      dispatch({
+        type: LOADED,
+      });
+    }
     if (first.current) {
       if (posts && posts.length > 5) {
         setState({

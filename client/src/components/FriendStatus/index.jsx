@@ -1,18 +1,48 @@
 import React from 'react';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
 import { Typography } from '@material-ui/core';
-import wow from '../../common/images/wow.svg';
-import haha from '../../common/images/haha.svg';
-import { Link } from 'react-router-dom';
-import content1 from '../../common/images/content1.jpeg';
-import content2 from '../../common/images/content2.jpeg';
-import content3 from '../../common/images/content3.jpeg';
-import content4 from '../../common/images/content4.jpeg';
 import FriendInvitedTab from '../FriendInvitedTab';
+import PeopleOnline from '../PeopleOnline';
+import { OPEN_MESSAGES } from '../../common/constants';
+import { useSelector, useDispatch } from 'react-redux';
 
 const FriendStatus = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const friends = useSelector((state) => state.friendsStore.friends);
+
+  const handleClickMessage = (otherUser) => {
+    dispatch({
+      type: OPEN_MESSAGES,
+      payload: otherUser,
+    });
+  };
+
+  const handleRenderFriends = () => {
+    const { friends: myFriends } = friends;
+    return myFriends.map((friend) => {
+      console.log('----------');
+      console.log(friend);
+      return (
+        <div
+          className={classes.friendContainer}
+          key={friend.userID}
+          onClick={() => {
+            handleClickMessage(friend);
+          }}
+        >
+          <img
+            src={friend.avatar}
+            className={classes.avatarFriend}
+            alt="avatar"
+          />
+          <Typography className={classes.nameFriend}>
+            {friend.username}
+          </Typography>
+        </div>
+      );
+    });
+  };
   return (
     <div className={classes.containerFriendStatus}>
       <div className={classes.container}>
@@ -21,11 +51,16 @@ const FriendStatus = () => {
           <div className={classes.titleFriendOnlineContainer}>
             <Typography className={classes.title}>Bạn bè</Typography>
           </div>
-          <div className={classes.friendContainer}>
-            <img src={haha} className={classes.avatarFriend} />
-            <Typography className={classes.nameFriend}>Nguyễn Văn A</Typography>
-          </div>
+          {friends && friends.friends.length > 0 ? (
+            handleRenderFriends()
+          ) : (
+            <Typography>
+              Bạn không có người bạn nào. Hãy kết bạn với những người bạn thấy
+              nào !
+            </Typography>
+          )}
         </div>
+        <PeopleOnline />
       </div>
     </div>
   );

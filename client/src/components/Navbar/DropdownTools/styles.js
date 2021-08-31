@@ -4,8 +4,14 @@ import comboIcon1 from '../../../common/images/comboIcon1.png';
 
 export const useStyles = makeStyles((theme) => ({
   iconMuiNavRight: {
-    width: '30px',
-    height: '30px',
+    backgroundImage: `url(https://www.facebook.com/rsrc.php/v3/yp/r/8ohE3S_aSDG.png)`,
+    backgroundPosition: '-63px -88px',
+    backgroundSize: '189px 139px',
+    width: '18px',
+    height: '18px',
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    filter: 'invert(90%)',
   },
   containerIconRight: {
     width: '40px',
@@ -14,7 +20,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '50px',
-    margin: '0 0.25rem',
     cursor: 'pointer',
   },
   container: {

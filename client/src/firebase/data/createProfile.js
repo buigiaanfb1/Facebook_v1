@@ -12,7 +12,7 @@ export const createProfile = async (user) => {
     if (!res) {
       const doc = {
         userID: user.uid,
-        username: user.displayName,
+        username: user.displayName + '😎',
         email: user.email,
         avatar:
           'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default-picture%2Favatar.jpeg?alt=media&token=aea5710f-8f9a-436d-b0f2-62a53efe30b8',

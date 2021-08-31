@@ -5,6 +5,7 @@ import { likeIconInBody } from '../iconSvg';
 import { formatTimeMessage } from '../../../../../../helpers/formatTime';
 import { useDispatch } from 'react-redux';
 import { useStyles } from '../styles';
+import ImageForMessenger from '../../../../../../components/ImageForMessenger';
 import { GET_NEW_MESSENGER_PICTURES } from '../../../../../../common/constants';
 
 const BodyRealtime = ({ currentUser, user }) => {
@@ -55,26 +56,35 @@ const BodyRealtime = ({ currentUser, user }) => {
       return <div className={classes.iconLike}>{likeIconInBody}</div>;
     } else if (message.content && !message.images) {
       return (
-        <div className={classes.messageContainer}>
-          <Typography className={classes.content}>{message.content}</Typography>
+        <div
+          className={`${classes.messageContainer} ${classes.messageBackground}`}
+        >
+          <Typography className={classes.contentRight}>
+            {message.content}
+          </Typography>
         </div>
       );
     } else if (message.content && message.images) {
       return (
         <div className={classes.containerImageVsContentRight}>
           <div className={classes.wrapperContainerImageVsContentRight}>
-            <div className={classes.messageContainer}>
-              <Typography className={classes.content}>
+            <div
+              className={`${classes.messageContainer} ${classes.messageBackground}`}
+            >
+              <Typography className={classes.contentRight}>
                 {message.content}
               </Typography>
             </div>
           </div>
-          <img src={message.images[0]} alt="pic" />
+          <ImageForMessenger image={message.images[0]} />
         </div>
       );
     } else {
       return (
-        <img src={message.images[0]} className={classes.imageTest} alt="pic" />
+        <ImageForMessenger
+          image={message.images[0]}
+          className={classes.imageTest}
+        />
       );
     }
   };
@@ -98,12 +108,15 @@ const BodyRealtime = ({ currentUser, user }) => {
               </Typography>
             </div>
           </div>
-          <img src={message.images[0]} alt="pic" />
+          <ImageForMessenger image={message.images[0]} />
         </div>
       );
     } else {
       return (
-        <img src={message.images[0]} className={classes.imageTest} alt="pic" />
+        <ImageForMessenger
+          image={message.images[0]}
+          className={classes.imageTest}
+        />
       );
     }
   };

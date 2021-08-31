@@ -147,10 +147,22 @@ export const useStyles = makeStyles((theme) => ({
     WebkitHyphens: 'auto',
     hyphens: 'auto',
   },
+
+  messageBackground: {
+    backgroundColor: 'rgba(0, 132, 255) !important',
+  },
   content: {
     fontSize: '15px',
     fontWeight: '400',
     lineHeight: '19px',
+    color: 'var(--primary-text)',
+  },
+
+  contentRight: {
+    fontSize: '15px',
+    fontWeight: '400',
+    lineHeight: '19px',
+    color: 'var(--always-white)',
   },
   right: {
     paddingRight: '8px',

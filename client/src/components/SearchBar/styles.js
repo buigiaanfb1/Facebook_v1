@@ -29,24 +29,23 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
     height: '40px',
     fontSize: '15px',
-    color: 'var(--primary-text)',
+    color: 'var(--primary-text) !important',
     fontWeight: '300',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: '2.25rem',
+    paddingLeft: '2.25rem !important',
     transition: theme.transitions.create('width'),
     width: '100%',
-    width: '28ch',
+    width: '28ch !important',
     [theme.breakpoints.down('md')]: {
-      width: '20ch',
+      width: '20ch !important',
     },
     [theme.breakpoints.down('xs')]: {
-      width: '5ch',
+      width: '5ch !important',
     },
   },
 }));

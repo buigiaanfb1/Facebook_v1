@@ -6,8 +6,9 @@ import { timestamp } from '../../../../../firebase/config';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import $ from 'jquery';
 import { v4 as uuidv4 } from 'uuid';
-import { pictureIcon, likeIcon } from '../iconSvg';
+import { pictureIcon, likeIcon, stickerIcon } from '../iconSvg';
 import { setStorage } from '../../../../../firebase/data/setStorage';
+import Picker from 'emoji-picker-react';
 
 const InputMessage = ({ user }) => {
   const classes = useStyles();
@@ -19,13 +20,14 @@ const InputMessage = ({ user }) => {
     message: '',
     images: [],
   });
+  const [emojisPickerOpen, setEmojisPickerOpen] = useState(false);
 
   // viết jquery trong useEffect giúp xoá state và biến dấu
   // enter k xuống hàng trong textarea nhanh hơn hàm onKeyDown
   useEffect(() => {
-    $(`#textareaInputMessenger${user.userID}`).keypress(function (e) {
+    $(`#textareaInputMessage${user.userID}`).keypress(function (e) {
       if (e.keyCode != 13 && e.shiftKey == false) return;
-      var msg = $(`#textareaInputMessenger${user.userID}`)
+      var msg = $(`#textareaInputMessage${user.userID}`)
         .val()
         .replace(/\n/g, '');
       setState({
@@ -182,7 +184,19 @@ const InputMessage = ({ user }) => {
       createdAt: timestamp(),
       like: true,
     };
-    await addMessageCollection(info, userID, user.userID);
+    await addMessageCollection(info, userID, user.userID, user);
+  };
+
+  const handleOpenEmojisPicker = () => {
+    setEmojisPickerOpen(!emojisPickerOpen);
+  };
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject);
+    setState({
+      ...state,
+      message: state.message + emojiObject.emoji,
+    });
+    setEmojisPickerOpen(false);
   };
 
   return (
@@ -191,13 +205,15 @@ const InputMessage = ({ user }) => {
         <div className={classes.iconInput}>{pictureIcon}</div>
         <input
           type="file"
-          multiple
           id="uploadPictureMessage"
           style={{ display: 'none' }}
           accept="image/png, image/jpeg"
           onChange={(e) => handleInputFiles(e)}
         />
       </label>
+      <div className={classes.iconInput} onClick={handleOpenEmojisPicker}>
+        {stickerIcon}
+      </div>
       <div style={{ padding: '0 0.5rem 0 0.5rem', flexGrow: '3' }}>
         {state.images.length > 0 && (
           <div className={classes.containerImagesUnsent}>
@@ -205,7 +221,7 @@ const InputMessage = ({ user }) => {
           </div>
         )}
         <TextareaAutosize
-          id={`textareaInputMessenger${user.userID}`}
+          id={`textareaInputMessage${user.userID}`}
           maxRows={4}
           aria-label="maximum height"
           placeholder="Aa"
@@ -220,6 +236,11 @@ const InputMessage = ({ user }) => {
       <div className={classes.iconInput} onClick={handleSendLike}>
         {likeIcon}
       </div>
+      {emojisPickerOpen && (
+        <div className={classes.emojisPickerContainer}>
+          <Picker onEmojiClick={onEmojiClick} disableSearchBar />
+        </div>
+      )}
     </div>
   );
 };

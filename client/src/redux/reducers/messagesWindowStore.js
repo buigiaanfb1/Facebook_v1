@@ -1,4 +1,8 @@
-import { OPEN_MESSAGES, CLOSE_MESSAGES_ID } from '../../common/constants';
+import {
+  OPEN_MESSAGES,
+  CLOSE_MESSAGES_ID,
+  CLOSE_ALL_MESSAGES,
+} from '../../common/constants';
 
 const initialState = {
   messagesOpening: [],
@@ -28,6 +32,10 @@ export default (state = initialState, { type, payload }) => {
         return { ...state };
       }
       return state;
+    }
+    case CLOSE_ALL_MESSAGES: {
+      state.messagesOpening = [];
+      return { ...state };
     }
     default:
       return { ...state };

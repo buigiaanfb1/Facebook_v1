@@ -64,6 +64,29 @@ const YourThinkingModal = (props) => {
     setOpen(false);
   };
 
+  const handleClearAll = (res) => {
+    handleReRender(res);
+    handleClose();
+    toggle();
+    setInfo({
+      text: '',
+      color: null,
+      backgroundPresetsUri: null,
+      imageBlob: [],
+    });
+    setTextPreset({
+      isPreset: false,
+      isShow: false,
+      backgroundPresetsUri: null,
+      color: '#FFF',
+    });
+    setSubmitting(false);
+    setCheckInput({
+      isValid: false,
+      isShowPresets: true,
+    });
+  };
+
   const handleSubmit = async () => {
     if (info.imageBlob && info.imageBlob.length > 0) {
       setSubmitting(true);
@@ -73,10 +96,7 @@ const YourThinkingModal = (props) => {
         currentUser,
         currentUser?.avatar
       );
-      handleReRender(res);
-      handleClose();
-      toggle();
-      setSubmitting(false);
+      handleClearAll(res);
     } else {
       setSubmitting(true);
       const res = await createAPostWithNoPicture(
@@ -90,6 +110,7 @@ const YourThinkingModal = (props) => {
       handleClose();
       toggle();
       setSubmitting(false);
+      handleClearAll(res);
     }
   };
   // Đăng bài thành công (server trả về 200) thì re render cmp

@@ -29,7 +29,9 @@ const EditNameModal = ({ profileInfo }) => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    setName(value);
+    if (value.length < 12) {
+      setName(value);
+    } else return;
   };
 
   const handleSubmit = async () => {
