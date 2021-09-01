@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'flex-end',
     position: 'absolute',
-    bottom: '0',
+    bottom: '12%',
     left: '0',
     width: '100%',
   },

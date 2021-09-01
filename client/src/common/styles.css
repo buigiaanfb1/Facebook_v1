@@ -154,7 +154,7 @@ div::-webkit-scrollbar-thumb:hover {
 .sweet_popup_custom {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   position: relative;
-  background-color: #7367f0;
+  background-color: #7367f0 !important;
   z-index: 99999999999999;
 }
 

@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh)',
     background: 'pink',
     backgroundColor: 'var(--messenger-card-background)',
+    marginTop: '38px',
   },
   header: {
     padding: '1rem',
@@ -70,7 +71,7 @@ export const useStyles = makeStyles((theme) => ({
     fill: 'rgb(0, 132, 255);',
   },
   body: {
-    height: 'calc(100vh - 60px - 56px)',
+    height: 'calc(100vh - 60px - 135px)',
     overflow: 'hidden',
     '&:hover': {
       overflowY: 'auto',
