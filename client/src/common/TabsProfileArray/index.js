@@ -1,11 +1,4 @@
-import {
-  FRIENDS_TAB,
-  INTRODUCE_TAB,
-  PICTURE_TAB,
-  POST_TAB,
-  TAB_PROFILE,
-} from '../../common/constants';
-import IntroductionTabProfile from '../../components/IntroductionTabProfile';
+import { FRIENDS_TAB, PICTURE_TAB, POST_TAB } from '../../common/constants';
 import FriendsTabProfile from '../../components/FriendsTabProfile';
 import ProfileDown from '../../components/ProfileDown';
 import PicturesTabProfile from '../../components/PicturesTabProfile';
@@ -16,11 +9,6 @@ export const arrTab = [
     component: ProfileDown,
     view: 'Bài viết',
   },
-  // {
-  //   cons: INTRODUCE_TAB,
-  //   component: IntroductionTabProfile,
-  //   view: 'Giới thiệu',
-  // },
   {
     cons: FRIENDS_TAB,
     component: FriendsTabProfile,
