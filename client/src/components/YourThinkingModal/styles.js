@@ -206,6 +206,8 @@ export const useStyles = makeStyles((theme) => ({
     width: 'calc(99% / 2)',
     marginBottom: '0.2rem',
     borderRadius: '8px',
+    maxHeight: '200px',
+    objectFit: 'cover',
   },
   //
   topFixed: {},

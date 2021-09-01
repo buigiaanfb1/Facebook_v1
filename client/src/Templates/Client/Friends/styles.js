@@ -13,6 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0.5rem',
     borderRight: '1px solid var(--border-item)',
     position: 'fixed',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
   containerMain: {
     marginLeft: '360px',
@@ -20,6 +23,10 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: 'var(--background-main)',
     minHeight: '100vh',
     padding: '36px 20px',
+    [theme.breakpoints.down('md')]: {
+      marginLeft: '0',
+      width: 'calc(100vw)',
+    },
   },
 
   containerTitle: {

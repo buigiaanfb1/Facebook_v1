@@ -10,6 +10,7 @@ import {
 } from './iconSvg';
 import InputMessage from './InputMessage';
 import { setCollection } from '../../../firebase/data/setCollection';
+import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
 const Message = ({ handleClosePopupFromChild, user, currentUser }) => {
@@ -26,18 +27,22 @@ const Message = ({ handleClosePopupFromChild, user, currentUser }) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <div className={classes.containerAvatarVsName}>
-          <div className={classes.containerAvatar}>
-            <img
-              src={user.avatar}
-              className={classes.avatar}
-              alt="other people"
-            />
+        <Link to={`profile/${user.userID}`}>
+          <div className={classes.containerAvatarVsName}>
+            <div className={classes.containerAvatar}>
+              <img
+                src={user.avatar}
+                className={classes.avatar}
+                alt="other people"
+              />
+            </div>
+            <div className={classes.containerName}>
+              <Typography className={classes.nameBig}>
+                {user.username}
+              </Typography>
+            </div>
           </div>
-          <div className={classes.containerName}>
-            <Typography className={classes.nameBig}>{user.username}</Typography>
-          </div>
-        </div>
+        </Link>
         <div className={classes.containerTools}>
           <div className={classes.icon}>{videoIcon}</div>
           <div className={classes.icon}>{phoneIcon}</div>

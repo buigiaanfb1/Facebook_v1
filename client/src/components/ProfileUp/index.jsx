@@ -18,6 +18,7 @@ import AvatarLoader from '../../componentsLoader/AvatarLoader';
 import FriendButton from './FriendButton';
 import EditNameModal from './EditNameModal';
 import Tabs from './Tabs';
+import { sweetAlert } from '../../helpers/SweetAlert';
 
 const ProfileUp = () => {
   const { id } = useParams();
@@ -104,7 +105,7 @@ const ProfileUp = () => {
   };
 
   const handleRenderDependOnUser = () => {
-    if (profileInfo?.userID === currentUser?.userID) {
+    if (currentUser && profileInfo?.userID === currentUser?.userID) {
       return (
         <>
           <button
@@ -128,16 +129,21 @@ const ProfileUp = () => {
       return (
         <>
           <button
-            onClick={handleOpenMessagePopup}
+            onClick={currentUser ? handleOpenMessagePopup : handleNotification}
             className={classes.messageContainer}
           >
             <img src={messenger} className={classes.iconRight} alt="message" />
             <Typography className={classes.iconRightText}>Nhắn tin</Typography>
           </button>
+
           <FriendButton profileInfo={profileInfo} currentUser={currentUser} />
         </>
       );
     }
+  };
+
+  const handleNotification = () => {
+    sweetAlert('Đăng nhập để nhắn tin.');
   };
 
   return (

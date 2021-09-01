@@ -207,4 +207,16 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
     textAlign: 'center',
   },
+  renderNothingContainer: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  renderNothingText: {
+    animation: 'color-change 5s infinite',
+    fontSize: '40px',
+    fontWeight: '500',
+    textAlign: 'center',
+  },
 }));

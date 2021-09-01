@@ -14,7 +14,7 @@ import { addReactionServices } from './modules/backendServices';
 import $ from 'jquery';
 import CommentInput from './CommentInput';
 import OtherComments from './OtherComments';
-import Picker from 'emoji-picker-react';
+import { sweetAlert } from '../../helpers/SweetAlert';
 
 const EmojisVsComments = ({
   id,
@@ -79,47 +79,55 @@ const EmojisVsComments = ({
 
   // Chọn trong Reaction Box
   const handleChooseEmoji = (e) => {
-    let reaction = e.target.id;
-    if (reaction === reactionPicker.reaction) {
-      setReactionPicker({
-        ...reactionPicker,
-        reaction: null,
-      });
-    } else {
-      setReactionPicker({
-        ...reactionPicker,
-        reaction: reaction,
-        userReactionOld: reactionPicker.reaction || null,
-      });
-    }
-    check.current = true;
-  };
-
-  // Khi ấn nút like
-  const handleChooseEmojiButton = (e) => {
-    let reaction = e.target.id;
-    if (reactionPicker.reaction) {
-      if (reactionPicker.reaction === 'like') {
+    if (currentUser) {
+      let reaction = e.target.id;
+      if (reaction === reactionPicker.reaction) {
         setReactionPicker({
           ...reactionPicker,
           reaction: null,
-          userReactionOld: 'like',
         });
       } else {
         setReactionPicker({
           ...reactionPicker,
-          reaction: null,
+          reaction: reaction,
           userReactionOld: reactionPicker.reaction || null,
         });
       }
+      check.current = true;
     } else {
-      setReactionPicker({
-        ...reactionPicker,
-        reaction: reaction,
-        userReactionOld: null,
-      });
+      sweetAlert('Đăng nhập để thả cảm xúc.');
     }
-    check.current = true;
+  };
+
+  // Khi ấn nút like
+  const handleChooseEmojiButton = (e) => {
+    if (currentUser) {
+      let reaction = e.target.id;
+      if (reactionPicker.reaction) {
+        if (reactionPicker.reaction === 'like') {
+          setReactionPicker({
+            ...reactionPicker,
+            reaction: null,
+            userReactionOld: 'like',
+          });
+        } else {
+          setReactionPicker({
+            ...reactionPicker,
+            reaction: null,
+            userReactionOld: reactionPicker.reaction || null,
+          });
+        }
+      } else {
+        setReactionPicker({
+          ...reactionPicker,
+          reaction: reaction,
+          userReactionOld: null,
+        });
+      }
+      check.current = true;
+    } else {
+      sweetAlert('Đăng nhập để thả cảm xúc.');
+    }
   };
 
   const handleRenderLikeButton = () => {
@@ -220,7 +228,7 @@ const EmojisVsComments = ({
       } else {
         return reactionPicker.reaction ? (
           <Typography className={classes.amountPeopleEmoji}>
-            Bạn và {reactions.total - 1}
+            Bạn và {reactions.total - 1} người khác
           </Typography>
         ) : (
           <Typography className={classes.amountPeopleEmoji}>

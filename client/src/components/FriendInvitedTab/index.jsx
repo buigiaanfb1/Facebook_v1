@@ -1,17 +1,89 @@
 import { Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { setCollection } from '../../firebase/data/setCollection';
+import { getSubDocument } from '../../firebase/data/getDocument';
+import { useDispatch } from 'react-redux';
+import { FRIENDS_INITIAL } from '../../common/constants';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
-const FriendInvitedTab = () => {
+const FriendInvitedTab = ({ currentUser }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const friendsInvited = useSelector((state) => state.friendsStore.incoming);
+  const { addFriendToBothUser, removeRequestFriend } = setCollection('users');
+  const [done, setDone] = useState({
+    isDone: false,
+    label: null,
+  });
+
+  const handleAccept = async (friend) => {
+    console.log('handle accept', friend, currentUser);
+    // Delete invitation in database
+    await handleDecline(friend);
+    // then add to friends
+    await addFriendToBothUser(
+      currentUser,
+      'friends',
+      currentUser.userID,
+      friend,
+      'friends',
+      friend.userID
+    );
+    getFriendCollection();
+    setDone({
+      isDone: true,
+      label: 'Đã xác nhận lời mời',
+    });
+  };
+
+  const handleDecline = async (friend) => {
+    console.log('handle accept', friend, currentUser);
+    await removeRequestFriend(
+      // đổi vị trí là sai ngay do bên Firebase setup như cc
+      currentUser,
+      'friendsRequested',
+      friend.userID,
+      friend,
+      'friendsIncoming',
+      currentUser.userID
+    );
+    getFriendCollection();
+    setDone({
+      isDone: true,
+      label: 'Đã xoá yêu cầu',
+    });
+  };
+
+  const getFriendCollection = async () => {
+    // Get new info from firebase
+    const friendsRequested = await getSubDocument(
+      'users',
+      'friendsRequested',
+      currentUser.userID
+    );
+    const friendsIncoming = await getSubDocument(
+      'users',
+      'friendsIncoming',
+      currentUser.userID
+    );
+    const friends = await getSubDocument(
+      'users',
+      'friends',
+      currentUser.userID
+    );
+    dispatch({
+      type: FRIENDS_INITIAL,
+      payload: { friends, friendsIncoming, friendsRequested },
+    });
+  };
 
   const handleRenderFriendInvited = () => {
-    let friend = friendsInvited[0];
+    let friend = friendsInvited.incoming[0];
+
     return (
-      <div className={classes.friendInviteContainer}>
+      <div className={classes.containerFriendInvited}>
         <div className={classes.friendInviteTitle}>
           <Typography className={classes.title}>Lời mời kết bạn</Typography>
           <Link to={`/friends`}>
@@ -25,18 +97,41 @@ const FriendInvitedTab = () => {
               <Typography className={classes.name}>
                 {friend.username}
               </Typography>
-              <Typography className={classes.date}>6 ngày</Typography>
             </div>
             <div className={classes.buttons}>
-              <button className={classes.buttonAccept}>Xác nhận</button>
-              <button className={classes.buttonDecline}>Xoá</button>
+              {!done.isDone ? (
+                <>
+                  <button
+                    className={classes.buttonAccept}
+                    onClick={() => handleAccept(friend)}
+                  >
+                    Xác nhận
+                  </button>
+                  <button
+                    className={classes.buttonDecline}
+                    onClick={() => handleDecline(friend)}
+                  >
+                    Xoá
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={classes.buttonDisable}
+                    style={{ visibility: 'hidden' }}
+                  ></button>
+                  <button className={classes.buttonDisable}>
+                    {done.label}
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
     );
   };
-  return friendsInvited && friendsInvited.length > 0
+  return friendsInvited && friendsInvited.incoming.length > 0
     ? handleRenderFriendInvited()
     : null;
 };

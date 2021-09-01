@@ -4,6 +4,18 @@ import { theme } from '../../common/theme';
 export const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: 'calc(100% / 7)',
+    [theme.breakpoints.down('lg')]: {
+      width: 'calc(100% / 4)',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: 'calc(100% / 4)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: 'calc(100% / 3)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 'calc(100% / 2)',
+    },
   },
   containerItemPeople: {
     borderRadius: '8px',

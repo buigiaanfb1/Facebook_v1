@@ -14,6 +14,10 @@ const Post = ({ post, profileID }) => {
   console.log('post rerender');
   const classes = useStyles();
   const [state, setState] = useState({ post, first: false });
+  const [content, setContent] = useState({
+    text: '',
+    hasMore: false,
+  });
   const { res } = getUser();
   const avatarDefault =
     'https://firebasestorage.googleapis.com/v0/b/facebook-for-cv.appspot.com/o/default%2Favatar-default.jpeg?alt=media&token=a1f34410-3760-4666-a3b0-e59e8444f8b0';
@@ -37,6 +41,24 @@ const Post = ({ post, profileID }) => {
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);
+  useEffect(() => {
+    if (state.post.content && state.post.content.length > 500) {
+      if (state.post.content.length !== content.text.length) {
+        let subContent = { ...state.post };
+        setContent({
+          text: subContent.content.substring(0, 500),
+          hasMore: true,
+        });
+      }
+    }
+  }, [state]);
+
+  const handleReadMore = () => {
+    setContent({
+      text: state.post.content,
+      hasMore: false,
+    });
+  };
 
   const handleGetReaction = (post) => {
     const { wow, like, sad, love, hug, angry, haha } = post.reaction;
@@ -137,9 +159,28 @@ const Post = ({ post, profileID }) => {
               </a>
             )}
           >
-            <Typography style={{ wordBreak: 'break-word' }}>
-              {state.post.content}
-            </Typography>
+            {content.text.length > 0 ? (
+              <>
+                <Typography
+                  style={{ wordBreak: 'break-word', display: 'inline' }}
+                >
+                  {content.text}
+                  {content.hasMore && '... '}
+                </Typography>
+                {content.hasMore && (
+                  <Typography
+                    className={classes.readMore}
+                    onClick={handleReadMore}
+                  >
+                    Xem thêm
+                  </Typography>
+                )}
+              </>
+            ) : (
+              <Typography style={{ wordBreak: 'break-word' }}>
+                {state.post.content}
+              </Typography>
+            )}
           </Linkify>
           {state.post.picture.length > 0 && (
             <Image picturesArr={state.post.picture} />

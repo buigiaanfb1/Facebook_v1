@@ -2,30 +2,13 @@ import { makeStyles } from '@material-ui/core';
 import { theme } from '../../common/theme';
 
 export const useStyles = makeStyles((theme) => ({
-  containerFriendStatus: {
-    position: 'fixed',
-    bottom: '100px',
-    right: '0',
-    width: '360px',
-    maxHeight: 'calc(100vh - 100px)',
-    overflow: 'auto',
-    [theme.breakpoints.down('lg')]: {
-      width: '280px',
-    },
-    [theme.breakpoints.down('md')]: {
-      width: '240px',
-    },
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
   title: {
     fontWeight: '500',
     fontSize: '17px',
     color: 'var(--secondary-text)',
   },
   container: {
-    margin: '0 16px',
+    // margin: '0 16px',
   },
   titleFriendOnlineContainer: {
     padding: '1rem 0',

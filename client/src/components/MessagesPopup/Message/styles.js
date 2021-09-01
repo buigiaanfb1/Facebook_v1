@@ -42,6 +42,9 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   containerTools: {
     display: 'flex',

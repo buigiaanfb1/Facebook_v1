@@ -149,3 +149,58 @@ div::-webkit-scrollbar-thumb:hover {
 
 .like-btn::before {
 }
+
+/* SweetAlert */
+.sweet_popup_custom {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  position: relative;
+  background-color: #7367f0;
+  z-index: 99999999999999;
+}
+
+.sweet_popup_custom::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: -0.5rem;
+  left: -0.5rem;
+  width: 100%;
+  height: 100%;
+  background-color: var(--always-white);
+  border-radius: 5px;
+  transition: background-color 0.3s linear;
+  /* border: 2px solid #000; */
+}
+
+@keyframes color-change {
+  0% {
+    color: rgb(255, 131, 100);
+  }
+  11% {
+    color: rgb(255, 253, 132);
+  }
+  22% {
+    color: rgb(107, 255, 114);
+  }
+  33% {
+    color: rgb(107, 245, 255);
+  }
+  44% {
+    color: rgb(107, 134, 255);
+  }
+  55% {
+    color: rgb(139, 107, 255);
+  }
+  66% {
+    color: rgb(243, 107, 255);
+  }
+  77% {
+    color: rgb(255, 107, 164);
+  }
+  88% {
+    color: rgb(255, 107, 107);
+  }
+  100% {
+    color: rgb(107, 129, 255);
+  }
+}

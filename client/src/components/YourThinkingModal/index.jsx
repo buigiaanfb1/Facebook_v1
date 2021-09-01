@@ -39,6 +39,21 @@ const YourThinkingModal = (props) => {
     backgroundPresetsUri: null,
     imageBlob: [],
   });
+  console.log(info);
+
+  useEffect(() => {
+    if (info.text.length > 0 || info.imageBlob.length > 0) {
+      setCheckInput({
+        ...checkInput,
+        isValid: true,
+      });
+    } else {
+      setCheckInput({
+        ...checkInput,
+        isValid: false,
+      });
+    }
+  }, [info]);
 
   useEffect(() => {
     if (props.openModal) {
@@ -379,12 +394,12 @@ const YourThinkingModal = (props) => {
                   </div>
                 )}
               </div>
-              {checkInput.isShowPresets && (
+              {checkInput.isShowPresets || info.text.length < 85 ? (
                 <FormatPresets
                   handleSetTextPresetsFromChild={handleSetTextPresetsFromChild}
                   handleResetPresetsFromChild={handleResetPresetsFromChild}
                 />
-              )}
+              ) : null}
               {/* Exit Icon */}
               <div className={classes.exitContainer} onClick={handleClose}>
                 <i className={classes.exit}></i>

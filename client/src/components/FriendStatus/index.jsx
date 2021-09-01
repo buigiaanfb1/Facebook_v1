@@ -10,6 +10,7 @@ const FriendStatus = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const friends = useSelector((state) => state.friendsStore.friends);
+  const currentUser = useSelector((state) => state.userStore.currentUser);
 
   const handleClickMessage = (otherUser) => {
     dispatch({
@@ -46,20 +47,22 @@ const FriendStatus = () => {
   return (
     <div className={classes.containerFriendStatus}>
       <div className={classes.container}>
-        <FriendInvitedTab />
-        <div className={classes.friendOnlineContainer}>
-          <div className={classes.titleFriendOnlineContainer}>
-            <Typography className={classes.title}>Bạn bè</Typography>
+        <FriendInvitedTab currentUser={currentUser} />
+        {currentUser && (
+          <div className={classes.friendOnlineContainer}>
+            <div className={classes.titleFriendOnlineContainer}>
+              <Typography className={classes.title}>Bạn bè</Typography>
+            </div>
+            {friends && friends.friends.length > 0 ? (
+              handleRenderFriends()
+            ) : (
+              <Typography>
+                Bạn không có người bạn nào. Hãy kết bạn với những người bạn thấy
+                nào !
+              </Typography>
+            )}
           </div>
-          {friends && friends.friends.length > 0 ? (
-            handleRenderFriends()
-          ) : (
-            <Typography>
-              Bạn không có người bạn nào. Hãy kết bạn với những người bạn thấy
-              nào !
-            </Typography>
-          )}
-        </div>
+        )}
         <PeopleOnline />
       </div>
     </div>

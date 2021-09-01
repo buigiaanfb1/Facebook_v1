@@ -14,9 +14,9 @@ const Header = () => {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userStore.currentUser);
   return (
-    currentUser && (
-      <div className={classes.container}>
-        <div style={{ marginTop: '1rem' }}></div>
+    <div className={classes.container}>
+      <div style={{ marginTop: '1rem' }}></div>
+      {currentUser && (
         <div className={classes.wrapperItem}>
           <Link to={`profile/${currentUser.userID}`}>
             <div className={classes.itemProfile}>
@@ -27,38 +27,38 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className={classes.wrapperItem}>
-          <div className={classes.item}>
-            <img src={friends} className={classes.itemPicture} />
-            <Typography className={classes.text}>Tìm kiếm bạn bè</Typography>
-          </div>
-        </div>
-        <div className={classes.wrapperItem}>
-          <div className={classes.item}>
-            <img src={group} className={classes.itemPicture} />
-            <Typography className={classes.text}>Nhóm</Typography>
-          </div>
-        </div>
-        <div className={classes.wrapperItem}>
-          <div className={classes.item}>
-            <img src={watch} className={classes.itemPicture} />
-            <Typography className={classes.text}>Watch</Typography>
-          </div>
-        </div>
-        <div className={classes.wrapperItem}>
-          <div className={classes.item}>
-            <img src={market} className={classes.itemPicture} />
-            <Typography className={classes.text}>Marketplace</Typography>
-          </div>
-        </div>
-        <div className={classes.wrapperItem}>
-          <div className={classes.item}>
-            <img src={save} className={classes.itemPicture} />
-            <Typography className={classes.text}>Đã lưu</Typography>
-          </div>
+      )}
+      <div className={classes.wrapperItem}>
+        <div className={classes.item}>
+          <img src={friends} className={classes.itemPicture} />
+          <Typography className={classes.text}>Tìm kiếm bạn bè</Typography>
         </div>
       </div>
-    )
+      <div className={classes.wrapperItem}>
+        <div className={classes.item}>
+          <img src={group} className={classes.itemPicture} />
+          <Typography className={classes.text}>Nhóm</Typography>
+        </div>
+      </div>
+      <div className={classes.wrapperItem}>
+        <div className={classes.item}>
+          <img src={watch} className={classes.itemPicture} />
+          <Typography className={classes.text}>Watch</Typography>
+        </div>
+      </div>
+      <div className={classes.wrapperItem}>
+        <div className={classes.item}>
+          <img src={market} className={classes.itemPicture} />
+          <Typography className={classes.text}>Marketplace</Typography>
+        </div>
+      </div>
+      <div className={classes.wrapperItem}>
+        <div className={classes.item}>
+          <img src={save} className={classes.itemPicture} />
+          <Typography className={classes.text}>Đã lưu</Typography>
+        </div>
+      </div>
+    </div>
   );
 };
 

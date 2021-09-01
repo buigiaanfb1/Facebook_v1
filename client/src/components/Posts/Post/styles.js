@@ -303,4 +303,13 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     fontSize: '26px',
   },
+
+  readMore: {
+    display: 'inline',
+    fontWeight: '500',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }));

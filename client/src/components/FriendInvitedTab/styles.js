@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   item: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     padding: '8px',
     margin: '0 -8px',
     borderRadius: '8px',
@@ -35,6 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '46.67px',
     height: '46.67px',
     borderRadius: '50%',
+    objectFit: 'cover',
     marginRight: '0.75rem',
   },
   containerRight: {
@@ -63,10 +64,16 @@ export const useStyles = makeStyles((theme) => ({
     border: 'none',
     width: 'calc(100% / 2)',
     height: '36px',
+    color: 'var(--always-white)',
     borderRadius: '8px',
     marginRight: '8px',
     fontWeight: '700',
     fontSize: '15px',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    '&:hover': {
+      backgroundColor: 'var(--button-blue-hover)',
+    },
     [theme.breakpoints.down('lg')]: {
       width: '100%',
       margin: '4px 0',
@@ -80,6 +87,27 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     fontWeight: '700',
     fontSize: '15px',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    '&:hover': {
+      backgroundColor: 'var(--hover-icon-overlay)',
+    },
+    [theme.breakpoints.down('lg')]: {
+      width: '100%',
+      margin: '4px 0',
+    },
+  },
+
+  buttonDisable: {
+    backgroundColor: 'var(--hover-icon-overlay)',
+    border: 'none',
+    width: '100%',
+    height: '36px',
+    borderRadius: '8px',
+    marginTop: '6px',
+    fontWeight: '700',
+    fontSize: '15px',
+    cursor: 'not-allowed',
     [theme.breakpoints.down('lg')]: {
       width: '100%',
       margin: '4px 0',
