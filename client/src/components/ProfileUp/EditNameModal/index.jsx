@@ -6,7 +6,7 @@ import editIcon from '../../../common/images/editIcon.png';
 import { useStyles } from './styles';
 import { TextField, Typography } from '@material-ui/core';
 import { setCollection } from '../../../firebase/data/setCollection';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const EditNameModal = ({ profileInfo }) => {
   const classes = useStyles();

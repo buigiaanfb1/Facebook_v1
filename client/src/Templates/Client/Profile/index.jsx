@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ProfileUp from './../../../components/ProfileUp';
 import Content from './Content';
 import { useDispatch, useSelector } from 'react-redux';
-import ScrollToTop from '../../../helpers/ScrollToTop';
 
 import {
   CLEAR_PROFILE,

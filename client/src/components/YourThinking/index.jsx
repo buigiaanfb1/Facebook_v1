@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
 import YourThinkingModal from '../YourThinkingModal';
 import { Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';

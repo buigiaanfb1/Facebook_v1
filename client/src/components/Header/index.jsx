@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
 import friends from '../../common/images/friends-header.png';
 import watch from '../../common/images/watch-header.png';
 import save from '../../common/images/save-header.png';

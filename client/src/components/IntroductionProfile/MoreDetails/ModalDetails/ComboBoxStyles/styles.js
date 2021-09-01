@@ -1,6 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { theme } from '../../../../../common/theme';
-import comboPost3 from '../../../../../common/images/comboPost3.png';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {

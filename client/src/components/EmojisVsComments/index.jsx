@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useStyles } from './styles';
-import avatar from '../../common/images/avatar.png';
 import like from '../../common/images/like.svg';
 import wow from '../../common/images/wow.svg';
 import haha from '../../common/images/haha.svg';

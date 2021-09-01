@@ -16,7 +16,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const YourThinkingModal = (props) => {
   const classes = useStyles();
   const { toggle } = useAudio();
-  const profileInfo = useSelector((state) => state.shareStore.profileInfo);
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const { createAPostWithPicture, createAPostWithNoPicture } = createAPost();
   const dispatch = useDispatch();

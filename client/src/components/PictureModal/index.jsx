@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './styles';
-import test2 from '../../common/images/test2.jpeg';
 
 const PictureModal = (props) => {
   const classes = useStyles();

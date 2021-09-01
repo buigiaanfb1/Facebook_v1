@@ -6,7 +6,6 @@ import history from './history';
 import { useEffect } from 'react';
 import { createProfile } from './firebase/data/createProfile';
 import { getSubDocument } from './firebase/data/getDocument';
-import { setCollection } from './firebase/data/setCollection';
 import { getUser } from './firebase/data/currentUser';
 import { useDispatch } from 'react-redux';
 import {
@@ -16,7 +15,6 @@ import {
 } from './common/constants';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { projectFirestore } from './firebase/config';
 import MessagesPopup from './components/MessagesPopup';
 import TopLoadingBar from './components/TopLoadingBar';
 

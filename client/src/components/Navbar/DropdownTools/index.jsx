@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Popper from '@material-ui/core/Popper';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';

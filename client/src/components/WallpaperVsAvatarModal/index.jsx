@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useStyles } from './styles.js';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import content1 from '../../common/images/test2.jpeg';
 import Fade from '@material-ui/core/Fade';
 
 const WallpaperVsAvatarModal = (props) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Message from './Message';
 import { useStyles } from './styles';
 import { useSelector, useDispatch } from 'react-redux';

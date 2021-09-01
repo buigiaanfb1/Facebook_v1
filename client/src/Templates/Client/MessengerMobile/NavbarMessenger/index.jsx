@@ -2,13 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import L1KE from '../../../../common/images/L1KE.png';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import SearchBar from '../../../../components/SearchBar';
 import ModalChat from '../ModalChat';
 import { useDispatch } from 'react-redux';
 import { projectFirestore } from '../../../../firebase/config';
 import {
   CLEAR_MESSENGER_PICTURES,
-  OPEN_MESSAGES,
   SELECTED_MESSAGE_MESSENGER,
 } from '../../../../common/constants';
 import { setCollection } from '../../../../firebase/data/setCollection';

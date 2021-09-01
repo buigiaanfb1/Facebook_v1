@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import WallpaperVsAvatarModal from '../WallpaperVsAvatarModal';
-import { useStyles } from './styles';
 
 const ImageForMessenger = ({ image, className = '' }) => {
-  const classes = useStyles();
   const [openPostPictureModal, setPostPictureModal] = useState({
     open: false,
     picture: null,

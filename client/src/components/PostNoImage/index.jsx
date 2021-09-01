@@ -3,11 +3,6 @@ import avatar from '../../common/images/avatar.png';
 import like from '../../common/images/like.svg';
 import wow from '../../common/images/wow.svg';
 import haha from '../../common/images/haha.svg';
-import content1 from '../../common/images/content1.jpeg';
-import content2 from '../../common/images/content2.jpeg';
-import content3 from '../../common/images/content3.jpeg';
-import content4 from '../../common/images/content4.jpeg';
-import postPicture from '../../common/images/PostPicture.jpeg';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 

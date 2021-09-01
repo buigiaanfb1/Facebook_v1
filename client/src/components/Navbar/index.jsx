@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Left
 import logo from '../../common/images/logo.png';
 // Middle

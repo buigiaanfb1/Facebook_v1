@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { projectFirestore } from '../../../../firebase/config';
 import {
   CLEAR_MESSENGER_PICTURES,
-  OPEN_MESSAGES,
   SELECTED_MESSAGE_MESSENGER,
 } from '../../../../common/constants';
 import { setCollection } from '../../../../firebase/data/setCollection';

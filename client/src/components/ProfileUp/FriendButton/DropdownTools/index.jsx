@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Popper from '@material-ui/core/Popper';
-import addFriend from '../../../../common/images/addFriend.png';
 import { Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 

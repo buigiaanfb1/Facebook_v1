@@ -7,7 +7,6 @@ import EmojisVsComments from '../../EmojisVsComments';
 import { getUser } from '../../../firebase/data/currentUser';
 import { projectFirestore } from '../../../firebase/config';
 import Image from './Image';
-import OtherComments from '../../EmojisVsComments/OtherComments';
 import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
 
