@@ -8,7 +8,11 @@ export const useStyles = makeStyles((theme) => ({
     right: '0',
     width: '360px',
     maxHeight: 'calc(100vh - 100px)',
-    overflow: 'auto',
+    overflow: 'hidden',
+    '&:hover': {
+      overflowY: 'auto',
+      overflowY: 'overlay',
+    },
     [theme.breakpoints.down('lg')]: {
       width: '280px',
     },
