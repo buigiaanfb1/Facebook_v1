@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import comboPost3 from '../../common/images/comboPost3.png';
 import comboPost2 from '../../common/images/comboPost2.png';
-import logo from '../../common/images/logo.png';
 import { theme } from '../../common/theme';
 
 export const useStyles = makeStyles((theme) => ({

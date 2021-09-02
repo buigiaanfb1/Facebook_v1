@@ -34,7 +34,6 @@ const showLayoutClient = () => {
 };
 
 const App = () => {
-  console.log('App render');
   const dispatch = useDispatch();
   const { res } = getUser();
 

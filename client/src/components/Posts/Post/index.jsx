@@ -10,7 +10,6 @@ import Image from './Image';
 import Linkify from 'react-linkify';
 
 const Post = ({ post, profileID }) => {
-  console.log('post rerender');
   const classes = useStyles();
   const [state, setState] = useState({ post, first: false });
   const [content, setContent] = useState({

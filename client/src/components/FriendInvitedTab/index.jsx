@@ -19,7 +19,6 @@ const FriendInvitedTab = ({ currentUser }) => {
   });
 
   const handleAccept = async (friend) => {
-    console.log('handle accept', friend, currentUser);
     // Delete invitation in database
     await handleDecline(friend);
     // then add to friends
@@ -39,7 +38,6 @@ const FriendInvitedTab = ({ currentUser }) => {
   };
 
   const handleDecline = async (friend) => {
-    console.log('handle accept', friend, currentUser);
     await removeRequestFriend(
       // đổi vị trí là sai ngay do bên Firebase setup như cc
       currentUser,

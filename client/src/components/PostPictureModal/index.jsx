@@ -3,7 +3,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import PictureModal from '../PictureModal';
-import logo from '../../common/images/logo.png';
 import PostNoImage from '../PostNoImage';
 import history from '../../history';
 import { useStyles } from './styles';
@@ -11,7 +10,6 @@ import { useStyles } from './styles';
 const PostPictureModal = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  console.log(props.pictures);
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [fullWidth, setFullWidth] = useState(false);
   // get data from Parent (PictureProfile)
@@ -103,12 +101,6 @@ const PostPictureModal = (props) => {
                     >
                       <i className={classes.iconExit}></i>
                     </div>
-                    <img
-                      src={logo}
-                      className={classes.logo}
-                      onClick={handleRedirectToHomePage}
-                      alt="logo"
-                    />
                   </div>
                   <div className={classes.navRight}>
                     <div

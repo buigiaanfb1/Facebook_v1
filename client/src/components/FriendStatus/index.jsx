@@ -22,8 +22,6 @@ const FriendStatus = () => {
   const handleRenderFriends = () => {
     const { friends: myFriends } = friends;
     return myFriends.map((friend) => {
-      console.log('----------');
-      console.log(friend);
       return (
         <div
           className={classes.friendContainer}

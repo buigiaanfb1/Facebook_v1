@@ -26,7 +26,7 @@ const InputMessage = ({ user }) => {
   // enter k xuống hàng trong textarea nhanh hơn hàm onKeyDown
   useEffect(() => {
     $(`#textareaInputMessage${user.userID}`).keypress(function (e) {
-      if (e.keyCode != 13 && e.shiftKey == false) return;
+      if (e.keyCode != 13) return;
       var msg = $(`#textareaInputMessage${user.userID}`)
         .val()
         .replace(/\n/g, '');
@@ -78,6 +78,16 @@ const InputMessage = ({ user }) => {
         reader.readAsDataURL(files[key]);
       }
     });
+  };
+
+  // choose file is work perfect but if we delete a picture and
+  // choose it again it can't detected that it have change
+  // so we need to ( delete the memory of the input tag) like
+  // a trick
+  const handleClickFile = (e) => {
+    const element = e.target;
+
+    element.value = '';
   };
 
   const handleDetectPastePicture = (event) => {
@@ -209,6 +219,7 @@ const InputMessage = ({ user }) => {
           style={{ display: 'none' }}
           accept="image/png, image/jpeg"
           onChange={(e) => handleInputFiles(e)}
+          onClick={(e) => handleClickFile(e)}
         />
       </label>
       <div className={classes.iconInput} onClick={handleOpenEmojisPicker}>
@@ -230,6 +241,7 @@ const InputMessage = ({ user }) => {
           onKeyDown={handleKeyDown}
           onChange={handleChange}
           onPaste={handleDetectPastePicture}
+
           // onKeyDown={handleDetectEnter}
         />
       </div>

@@ -19,31 +19,18 @@ const PostsGlobal = () => {
     hasMore: false,
   });
 
-  // useEffect(() => {
-  //   if (postUploadStatus && postUploadStatus !== 0) {
-  //     console.log('@@');
-  //     setTimeout(() => {
-  //       handleGetPosts();
-  //     }, 10000);
-  //   }
-  // }, [postUploadStatus]);
-
-  // useEffect(() => {
-  //   handleGetPosts();
-  // }, []);
-
   useEffect(() => {
     const subscriber = projectFirestore
       .collection('posts')
       .orderBy('createdAt', 'desc')
       .onSnapshot((doc) => {
-        let posts = [];
+        let postsRealtime = [];
         doc.forEach(function (doc) {
           let id = doc.id;
           let data = { ...doc.data(), id };
-          posts.push(data);
+          postsRealtime.push(data);
         });
-        setPosts(posts);
+        setPosts(postsRealtime);
       });
     if (first) {
       dispatch({
@@ -60,63 +47,73 @@ const PostsGlobal = () => {
         type: LOADED,
       });
     }
-    if (first.current) {
-      if (posts && posts.length > 5) {
-        setState({
-          hasMore: true,
-          items: posts.slice(0, 5),
-        });
-        first.current = false;
-      } else if (posts) {
-        setState({
-          hasMore: false,
-          items: posts.slice(0, posts.length) || [],
-        });
-        first.current = false;
-      }
-    } else {
-      if (posts && posts.length > 5) {
-        setState({
-          hasMore: true,
-          items: [posts[0], ...state.items],
-        });
-      } else if (posts) {
-        setState({
-          hasMore: false,
-          items: posts.slice(0, posts.length) || [],
-        });
+    if (posts && posts.length > 0) {
+      if (first.current) {
+        let postsCopy = [...posts];
+        if (postsCopy && postsCopy.length > 5) {
+          setState({
+            hasMore: true,
+            items: postsCopy.slice(0, 5),
+          });
+          first.current = false;
+        } else if (postsCopy) {
+          setState({
+            hasMore: false,
+            items: postsCopy.slice(0, postsCopy.length) || [],
+          });
+          first.current = false;
+        }
+      } else {
+        let postsCopy = [...posts];
+        if (postsCopy && postsCopy.length > 5) {
+          setState({
+            hasMore: true,
+            items: [...state.items],
+          });
+        } else if (postsCopy) {
+          setState({
+            hasMore: false,
+            items: postsCopy.slice(0, postsCopy.length) || [],
+          });
+        }
       }
     }
   }, [posts]);
 
   const fetchData = () => {
-    // loaded.current = true;
-    if (state.items.length >= posts.length || 0) {
-      setState({
-        ...state,
-        hasMore: false,
-      });
-      return;
-    }
+    if (posts) {
+      let postsCopy = [...posts];
+      // loaded.current = true;
+      if (state.items.length >= posts.length || 0) {
+        setState({
+          ...state,
+          hasMore: false,
+        });
+        return;
+      }
 
-    if (posts && posts.length > 5) {
-      setTimeout(() => {
-        setState({
-          ...state,
-          items: state.items.concat(
-            posts.slice(state.items.length, state.items.length + 5)
-          ),
-        });
-      }, 500);
-    } else {
-      setTimeout(() => {
-        setState({
-          ...state,
-          items: state.items.concat(
-            posts.slice(state.items.length, posts.length - state.items.length)
-          ),
-        });
-      }, 500);
+      if (postsCopy && postsCopy.length > 5) {
+        setTimeout(() => {
+          setState({
+            ...state,
+            items: state.items.concat(
+              postsCopy.slice(state.items.length, state.items.length + 5)
+            ),
+          });
+        }, 500);
+      } else {
+        setTimeout(() => {
+          setState({
+            ...state,
+            items: state.items.concat(
+              postsCopy.slice(
+                state.items.length,
+                postsCopy.length - state.items.length
+              )
+            ),
+          });
+        }, 500);
+      }
     }
   };
 

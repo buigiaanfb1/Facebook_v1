@@ -246,6 +246,9 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: '8px',
     cursor: 'pointer',
     backgroundColor: 'var(--button-blue)',
+    [theme.breakpoints.down('sm')]: {
+      margin: '0.5rem 0',
+    },
   },
   iconRight: {
     width: '16px',

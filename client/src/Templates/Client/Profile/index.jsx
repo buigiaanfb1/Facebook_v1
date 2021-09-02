@@ -14,7 +14,6 @@ import {
 } from '../../../firebase/data/getDocument';
 
 const Profile = (props) => {
-  console.log('profile render');
   const id = props.match.params.id;
   const postUploadStatus = useSelector(
     (state) => state.shareStore.postUploadStatus
@@ -37,7 +36,6 @@ const Profile = (props) => {
 
   useEffect(() => {
     if (postUploadStatus && postUploadStatus !== 0) {
-      console.log('@@');
       getUserPosts();
     }
   }, [postUploadStatus]);

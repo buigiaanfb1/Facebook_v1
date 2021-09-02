@@ -202,12 +202,13 @@ const EmojisVsComments = ({
       }
     }
 
-    return showIconArr.map((icon) => {
+    return showIconArr.map((icon, index) => {
       return (
         <img
           src={vietSub[icon]}
           alt={`${vietSub[icon]} emoji`}
           className={classes.emoji}
+          key={index}
         />
       );
     });

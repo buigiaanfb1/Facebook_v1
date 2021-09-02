@@ -10,14 +10,13 @@ import { useStyles } from './styles';
 
 const Posts = () => {
   const classes = useStyles();
-  console.log('Posts render');
+
   const profilePosts = useSelector((state) => state.shareStore.profilePosts);
   const { id } = useParams();
   const [state, setState] = useState({
     items: [],
     hasMore: false,
   });
-  console.log(state);
 
   useEffect(() => {
     if (profilePosts && profilePosts.length > 5) {
@@ -34,7 +33,6 @@ const Posts = () => {
   }, [profilePosts]);
 
   const fetchData = () => {
-    console.log('ok');
     if (state.items.length >= profilePosts?.length || 0) {
       setState({
         ...state,
@@ -53,8 +51,6 @@ const Posts = () => {
         });
       }, 500);
     } else {
-      console.log(state.items);
-      console.log(state.items.length, profilePosts.length - state.items.length);
       setTimeout(() => {
         setState({
           ...state,

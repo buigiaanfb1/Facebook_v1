@@ -22,7 +22,7 @@ const PeopleOnline = () => {
   const handleRenderUsersOnline = () => {
     return state.usersOnline.map((user, index) => {
       return (
-        <Link to={`profile/${user.userID}`}>
+        <Link to={`profile/${user.userID}`} key={user.userID}>
           <div className={classes.friendContainer}>
             <div className={classes.containerAvatar}>
               <img

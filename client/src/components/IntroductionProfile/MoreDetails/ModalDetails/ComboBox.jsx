@@ -9,7 +9,6 @@ export default function ComboBox(props) {
   const classes = useStyles();
   const [cities, setCities] = useState();
   const [userChoice, setUserChoice] = useState();
-  console.log(userChoice);
 
   useEffect(() => {
     handleFetchCity();

@@ -15,7 +15,6 @@ import { formatTime } from '../../../helpers/formatTime';
 import { useAudio } from '../../../hooks/useAudio';
 
 const DropDownMessages = ({ currentUser }) => {
-  console.log('DropDownMessages mount');
   const { toggle } = useAudio();
   const firstRef = useRef(false);
   const { updateSeenMessageField } = setCollection('messages-notification');
@@ -29,10 +28,7 @@ const DropDownMessages = ({ currentUser }) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popper' : undefined;
 
-  console.log(messages);
-
   useEffect(() => {
-    console.log(currentUser.userID);
     const subscriber = projectFirestore
       .collection('messages-notification')
       .doc(currentUser.userID)

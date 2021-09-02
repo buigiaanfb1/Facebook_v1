@@ -5,17 +5,20 @@ import { Typography } from '@material-ui/core';
 import Linkify from 'react-linkify';
 import { vi } from 'date-fns/locale';
 import { formatDistanceToNowStrict } from 'date-fns';
+import WallpaperVsAvatarModal from '../../WallpaperVsAvatarModal';
 
 const OtherComments = ({ postID }) => {
   const classes = useStyles();
-  const loaded = useRef(false);
   const first = useRef(true);
   const [comments, setComments] = useState(null);
+  const [openPostPictureModal, setPostPictureModal] = useState({
+    open: false,
+    picture: null,
+  });
   const [state, setState] = useState({
     items: [],
     hasMore: false,
   });
-  console.log(state);
 
   useEffect(() => {
     const subscriber = projectFirestore
@@ -95,6 +98,23 @@ const OtherComments = ({ postID }) => {
     }
   };
 
+  const listenModalChildren = (close) => {
+    if (!close) {
+      setPostPictureModal({
+        open: false,
+        picture: null,
+      });
+    }
+  };
+
+  // mở Modal
+  const handleOpenModalPicture = (picture) => {
+    setPostPictureModal({
+      open: true,
+      picture: picture,
+    });
+  };
+
   const handleRenderTime = (comment) => {
     if (comment.createdAt) {
       let date = comment.createdAt.toDate();
@@ -114,6 +134,7 @@ const OtherComments = ({ postID }) => {
             width="60%"
             className={classes.imageOtherComment}
             alt="comment pic"
+            onClick={() => handleOpenModalPicture(image[0])}
           />
         </div>
       );
@@ -185,6 +206,13 @@ const OtherComments = ({ postID }) => {
         <Typography className={classes.readMore} onClick={fetchData}>
           Xem thêm bình luận
         </Typography>
+      )}
+      {openPostPictureModal.open && (
+        <WallpaperVsAvatarModal
+          openModal={openPostPictureModal.open}
+          picture={openPostPictureModal.picture}
+          listenModalChildren={listenModalChildren}
+        />
       )}
     </div>
   ) : null;

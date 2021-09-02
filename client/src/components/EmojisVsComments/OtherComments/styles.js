@@ -54,6 +54,7 @@ export const useStyles = makeStyles((theme) => ({
   commentOtherPeople: {
     fontSize: '15px',
     display: 'inline',
+    whiteSpace: 'pre',
   },
   linkify: {
     WebkitLineClamp: 1,
@@ -78,7 +79,9 @@ export const useStyles = makeStyles((theme) => ({
   imageOtherComment: {
     borderRadius: '16px',
     margin: '0rem 0rem',
-    maxWidth: '300px',
+    maxWidth: '200px',
+    maxHeight: 'auto',
+    // objectFit: 'contain',
   },
   readMore: {
     marginTop: '0.5rem',

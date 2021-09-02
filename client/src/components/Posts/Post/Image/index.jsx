@@ -108,7 +108,6 @@ const Image = ({ picturesArr }) => {
   };
 
   const handleRender5Picture = (picturesArr) => {
-    console.log(picturesArr);
     let picturesArrCopy = [...picturesArr];
     return (
       <div className={classes.containerClipPath}>

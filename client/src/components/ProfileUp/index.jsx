@@ -50,6 +50,15 @@ const ProfileUp = () => {
     return () => subscriber();
   }, []);
 
+  useEffect(() => {
+    if (profileInfo) {
+      document.title = `${profileInfo.username} | Facebook`;
+    }
+    return () => {
+      document.title = 'Facebook';
+    };
+  }, [profileInfo]);
+
   // mở Modal
   const handleOpenModalPicture = (picture, from) => {
     if (from === 'avatar') {

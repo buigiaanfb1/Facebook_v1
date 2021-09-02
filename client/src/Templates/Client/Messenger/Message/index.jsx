@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
 const Message = ({ currentUser, handleToggleFromChild }) => {
-  console.log('Message render');
   const classes = useStyles();
   const messageSelected = useSelector(
     (state) => state.messengerStore.messageSelected

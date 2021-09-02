@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
 
 const Post = ({ post }) => {
-  console.log('post rerender');
   const classes = useStyles();
   const [state, setState] = useState({ post, first: false });
   const [content, setContent] = useState({

@@ -14,7 +14,6 @@ import { formatTime } from '../../../../helpers/formatTime';
 import { useAudio } from '../../../../hooks/useAudio';
 
 const NavbarMessenger = ({ currentUser }) => {
-  console.log('NavbarMessenger');
   const { updateSeenMessageField } = setCollection('messages-notification');
   const firstRef = useRef(false);
   const { toggle } = useAudio();

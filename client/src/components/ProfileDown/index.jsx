@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { getUser } from '../../firebase/data/currentUser';
 
 const ProfileDown = () => {
-  console.log('ProfileDown render');
   const classes = useStyles();
   const { res: currentUser } = getUser();
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);

@@ -9,7 +9,6 @@ import { GET_NEW_MESSENGER_PICTURES } from '../../../../../common/constants';
 import ImageForMessenger from '../../../../../components/ImageForMessenger';
 
 const BodyRealtime = ({ currentUser, user }) => {
-  console.log('BodyRealtime');
   const classes = useStyles();
   const dispatch = useDispatch();
   const dummy = useRef();
@@ -33,7 +32,6 @@ const BodyRealtime = ({ currentUser, user }) => {
           }
         });
         if (imagesArr.length > 0) {
-          console.log(imagesArr);
           dispatch({
             type: GET_NEW_MESSENGER_PICTURES,
             payload: imagesArr,

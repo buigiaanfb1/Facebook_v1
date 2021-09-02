@@ -1,6 +1,6 @@
 import React from 'react';
 // Left
-import logo from '../../common/images/logo.png';
+import { logo } from './iconSvg';
 // Middle
 import home from '../../common/images/home-nav.svg';
 import friends from '../../common/images/friends-nav.svg';
@@ -31,7 +31,6 @@ const Navbar = () => {
   const iconMessageNotification = useSelector(
     (state) => state.hideStore.iconMessageNotification
   );
-  console.log('navbar');
 
   // render button Login or buttonProfile
   const handleRenderLoginOrNot = () => {
@@ -90,9 +89,7 @@ const Navbar = () => {
       <div className={classes.navContainer}>
         {/* Left */}
         <div className={classes.left}>
-          <Link to="/">
-            <img src={logo} className={classes.logo} />
-          </Link>
+          <Link to="/">{logo}</Link>
           <SearchBar />
         </div>
         {/* Middle */}

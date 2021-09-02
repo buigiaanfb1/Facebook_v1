@@ -16,7 +16,6 @@ const FriendInvited = ({ friend, currentUser }) => {
   const { addFriendToBothUser, removeRequestFriend } = setCollection('users');
 
   const handleAccept = async (otherUser) => {
-    console.log('handle accept', otherUser, currentUser);
     // Delete invitation in database
     await handleDecline(otherUser);
     // then add to friends
@@ -35,7 +34,6 @@ const FriendInvited = ({ friend, currentUser }) => {
     });
   };
   const handleDecline = async (otherUser) => {
-    console.log('handle accept', otherUser, currentUser);
     await removeRequestFriend(
       // đổi vị trí là sai ngay do bên Firebase setup như cc
       currentUser,

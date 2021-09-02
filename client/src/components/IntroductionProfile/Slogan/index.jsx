@@ -6,7 +6,6 @@ import ThreeDots from '../../../componentsLoader/ThreeDots';
 import { setCollection } from '../../../firebase/data/setCollection';
 
 const Slogan = () => {
-  console.log('slogan render');
   const profileInfo = useSelector((state) => state.shareStore.profileInfo);
   const currentUser = useSelector((state) => state.userStore.currentUser);
   const classes = useStyles();
@@ -33,7 +32,7 @@ const Slogan = () => {
   // handle Change Text Edit
   const handleChangeEditText = (e) => {
     const { value } = e.target;
-    console.log(value);
+
     if (value !== slogan.oldSlogan) {
       setSlogan({
         ...slogan,

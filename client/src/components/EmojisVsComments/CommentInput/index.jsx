@@ -22,7 +22,6 @@ const CommentInput = ({ postID }) => {
       info.user = currentUser;
     }
   }, [currentUser]);
-  console.log(info.user);
   const [emojisPickerOpen, setEmojisPickerOpen] = useState(false);
   const types = ['image/png', 'image/jpeg'];
 
@@ -185,7 +184,6 @@ const CommentInput = ({ postID }) => {
     setEmojisPickerOpen(!emojisPickerOpen);
   };
   const onEmojiClick = (event, emojiObject) => {
-    console.log(emojiObject);
     setInfo({
       ...info,
       text: info.text + emojiObject.emoji,
@@ -224,7 +222,7 @@ const CommentInput = ({ postID }) => {
             onKeyDown={(e) => handleDetectEnter(e)}
           />
           <div id={`${postID}IconContainer`} className={classes.containerIcon}>
-            <label for="uploadPictureComment">
+            <label htmlFor="uploadPictureComment">
               <div className={classes.containerIconPicture}>
                 <i className={classes.iconPicture}></i>
               </div>

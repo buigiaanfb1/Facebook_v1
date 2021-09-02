@@ -60,6 +60,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
     fontWeight: '700',
     textAlign: 'center',
+    width: '90%',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.25rem',
+    },
   },
   commentContainer: {
     padding: '10px 0',

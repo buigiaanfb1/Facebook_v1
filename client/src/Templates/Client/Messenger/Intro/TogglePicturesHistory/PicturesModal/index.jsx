@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 const PicturesModal = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  console.log(props.pictures);
+
   const [selectedPicture, setSelectedPicture] = useState(null);
   // get data from Parent (PictureProfile)
   useEffect(() => {

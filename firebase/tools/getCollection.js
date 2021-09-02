@@ -1,7 +1,7 @@
 const db = require('../config');
 
 const getDocument = async (collection, subCollection, id, subId) => {
-  console.log(id)
+  console.log(id);
   let documentRef = await db
     .collection(collection)
     .doc(id)

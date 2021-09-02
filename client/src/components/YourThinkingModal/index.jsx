@@ -38,7 +38,6 @@ const YourThinkingModal = (props) => {
     backgroundPresetsUri: null,
     imageBlob: [],
   });
-  console.log(info);
 
   useEffect(() => {
     if (info.text.length > 0 || info.imageBlob.length > 0) {
@@ -163,6 +162,16 @@ const YourThinkingModal = (props) => {
     });
   };
 
+  // choose file is work perfect but if we delete a picture and
+  // choose it again it can't detected that it have change
+  // so we need to ( delete the memory of the input tag) like
+  // a trick
+  const handleClickFile = (e) => {
+    const element = e.target;
+
+    element.value = '';
+  };
+
   const handleChangeText = (e) => {
     let textarea = document.getElementById('textareaYourThinkingModalPost');
     let heightLimit = 1000000; /* Maximum height: 200px */
@@ -228,7 +237,7 @@ const YourThinkingModal = (props) => {
     for (let index in items) {
       // get one by one file
       let item = items[index];
-      console.log(item);
+
       if (item.kind === 'file' && types.includes(item.type)) {
         let blob = item.getAsFile();
         let reader = new FileReader();
@@ -420,6 +429,7 @@ const YourThinkingModal = (props) => {
                     style={{ display: 'none' }}
                     accept="image/png, image/jpeg"
                     onChange={(e) => handleInputFiles(e)}
+                    onClick={(e) => handleClickFile(e)}
                   />
                 </label>
               </div>
