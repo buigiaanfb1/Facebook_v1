@@ -6,6 +6,7 @@ import Linkify from 'react-linkify';
 import { vi } from 'date-fns/locale';
 import { formatDistanceToNowStrict } from 'date-fns';
 import WallpaperVsAvatarModal from '../../WallpaperVsAvatarModal';
+import Comment from './Comment';
 
 const OtherComments = ({ postID }) => {
   const classes = useStyles();
@@ -174,9 +175,7 @@ const OtherComments = ({ postID }) => {
                   </a>
                 )}
               >
-                <Typography className={classes.commentOtherPeople}>
-                  {comment.text}
-                </Typography>
+                {comment.text && <Comment text={comment.text} />}
               </Linkify>
             </div>
             {handleRenderPicture(comment.imageBlob)}

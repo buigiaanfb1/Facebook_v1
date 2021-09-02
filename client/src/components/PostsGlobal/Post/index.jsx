@@ -205,7 +205,12 @@ const Post = ({ post }) => {
             </Typography>
           </Link>
           <div className={classes.timeContainer}>
-            <Typography className={classes.time}>
+            <Typography
+              className={classes.time}
+              onClick={() => {
+                console.log(post);
+              }}
+            >
               {handleRenderTime()}&nbsp;·&nbsp;
             </Typography>
             <span className={classes.privacyIcon}></span>

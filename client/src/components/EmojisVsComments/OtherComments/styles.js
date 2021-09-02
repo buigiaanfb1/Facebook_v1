@@ -54,7 +54,10 @@ export const useStyles = makeStyles((theme) => ({
   commentOtherPeople: {
     fontSize: '15px',
     display: 'inline',
-    whiteSpace: 'pre',
+    wordBreak: 'break-word',
+    whiteSpace: 'pre-line',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   linkify: {
     WebkitLineClamp: 1,
@@ -65,6 +68,13 @@ export const useStyles = makeStyles((theme) => ({
   toolsComment: {
     display: 'flex',
     padding: '2px 12px',
+  },
+  content: {
+    // position: 'relative',
+    // whiteSpace: 'pre-line',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   toolsCommentText: {
     fontSize: '12px',
@@ -88,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '15px',
     fontWeight: '500',
     display: 'inline-block',
-    color: 'var(--secondary-text)',
+    color: 'var(--always-white)',
     cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',

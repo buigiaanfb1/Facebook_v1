@@ -222,13 +222,13 @@ const CommentInput = ({ postID }) => {
             onKeyDown={(e) => handleDetectEnter(e)}
           />
           <div id={`${postID}IconContainer`} className={classes.containerIcon}>
-            <label htmlFor="uploadPictureComment">
+            <label htmlFor={`uploadPictureComment${postID}`}>
               <div className={classes.containerIconPicture}>
                 <i className={classes.iconPicture}></i>
               </div>
               <input
                 type="file"
-                id="uploadPictureComment"
+                id={`uploadPictureComment${postID}`}
                 style={{ display: 'none' }}
                 accept="image/png, image/jpeg"
                 onChange={(e) => handleInputFiles(e)}

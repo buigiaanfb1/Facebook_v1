@@ -45,7 +45,7 @@ const PeopleOnline = () => {
       <div className={classes.container}>
         <div className={classes.friendOnlineContainer}>
           <div className={classes.titleFriendOnlineContainer}>
-            <Typography className={classes.title}>Đang online</Typography>
+            <Typography className={classes.title}>Đã và đang online</Typography>
           </div>
           {state && handleRenderUsersOnline()}
         </div>
