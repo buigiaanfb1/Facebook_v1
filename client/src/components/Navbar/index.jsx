@@ -95,7 +95,9 @@ const Navbar = () => {
         {/* Middle */}
         <div className={classes.middle}>
           <div className={classes.containerIconMiddle}>
-            <img src={home} className={classes.iconNavMiddle} />
+            <Link to="/">
+              <img src={home} className={classes.iconNavMiddle} />
+            </Link>
           </div>
           <div className={classes.containerIconMiddle}>
             <img src={video} className={classes.iconNavMiddle} />
